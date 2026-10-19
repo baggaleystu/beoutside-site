@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Outside — Place-Based Learning Design, Apps &amp; Curriculum</title>
+<meta name="description" content="Be Outside designs place-based learning — custom apps, culturally grounded lessons, and filmed outdoor experiences — for schools, tribal education programs, and organizations.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --slate:  #2C3A35;
+  --sage:   #6B8C7A;
+  --sand:   #C9B89A;
+  --dusk:   #8B7355;
+  --paper:  #F7F4EF;
+  --ink:    #1E2820;
+  --muted:  #4a5a4f;
+  --sky-on-dark: #D8EDE5;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: transparent;
+  transition: background 0.3s, padding 0.3s;
+}
+
+nav.scrolled {
+  background: rgba(44, 58, 53, 0.96);
+  backdrop-filter: blur(8px);
+  padding: 14px 48px;
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--sand); }
+
+.nav-cta {
+  background: var(--sand) !important;
+  color: var(--slate) !important;
+  padding: 8px 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+}
+
+.nav-cta:hover { background: #d4c4a8 !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.04);
+  transition: transform 8s ease-out;
+}
+
+.hero-bg.loaded { transform: scale(1); }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20,30,25,0.15) 0%,
+    rgba(20,30,25,0.1) 40%,
+    rgba(20,30,25,0.75) 80%,
+    rgba(20,30,25,0.92) 100%
+  );
+}
+
+/* Topo lines on hero */
+.hero-topo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 72px 80px;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 16px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 7vw, 80px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--sky-on-dark);
+  max-width: 540px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--sand);
+  color: var(--slate);
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #d4c4a8; }
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,0.45);
+  color: white;
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover { border-color: white; }
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.5);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.scroll-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+}
+
+/* ── INTRO STRIP ── */
+.intro-strip {
+  background: var(--slate);
+  padding: 28px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.intro-stat {
+  text-align: center;
+}
+
+.intro-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--sand);
+  display: block;
+  line-height: 1;
+}
+
+.intro-stat-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sky-on-dark);
+  margin-top: 6px;
+  display: block;
+}
+
+.intro-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.12);
+}
+
+/* ── SECTION SHARED ── */
+section { position: relative; }
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 72px;
+}
+
+.eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 700;
+  color: var(--slate);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.section-body {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+/* ── STORY SECTION ── */
+.story {
+  background: var(--paper);
+  overflow: hidden;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.story-img {
+  position: relative;
+  height: 560px;
+  overflow: hidden;
+}
+
+.story-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.story-img-accent {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--sand);
+  z-index: 0;
+}
+
+.story-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  color: var(--dusk);
+  line-height: 1.5;
+  margin: 28px 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--sage);
+}
+
+/* ── PHOTO STRIP ── */
+.photo-strip {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  height: 420px;
+  gap: 3px;
+}
+
+.photo-strip-item {
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-strip-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.photo-strip-item:hover img { transform: scale(1.04); }
+
+.photo-strip-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 16px 14px;
+  background: linear-gradient(transparent, rgba(20,30,25,0.7));
+  color: rgba(255,255,255,0.85);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.photo-strip-item:hover .photo-strip-caption { opacity: 1; }
+
+/* ── HOW IT WORKS ── */
+.how {
+  background: white;
+}
+
+.how-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 56px;
+}
+
+.how-card {
+  background: var(--paper);
+  padding: 36px 32px;
+  position: relative;
+}
+
+.how-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--sage);
+}
+
+.how-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.how-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+
+.how-body {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── EXPERIENCES ── */
+.experiences {
+  background: var(--paper);
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px;
+  margin-top: 56px;
+}
+
+.exp-card {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.exp-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.exp-card:hover img { transform: scale(1.04); }
+
+.exp-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20,30,25,0.88) 0%,
+    rgba(20,30,25,0.3) 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+}
+
+.exp-tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 8px;
+}
+
+.exp-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.exp-desc {
+  font-size: 13px;
+  color: var(--sky-on-dark);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.exp-coming {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sand);
+  border: 1px solid rgba(201,184,154,0.4);
+  padding: 5px 12px;
+}
+
+/* ── MOUNTAIN PHOTO BREAK ── */
+.photo-break {
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-break img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.photo-break-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,30,25,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-break-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 40px);
+  font-style: italic;
+  color: white;
+  text-align: center;
+  max-width: 700px;
+  padding: 0 40px;
+  line-height: 1.4;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  background: var(--slate);
+  overflow: hidden;
+  position: relative;
+}
+
+.philosophy .section-title { color: white; }
+.philosophy .section-body { color: var(--sky-on-dark); max-width: 680px; }
+
+.phil-topo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+}
+
+.phil-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.phil-card {
+  background: rgba(255,255,255,0.05);
+  padding: 32px 28px;
+  border-top: 2px solid var(--sage);
+}
+
+.phil-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sand);
+  margin-bottom: 10px;
+}
+
+.phil-card-body {
+  font-size: 13.5px;
+  color: var(--sky-on-dark);
+  line-height: 1.7;
+}
+
+/* ── FOUNDER ── */
+.founder {
+  background: var(--paper);
+}
+
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.founder-img {
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+}
+
+.founder-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.founder-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-bottom: 4px;
+}
+
+.founder-role {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 24px;
+}
+
+.founder-bio {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.cred-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cred-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.cred-bar {
+  width: 2px;
+  min-height: 36px;
+  background: var(--sage);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.cred-text strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: 1px;
+}
+
+.cred-text span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ── WAITLIST ── */
+.waitlist {
+  position: relative;
+  overflow: hidden;
+}
+
+.waitlist-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.waitlist-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.waitlist-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,30,25,0.82);
+}
+
+.waitlist-topo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+}
+
+.waitlist-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 120px 40px;
+  text-align: center;
+}
+
+.waitlist-content .eyebrow { color: var(--sand); justify-content: center; display: block; }
+.waitlist-content .section-title { color: white; margin-bottom: 16px; }
+.waitlist-content .section-body { color: var(--sky-on-dark); margin: 0 auto 40px; text-align: center; }
+
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.waitlist-form input,
+.waitlist-form select {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.waitlist-form textarea {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  padding: 14px 18px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+.waitlist-form textarea::placeholder { color: rgba(255,255,255,0.45); }
+.waitlist-form textarea:focus { border-color: var(--sand); }
+
+.waitlist-form input::placeholder { color: rgba(255,255,255,0.45); }
+.waitlist-form input:focus { border-color: var(--sand); }
+
+.waitlist-form select {
+  color: rgba(255,255,255,0.7);
+  appearance: none;
+  cursor: pointer;
+}
+
+.waitlist-form select option { background: var(--slate); color: white; }
+
+.waitlist-submit {
+  background: var(--sand);
+  color: var(--slate);
+  border: none;
+  padding: 16px 32px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.waitlist-submit:hover { background: #d4c4a8; }
+
+.waitlist-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 12px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--slate);
+  padding: 32px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
+
+.footer-domain {
+  font-size: 11px;
+  color: var(--sand);
+  letter-spacing: 0.1em;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .hero-content { padding: 0 32px 64px; }
+  .section-inner { padding: 72px 32px; }
+  .story-grid, .founder-grid { grid-template-columns: 1fr; }
+  .story-img { height: 340px; }
+  .founder-img { height: 320px; }
+  .how-grid, .phil-grid { grid-template-columns: 1fr; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .exp-card { height: 300px; }
+  .photo-strip { grid-template-columns: 1fr; height: auto; }
+  .photo-strip-item { height: 260px; }
+  .intro-strip { padding: 24px 32px; justify-content: center; }
+  .intro-divider { display: none; }
+  footer { padding: 24px 32px; flex-direction: column; text-align: center; }
+  .nav-links { display: none; }
+  .scroll-hint { display: none; }
+  .form-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="#">Be Outside</a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#story">The Story</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#founder">About Stu</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <svg class="hero-topo" viewBox="0 0 1440 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,780 Q180,750 360,765 T720,740 T1080,755 T1440,730" stroke="white" stroke-width="0.8" fill="none"/>
+    <path d="M0,740 Q200,704 400,720 T800,695 T1200,710 T1440,685" stroke="white" stroke-width="1" fill="none"/>
+    <path d="M0,695 Q220,652 440,670 T880,642 T1300,658 T1440,632" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,640 Q260,590 520,612 T1000,582 T1380,600 T1440,574" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,575 Q300,518 600,545 T1100,512 T1440,532" stroke="white" stroke-width="1" fill="none"/>
+    <path d="M0,498 Q340,432 680,462 T1200,428 T1440,448" stroke="white" stroke-width="0.8" fill="none"/>
+    <line x1="360" y1="740" x2="360" y2="730" stroke="white" stroke-width="0.5"/>
+    <line x1="720" y1="695" x2="720" y2="685" stroke="white" stroke-width="0.5"/>
+    <line x1="1080" y1="640" x2="1080" y2="630" stroke="white" stroke-width="0.5"/>
+    <line x1="520" y1="575" x2="520" y2="565" stroke="white" stroke-width="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Be Outside · Learning Design · Utah</div>
+    <h1 class="hero-title">Outdoor learning,<br>built with the people it's for.</h1>
+    <p class="hero-sub">Be Outside designs place-based learning — custom apps, culturally grounded lessons, and filmed outdoor experiences — for schools, tribal education programs, and organizations that want students connected to the land.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+      <a href="#services" class="btn-ghost">See What I Do</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-stat">
+    <span class="intro-stat-num">15+</span>
+    <span class="intro-stat-label">Years in the classroom</span>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <span class="intro-stat-num">450+</span>
+    <span class="intro-stat-label">Students on the San Juan River</span>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <span class="intro-stat-num">100%</span>
+    <span class="intro-stat-label">Wellness and curriculum integrated</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="how services" id="services">
+  <div class="section-inner">
+    <div class="eyebrow">What I Do</div>
+    <h2 class="section-title">Tools, lessons, and experiences<br>rooted in place.</h2>
+    <p class="section-body">Every project starts with the place, the students, and the community they come from. From there, I build what fits.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-title">Learning Apps &amp; Tools</div>
+        <p class="how-body">Custom web apps that support how students learn — field tools, writing diagnostics, and lesson delivery that works where your students actually are. Designed by a classroom teacher, so they fit real class periods and real constraints.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-title">Curriculum &amp; Lesson Design</div>
+        <p class="how-body">I help tribal education programs, schools, and organizations create lessons that center the knowledge, languages, and places of their communities. The work happens alongside community knowledge holders, not around them, and is grounded in my CLASP research on culturally disruptive pedagogy.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-title">Outdoor Learning Experiences</div>
+        <p class="how-body">Filmed trail and river experiences with teacher guides and student materials, ready for any classroom — no field trip budget, permission slip, or nearby trailhead required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-img">
+        <img src="images/story-canyon-camp.jpg" alt="Tent at canyon camp at golden hour, Bears Ears country" loading="lazy"/>
+        <div class="story-img-accent"></div>
+      </div>
+      <div>
+        <div class="eyebrow">The Origin</div>
+        <h2 class="section-title">Born on a hillside. Built for every classroom.</h2>
+        <p class="section-body">During Covid, Stu Baggaley hiked to the mouth of Birch Canyon near his house, broadcast his surroundings live on Zoom, and taught an outdoor poetry lesson in real time. Students stepped outside wherever they were — backyards, apartment steps, driveways — wrote their own poems, and came back to share.</p>
+        <blockquote class="story-quote">It worked. And it stuck.</blockquote>
+        <p class="section-body">Be Outside grew out of that moment. Today it's a learning design studio: I build tools, design lessons, and film experiences for anyone who wants students to feel the land — whether or not they can get there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="images/san-juan-canyon.jpg" alt="San Juan River canyon walls" loading="lazy"/>
+    <div class="photo-strip-caption">San Juan River · Bears Ears</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="images/river-rafts-dawn.jpg" alt="Rafts on the river at dawn" loading="lazy"/>
+    <div class="photo-strip-caption">Dawn on the River</div>
+  </div>
+  <div class="photo-strip-item">
+    <img src="images/mt-naomi-hike.jpg" alt="Group hiking the Mt. Naomi trail" loading="lazy"/>
+    <div class="photo-strip-caption">Mt. Naomi · Bear River Range</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="eyebrow">Outdoor Experiences · How They Work</div>
+    <h2 class="section-title">A real place. A real experience.<br>In any classroom.</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div class="how-title">Buy an experience</div>
+        <p class="how-body">Choose a trail or river experience. Each experience includes filmed footage, a teacher guide, and student learning materials — everything you need to run it Monday morning.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div class="how-title">Bring the place into your room</div>
+        <p class="how-body">Play the footage with your class. Stu narrates from the trail, modeling observation and inquiry. Timer footage lets students work while the landscape rolls behind them.</p>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div class="how-title">Send them outside</div>
+        <p class="how-body">Students step outside wherever they are — the school yard, a sidewalk, a park — and apply what they learned. Then come back and share. Breathe for Change moments open and close every experience, holding the whole thing together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="experiences">
+  <div class="section-inner">
+    <div class="eyebrow">Our Own Work · Experiences</div>
+    <h2 class="section-title">Every experience is a place<br>with a story.</h2>
+    <p class="section-body">Each Be Outside experience is built around a real location — its geology, its ecology, its Indigenous history, and what's happening there right now. Bears Ears is in a federal land dispute that's been in the news for years. The San Juan River is at the center of water rights fights across the Southwest. Mt. Naomi sits in a national forest navigating grazing, recreation, and conservation pressures. These aren't just places to visit — they're places where real decisions are being made. Students learn to read a landscape the same way they'd read a headline.</p>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <img src="images/mt-naomi-trail.jpg" alt="Mt. Naomi trail — looking down on a neighboring peak" loading="lazy"/>
+      <div class="exp-overlay">
+        <div class="exp-tag">Experience 01 · Mountain</div>
+        <div class="exp-name">Mt. Naomi</div>
+        <p class="exp-desc">From alpine meadows to the summit ridge, students identify the plants and rocks of Utah's high country while following the Haudenosaunee story of the Great White Pine — and what it means to build peace from the ground up.</p>
+        <span class="exp-coming">In development</span>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img src="images/bears-ears-ridge.jpg" alt="Bears Ears panorama — students on the ridge overlooking the San Juan River" loading="lazy"/>
+      <div class="exp-overlay">
+        <div class="exp-tag">Experience 02 · Land &amp; Rights</div>
+        <div class="exp-name">Bears Ears</div>
+        <p class="exp-desc">Who has rights to this land? Students research and debate Indigenous sovereignty, mining claims, and ranching heritage in one of America's most contested landscapes.</p>
+        <span class="exp-coming">In development</span>
+      </div>
+    </div>
+    <div class="exp-card">
+      <img src="images/river-rafts-dawn.jpg" alt="Rafts on the San Juan River at dawn" loading="lazy"/>
+      <div class="exp-overlay">
+        <div class="exp-tag">Experience 03 · River</div>
+        <div class="exp-name">San Juan River</div>
+        <p class="exp-desc">Canyon walls, cottonwoods, and the living history of one of the most storied rivers in the American Southwest. Ecology, observation, and place-based storytelling on the water.</p>
+        <span class="exp-coming">In development</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO BREAK -->
+<div class="photo-break">
+  <img src="images/summit-rocks.jpg" alt="Summit rocks with lichen and mountain views" loading="lazy"/>
+  <div class="photo-break-overlay">
+    <p class="photo-break-quote">"The outdoors is for everyone — including teachers who feel stuck inside."</p>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <svg class="phil-topo" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,450 Q140,420 280,435 T560,410 T840,425 T1100,400" stroke="white" stroke-width="1" fill="none"/>
+    <path d="M0,400 Q160,364 320,380 T640,352 T960,368 T1100,342" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,340 Q180,298 360,318 T720,288 T1050,304 T1100,278" stroke="white" stroke-width="1.4" fill="none"/>
+    <path d="M0,270 Q200,222 400,246 T800,214 T1100,232" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,190 Q240,136 480,164 T900,130 T1100,150" stroke="white" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="section-inner" style="position:relative;z-index:1;">
+    <div class="eyebrow" style="color:var(--sand);">Philosophy</div>
+    <h2 class="section-title">Outdoor learning isn't just about nature.<br>It's about whose nature gets centered.</h2>
+    <p class="section-body">Be Outside is built on culturally disruptive pedagogy — centering Indigenous knowledge systems and the voices outdoor education has historically left out. Every experience is wellness and curriculum integrated, designed to support the whole student, not just standards on a checklist.</p>
+    <div class="phil-grid">
+      <div class="phil-card">
+        <div class="phil-card-title">Place-Based Learning</div>
+        <p class="phil-card-body">Every experience is rooted in a specific place — its geology, ecology, and the communities who have known it longest. Location isn't backdrop. It's curriculum.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-card-title">Culturally Disruptive</div>
+        <p class="phil-card-body">Grounded in CLASP research on Indigenous pedagogy. We ask whose stories get told about a landscape and work to expand that circle.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-card-title">Curriculum-Integrated</div>
+        <p class="phil-card-body">Every experience maps to real classroom standards — built to teach, not just inspire. No extra planning, no guesswork. Open it up and go.</p>
+      </div>
+      <div class="phil-card">
+        <div class="phil-card-title">Whole-Child Wellness</div>
+        <p class="phil-card-body">Breathe for Change practices run through every experience — not as add-ons, but as the rhythm that holds the learning together. Students arrive, breathe, observe, and leave differently than they came.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder" id="founder">
+  <div class="section-inner">
+    <div class="founder-grid">
+      <div class="founder-img">
+        <img src="images/stu-on-trail.jpg" alt="Stu Baggaley on the trail" loading="lazy"/>
+      </div>
+      <div>
+        <div class="eyebrow">The Founder</div>
+        <div class="founder-name">Stu Baggaley</div>
+        <div class="founder-role">Educator · Researcher · Learning Designer &amp; Developer</div>
+        <p class="founder-bio">15 years in the classroom. 450+ students taken down the San Juan River through Bears Ears country. A researcher, a handpan player, and the person who once hiked Birch Canyon on Zoom to prove that outdoor learning doesn't need a field trip bus. I consult with schools and tribal education programs on apps and curriculum that put community knowledge at the center.</p>
+        <div class="founder-creds">
+          <div class="cred">
+            <div class="cred-bar"></div>
+            <div class="cred-text">
+              <strong>M.S. Learning &amp; Technology</strong>
+              <span>Western Governors University</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-bar"></div>
+            <div class="cred-text">
+              <strong>Doctoral Student, ITLS</strong>
+              <span>Utah State University</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-bar"></div>
+            <div class="cred-text">
+              <strong>CLASP Researcher</strong>
+              <span>Culturally disruptive pedagogy · Spencer Foundation · Published 2020 &amp; 2024/25</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-bar"></div>
+            <div class="cred-text">
+              <strong>Breathe for Change</strong>
+              <span>Certified Educator</span>
+            </div>
+          </div>
+          <div class="cred">
+            <div class="cred-bar"></div>
+            <div class="cred-text">
+              <strong>6th Grade Teacher</strong>
+              <span>Edith Bowen Laboratory School, USU</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="contact">
+  <div class="waitlist-bg">
+    <img src="images/mountain-lake-sunset.jpg" alt="Sunset over mountain lake with birds in flight" loading="lazy"/>
+  </div>
+  <div class="waitlist-overlay"></div>
+  <svg class="waitlist-topo" viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,600 Q180,566 360,580 T720,552 T1080,568 T1440,540" stroke="white" stroke-width="1" fill="none"/>
+    <path d="M0,540 Q200,500 400,518 T800,486 T1200,504 T1440,476" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,468 Q240,422 480,444 T900,408 T1300,428 T1440,400" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,386 Q280,332 560,358 T1000,322 T1440,344" stroke="white" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="waitlist-content">
+    <div class="eyebrow">Let's Talk</div>
+    <h2 class="section-title">Have a project in mind?</h2>
+    <p class="section-body">Whether you need an app, a lesson series, or an outdoor experience built around your place and your students, let's talk. Or just ask for updates on the outdoor experiences.</p>
+    <form class="waitlist-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="form-name" value="contact"/>
+      <p style="display:none"><label>Leave this empty: <input name="bot-field"/></label></p>
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your name" required/>
+        <input type="text" name="organization" placeholder="School or organization"/>
+      </div>
+      <input type="email" name="email" placeholder="Email address" required/>
+      <select name="interest" required>
+        <option value="" disabled selected>I'm looking for...</option>
+        <option value="app">A learning app or tool</option>
+        <option value="curriculum">Curriculum or lesson design</option>
+        <option value="experience">A custom outdoor experience</option>
+        <option value="updates">Updates on Be Outside experiences</option>
+        <option value="unsure">Not sure yet</option>
+      </select>
+      <textarea name="message" rows="4" placeholder="Tell me a little about your project (optional)"></textarea>
+      <button type="submit" class="waitlist-submit">Send →</button>
+    </form>
+    <p class="waitlist-note">I'll get back to you personally. No spam.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Be Outside</div>
+    <div class="footer-domain">beoutside.life</div>
+  </div>
+  <div class="footer-copy">© 2026 Be Outside LLC · Utah</div>
+</footer>
+
+<script>
+// Nav scroll behavior
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Hero image lazy load with subtle zoom-in
+window.addEventListener('load', () => {
+  const bg = document.getElementById('heroBg');
+  const img = new Image();
+  img.onload = () => {
+    bg.style.backgroundImage = "url('images/hero.jpg')";
+    setTimeout(() => bg.classList.add('loaded'), 100);
+  };
+  img.src = 'images/hero.jpg';
+});
+
+// Waitlist form
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('.waitlist-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(new FormData(form)).toString()
+  }).then(res => {
+    if (!res.ok) throw new Error(res.status);
+    btn.textContent = '✓ Thanks — I\'ll be in touch!';
+    btn.style.background = '#6B8C7A';
+    btn.style.color = 'white';
+    form.reset();
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Something went wrong — try again';
+  });
+}
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.how-card, .phil-card, .exp-card, .cred-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
