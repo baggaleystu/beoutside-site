@@ -352,7 +352,38 @@ section { position: relative; }
 
 /* ── STANDARDS ── */
 .standards { background: white; border-top: 1px solid #ece6db; }
-.std-list { margin-top: 36px; border-top: 1px solid #e3ddd2; }
+.std-all { margin-top: 32px; }
+.std-toggle {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--slate);
+  color: white;
+  padding: 14px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.std-toggle::-webkit-details-marker { display: none; }
+.std-toggle:hover { background: #3a4b45; }
+.std-toggle:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+.std-hide { display: none; }
+.std-all[open] .std-show { display: none; }
+.std-all[open] .std-hide { display: inline; }
+.std-chev {
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--sand);
+  border-bottom: 2px solid var(--sand);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 0.25s;
+}
+.std-all[open] .std-chev { transform: rotate(-135deg) translate(-2px, -1px); }
+.std-intro { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 28px; max-width: 640px; }
+.std-list { margin-top: 24px; border-top: 1px solid #e3ddd2; }
 .std {
   border-bottom: 1px solid #e3ddd2;
 }
@@ -899,10 +930,14 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
 <!-- STANDARDS -->
 <section class="standards" id="standards">
   <div class="section-inner">
-    <div class="eyebrow">Utah Core Standards</div>
+    <div class="eyebrow">Utah Core Standards · CASEL</div>
     <h2 class="section-title">Standards taught</h2>
-    <p class="section-body">Trail Walk is built for Utah classrooms. Open a subject to see which Utah Core Standards each lesson addresses, by grade. Standards marked <span class="std-tag" style="margin-left:0">Supports</span> are touched on but not fully covered, so pair them with your own instruction.</p>
+    <p class="section-body">Trail Walk is built for Utah classrooms and for the whole student. See which Utah Core Standards and CASEL social-emotional competencies each lesson addresses.</p>
 
+    <details class="std-all">
+      <summary class="std-toggle"><span class="std-show">Show standards</span><span class="std-hide">Hide standards</span><span class="std-chev" aria-hidden="true"></span></summary>
+
+    <p class="std-intro">Open a subject to see the details. Standards marked <span class="std-tag" style="margin-left:0">Supports</span> are touched on but not fully covered, so pair them with your own instruction.</p>
     <div class="std-list">
 
       <details class="std">
@@ -962,7 +997,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
             <tbody>
               <tr><td><span class="std-code">4.1.2</span><span class="std-grade">Grade 4</span></td><td><strong>How and why humans changed Utah's environment to meet their needs.</strong> Smooth brome planted for livestock; St. Lucie cherry escaping from orchards.</td><td class="std-lesson">2</td></tr>
               <tr><td><span class="std-code">4.2.3</span><span class="std-grade">Grade 4</span></td><td><strong>Ways of life of Native American tribal groups.</strong> Shoshone uses of willow and chokecherry, and the name Sihiviogoi, "Willow River." <span class="std-tag">Supports</span></td><td class="std-lesson">2</td></tr>
-              <tr><td><span class="std-code">Utah Studies 1.2</span><span class="std-grade">Grade 7</span></td><td><strong>Interactions between Utah's physical characteristics and American Indian cultures.</strong> How the Northwestern Band of the Shoshone used the plants of Cache Valley for baskets, windbreaks, and pemmican.</td><td class="std-lesson">Land acknowledgement, 2</td></tr>
+              <tr><td><span class="std-code">Utah Studies 1.2</span><span class="std-grade">Grade 7</span></td><td><strong>Interactions between Utah's physical characteristics and American Indian cultures.</strong> How the Northwestern Band of the Shoshone used the plants of Cache Valley for baskets, windbreaks, and pemmican.</td><td class="std-lesson">2 + land acknowledgement</td></tr>
             </tbody>
           </table>
         </div>
@@ -1002,9 +1037,30 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
         </div>
       </details>
 
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Social-Emotional Learning (CASEL)</span><span class="std-meta">CASEL 5 core competencies · Grades 3–8</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Competency</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">Self-Awareness</span></td><td><strong>Understand one's own emotions, thoughts, and values.</strong> Students check in with how they feel before each lesson, journal how they feel afterward, and connect the trail to places and memories that matter to them.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">Self-Management</span></td><td><strong>Manage emotions and stress, and work toward goals.</strong> The Trail Breath calms and focuses students at the start of every lesson; the final project sets a clear goal of 3 details, 3 questions, and 1 connection.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">Social Awareness</span></td><td><strong>Understand others' perspectives, including those from diverse backgrounds.</strong> The land acknowledgement and Field Read center the Northwestern Band of the Shoshone; students ask a family member about a place that matters to them.</td><td class="std-lesson">2, 3 + land acknowledgement</td></tr>
+              <tr><td><span class="std-code">Relationship Skills</span></td><td><strong>Communicate clearly, listen, and work with others.</strong> Partner sharing, presenting projects to peers and adults, and reading the poem for two voices together.</td><td class="std-lesson">3, 4</td></tr>
+              <tr><td><span class="std-code">Responsible Decision-Making</span></td><td><strong>Make caring, constructive choices and weigh consequences.</strong> "Read the Land" asks what happens if introduced plants keep spreading; students learn trail safety and to take only pictures and leave no trace.</td><td class="std-lesson">2, 4</td></tr>
+            </tbody>
+          </table>
+          <p class="std-note">CASEL's framework describes competencies rather than numbered grade-level standards. Utah's Health standards above cover the related stress-management skills.</p>
+        </div>
+      </details>
+
     </div>
 
-    <p class="std-foot">Aligned to the current Utah Core Standards from the <a href="https://schools.utah.gov/curr" target="_blank" rel="noopener">Utah State Board of Education</a>. Check with your district for local pacing and course requirements.</p>
+    <p class="std-foot">Aligned to the current Utah Core Standards from the <a href="https://schools.utah.gov/curr" target="_blank" rel="noopener">Utah State Board of Education</a> and the <a href="https://casel.org/fundamentals-of-sel/what-is-the-casel-framework/" target="_blank" rel="noopener">CASEL framework</a>. Check with your district for local pacing and course requirements.</p>
+    </details>
   </div>
 </section>
 
