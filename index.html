@@ -844,6 +844,65 @@ footer {
   .scroll-hint { display: none; }
   .form-row { flex-direction: column; }
 }
+
+/* ── MOBILE MENU ── */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  cursor: pointer;
+  position: relative;
+}
+.nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after {
+  position: absolute;
+  left: 11px;
+  width: 22px;
+  height: 2px;
+  background: white;
+  transition: transform 0.25s, opacity 0.2s;
+  content: '';
+}
+.nav-toggle span { top: 21px; }
+.nav-toggle span::before { left: 0; top: -7px; }
+.nav-toggle span::after  { left: 0; top: 7px; }
+nav.open .nav-toggle span { background: transparent; }
+nav.open .nav-toggle span::before { transform: translateY(7px) rotate(45deg); }
+nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  nav.open { background: rgba(44, 58, 53, 0.98); }
+  nav.open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(44, 58, 53, 0.98);
+    padding: 8px 24px 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  nav.open .nav-links a {
+    font-size: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  nav.open .nav-links a.nav-cta {
+    margin-top: 16px;
+    text-align: center;
+    border-bottom: 0;
+    padding: 14px 20px !important;
+    font-size: 12px !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -851,10 +910,12 @@ footer {
 <!-- NAV -->
 <nav id="nav">
   <a class="nav-brand" href="#">Be Outside</a>
-  <div class="nav-links">
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+  <div class="nav-links" id="navLinks">
     <a href="#services">Services</a>
     <a href="#story">The Story</a>
     <a href="#experiences">Experiences</a>
+    <a href="/trail-walk/">Trail Walk</a>
     <a href="#founder">About Stu</a>
     <a href="#contact" class="nav-cta">Let's Talk</a>
   </div>
@@ -1176,6 +1237,19 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
 });
+
+// Mobile menu
+const navToggle = document.querySelector('.nav-toggle');
+navToggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+  navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+});
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+  navToggle.setAttribute('aria-label', 'Open menu');
+}));
 
 // Hero image lazy load with subtle zoom-in
 window.addEventListener('load', () => {
