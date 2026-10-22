@@ -504,6 +504,14 @@ section { position: relative; }
   padding: 5px 12px;
 }
 
+a.exp-card { display: block; text-decoration: none; }
+.exp-live {
+  background: var(--sand);
+  color: var(--slate);
+  border-color: var(--sand);
+}
+a.exp-card:hover .exp-live { background: #d4c4a8; }
+
 /* ── MOUNTAIN PHOTO BREAK ── */
 .photo-break {
   height: 500px;
@@ -992,24 +1000,24 @@ footer {
   <div class="section-inner">
     <div class="eyebrow">Our Own Work · Experiences</div>
     <h2 class="section-title">Every experience is a place<br>with a story.</h2>
-    <p class="section-body">Each Be Outside experience is built around a real location — its geology, its ecology, its Indigenous history, and what's happening there right now. Bears Ears is in a federal land dispute that's been in the news for years. The San Juan River is at the center of water rights fights across the Southwest. Mt. Naomi sits in a national forest navigating grazing, recreation, and conservation pressures. These aren't just places to visit — they're places where real decisions are being made. Students learn to read a landscape the same way they'd read a headline.</p>
+    <p class="section-body">Each Be Outside experience is built around a real location — its geology, its ecology, its Indigenous history, and what's happening there right now. The trail to Birch Creek mixes plants that have grown in Cache Valley for centuries with newcomers people brought from far away. The San Juan River is at the center of water rights fights across the Southwest. Mt. Naomi sits in a national forest navigating grazing, recreation, and conservation pressures. These aren't just places to visit — they're places where real decisions are being made. Students learn to read a landscape the same way they'd read a headline.</p>
   </div>
   <div class="exp-grid">
+    <a class="exp-card" href="/trail-walk/">
+      <img src="images/trail-walk-grove.jpg" alt="Aspen and cottonwood grove on the trail to Birch Creek, Smithfield, Utah" loading="lazy"/>
+      <div class="exp-overlay">
+        <div class="exp-tag">Experience 01 · Trail</div>
+        <div class="exp-name">Trail Walk</div>
+        <p class="exp-desc">Walk the trail to Birch Creek in Cache Valley from anywhere. A short film, four lessons in noticing, wondering, and connecting, two leveled readings, and a nature journal. Grades 3–8.</p>
+        <span class="exp-coming exp-live">Available now · Free →</span>
+      </div>
+    </a>
     <div class="exp-card">
       <img src="images/mt-naomi-trail.jpg" alt="Mt. Naomi trail — looking down on a neighboring peak" loading="lazy"/>
       <div class="exp-overlay">
-        <div class="exp-tag">Experience 01 · Mountain</div>
+        <div class="exp-tag">Experience 02 · Mountain</div>
         <div class="exp-name">Mt. Naomi</div>
         <p class="exp-desc">From alpine meadows to the summit ridge, students identify the plants and rocks of Utah's high country while following the Haudenosaunee story of the Great White Pine — and what it means to build peace from the ground up.</p>
-        <span class="exp-coming">In development</span>
-      </div>
-    </div>
-    <div class="exp-card">
-      <img src="images/bears-ears-ridge.jpg" alt="Bears Ears panorama — students on the ridge overlooking the San Juan River" loading="lazy"/>
-      <div class="exp-overlay">
-        <div class="exp-tag">Experience 02 · Land &amp; Rights</div>
-        <div class="exp-name">Bears Ears</div>
-        <p class="exp-desc">Who has rights to this land? Students research and debate Indigenous sovereignty, mining claims, and ranching heritage in one of America's most contested landscapes.</p>
         <span class="exp-coming">In development</span>
       </div>
     </div>

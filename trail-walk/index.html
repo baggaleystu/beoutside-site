@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trail Walk — A Free Be Outside Experience for Grades 3–8</title>
+<meta name="description" content="A free filmed trail walk in Cache Valley, Utah, with four lessons in noticing, wondering, and making connections, plus readings, foldables, and a nature journal page. Grades 3–8.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --slate:  #2C3A35;
+  --sage:   #6B8C7A;
+  --sand:   #C9B89A;
+  --dusk:   #8B7355;
+  --paper:  #F7F4EF;
+  --ink:    #1E2820;
+  --muted:  #4a5a4f;
+  --sky-on-dark: #D8EDE5;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: transparent;
+  transition: background 0.3s, padding 0.3s;
+}
+nav.scrolled {
+  background: rgba(44, 58, 53, 0.96);
+  backdrop-filter: blur(8px);
+  padding: 14px 48px;
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--sand); }
+.nav-cta {
+  background: var(--sand) !important;
+  color: var(--slate) !important;
+  padding: 8px 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.06em !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+}
+.nav-cta:hover { background: #d4c4a8 !important; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 88vh;
+  min-height: 560px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/trail-walk-grove.jpg');
+  background-size: cover;
+  background-position: center 40%;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20,30,25,0.25) 0%,
+    rgba(20,30,25,0.15) 35%,
+    rgba(20,30,25,0.78) 78%,
+    rgba(20,30,25,0.94) 100%
+  );
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 72px 80px;
+  max-width: 900px;
+}
+.hero-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 700;
+  color: white;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--sky-on-dark);
+  max-width: 580px;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-block;
+  background: var(--sand);
+  color: var(--slate);
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #d4c4a8; }
+.btn-ghost {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.45);
+  color: white;
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.btn-ghost:hover { border-color: white; }
+.free-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate);
+  background: var(--sky-on-dark);
+  padding: 5px 12px;
+  margin-bottom: 18px;
+}
+
+/* ── LAND ACKNOWLEDGEMENT ── */
+.land {
+  background: var(--slate);
+  padding: 44px 72px;
+  text-align: center;
+}
+.land-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 14px;
+}
+.land-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(17px, 2.2vw, 21px);
+  color: var(--sky-on-dark);
+  line-height: 1.6;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* ── SHARED ── */
+section { position: relative; }
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 96px 72px;
+}
+.eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 700;
+  color: var(--slate);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+.section-body {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 640px;
+}
+
+/* ── WATCH ── */
+.watch { background: white; }
+.video-wrap {
+  position: relative;
+  margin-top: 40px;
+  aspect-ratio: 16 / 9;
+  background: var(--slate);
+  overflow: hidden;
+}
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  background:
+    linear-gradient(rgba(20,30,25,0.65), rgba(20,30,25,0.65)),
+    url('../images/trail-walk-grove.jpg') center/cover;
+  color: white;
+}
+.video-placeholder strong {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.video-placeholder span {
+  font-size: 13px;
+  color: var(--sky-on-dark);
+  letter-spacing: 0.04em;
+}
+
+/* ── FLOW ── */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  margin-top: 40px;
+}
+.flow-step {
+  background: var(--paper);
+  padding: 22px 18px;
+  border-top: 3px solid var(--sage);
+}
+.flow-emoji { font-size: 22px; margin-bottom: 10px; display: block; }
+.flow-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+.flow-body {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── LESSONS ── */
+.lessons { background: var(--paper); }
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  margin-top: 48px;
+}
+.lesson-card {
+  background: white;
+  padding: 36px 32px;
+  position: relative;
+}
+.lesson-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--sage);
+}
+.lesson-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.lesson-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+.lesson-body {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.lesson-task {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.6;
+  padding-left: 14px;
+  border-left: 2px solid var(--sand);
+}
+.lesson-note {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 720px;
+}
+
+/* ── READINGS ── */
+.readings { background: white; }
+.read-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 44px;
+}
+.read-card {
+  border: 1px solid #e3ddd2;
+  padding: 32px;
+  background: var(--paper);
+}
+.read-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: white;
+  background: var(--slate);
+  padding: 5px 12px;
+  margin-bottom: 16px;
+}
+.read-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+.read-body {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.plant-list {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+.plant-col {
+  background: var(--paper);
+  padding: 24px 28px;
+}
+.plant-col h3 {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin-bottom: 10px;
+}
+.plant-col p {
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.8;
+}
+
+/* ── EXAMPLE ── */
+.example { background: var(--paper); }
+.example-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-top: 40px;
+}
+.example-img img {
+  width: 100%;
+  display: block;
+  box-shadow: 0 10px 40px rgba(30,40,32,0.12);
+}
+.look-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+.look-list li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  padding-left: 16px;
+  border-left: 2px solid var(--sage);
+}
+.look-list strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: 2px;
+}
+
+/* ── DOWNLOADS ── */
+.downloads {
+  background: var(--slate);
+  color: white;
+}
+.downloads .eyebrow { color: var(--sand); }
+.downloads .section-title { color: white; }
+.downloads .section-body { color: var(--sky-on-dark); }
+.dl-main {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: rgba(255,255,255,0.06);
+  border-top: 2px solid var(--sand);
+  padding: 32px;
+}
+.dl-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.dl-main-desc { font-size: 14px; color: var(--sky-on-dark); line-height: 1.6; max-width: 560px; }
+.dl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 3px;
+}
+.dl-item {
+  display: block;
+  background: rgba(255,255,255,0.04);
+  padding: 26px 28px;
+  text-decoration: none;
+  color: white;
+  border-top: 2px solid var(--sage);
+  transition: background 0.2s;
+}
+.dl-item:hover { background: rgba(255,255,255,0.09); }
+.dl-item-title { font-size: 15px; font-weight: 600; color: var(--sand); margin-bottom: 6px; }
+.dl-item-desc { font-size: 13px; color: var(--sky-on-dark); line-height: 1.6; margin-bottom: 12px; }
+.dl-item-cta {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: white;
+}
+
+/* ── NOTE ── */
+.note { background: white; }
+.note-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.note-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 2.3vw, 22px);
+  font-style: italic;
+  color: var(--dusk);
+  line-height: 1.6;
+  padding-left: 20px;
+  border-left: 3px solid var(--sage);
+  margin-bottom: 18px;
+}
+.note-sig { font-size: 13px; color: var(--muted); padding-left: 23px; }
+.breath {
+  background: var(--paper);
+  padding: 32px;
+  border-top: 3px solid var(--sage);
+}
+.breath h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate);
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+.breath ol { padding-left: 20px; }
+.breath li {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+
+/* ── MORE ── */
+.more {
+  position: relative;
+  overflow: hidden;
+}
+.more-bg { position: absolute; inset: 0; }
+.more-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+.more-overlay { position: absolute; inset: 0; background: rgba(20,30,25,0.8); }
+.more-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 110px 40px;
+  text-align: center;
+}
+.more-content .eyebrow { color: var(--sand); }
+.more-content .section-title { color: white; }
+.more-content .section-body { color: var(--sky-on-dark); margin: 0 auto 32px; }
+.more-content .hero-btns { justify-content: center; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--slate);
+  padding: 32px 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+}
+.footer-domain { font-size: 11px; color: var(--sand); letter-spacing: 0.1em; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 24px 56px; }
+  .land { padding: 36px 24px; }
+  .section-inner { padding: 64px 24px; }
+  .flow { grid-template-columns: repeat(2, 1fr); }
+  .lesson-grid, .read-grid, .plant-list, .example-grid, .note-grid, .dl-grid { grid-template-columns: 1fr; }
+  .example-grid, .note-grid { gap: 32px; }
+  .dl-main { padding: 24px; }
+  footer { padding: 24px; flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-brand" href="/">Be Outside</a>
+  <div class="nav-links">
+    <a href="#watch">Watch</a>
+    <a href="#lessons">Lessons</a>
+    <a href="#readings">Readings</a>
+    <a href="/#experiences">All Experiences</a>
+    <a href="#downloads" class="nav-cta">Free Download</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" role="img" aria-label="Aspen and cottonwood grove on the trail to Birch Creek, Smithfield, Utah"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="free-badge">Free · Grades 3–8</span>
+    <div class="hero-eyebrow">Be Outside Experience · Cache Valley, Utah</div>
+    <h1 class="hero-title">Trail Walk</h1>
+    <p class="hero-sub">Walk the trail to Birch Creek in Smithfield, Utah, from anywhere. A short film, four lessons in noticing, wondering, and making connections, two leveled readings, and everything you need to send kids outside to create. Free for teachers and parents.</p>
+    <div class="hero-btns">
+      <a href="#watch" class="btn-primary">Watch the Film</a>
+      <a href="#downloads" class="btn-ghost">Download the Guide</a>
+    </div>
+  </div>
+</section>
+
+<!-- LAND ACKNOWLEDGEMENT -->
+<div class="land">
+  <div class="land-label">Land Acknowledgement</div>
+  <p class="land-text">The trails we walk in Cache Valley are the homeland of the Northwestern Band of the Shoshone Nation, who are still here today. We remember that this land was taken from them through violence. As we walk, we honor their history and care for this land.</p>
+</div>
+
+<!-- WATCH -->
+<section class="watch" id="watch">
+  <div class="section-inner">
+    <div class="eyebrow">Step One · Watch</div>
+    <h2 class="section-title">Bring the trail into your room.</h2>
+    <p class="section-body">Watch the film once, just to take it in. Then watch again with a foldable in hand, pausing on anything that deserves a closer look. Willows, a 200-year-old juniper, a rose that smells like apples, and a creek at the end of the trail.</p>
+    <div class="video-wrap" id="videoWrap">
+      <div class="video-placeholder">
+        <strong>The film is on its way.</strong>
+        <span>Check back soon, or download the guide below to get started.</span>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">🌬️</span>
+        <div class="flow-title">Arrive</div>
+        <p class="flow-body">Quick breathwork to check in before you begin.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">🎬</span>
+        <div class="flow-title">Watch</div>
+        <p class="flow-body">Watch the film once, just to take it in.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">📝</span>
+        <div class="flow-title">Watch to Learn</div>
+        <p class="flow-body">Watch again and fill out the foldable.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">💭</span>
+        <div class="flow-title">Reflect</div>
+        <p class="flow-body">Journal how you feel and what you learned.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">🌲</span>
+        <div class="flow-title">Go Outside &amp; Create</div>
+        <p class="flow-body">Make art, photos, or film wherever you are.</p>
+      </div>
+      <div class="flow-step">
+        <span class="flow-emoji" aria-hidden="true">🤝</span>
+        <div class="flow-title">Share</div>
+        <p class="flow-body">Show your project to peers, a teacher, and a parent.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LESSONS -->
+<section class="lessons" id="lessons">
+  <div class="section-inner">
+    <div class="eyebrow">Four Lessons · Grades 3–8</div>
+    <h2 class="section-title">Notice. Wonder. Connect.<br>Then go outside.</h2>
+    <p class="section-body">Each lesson opens with a short breathing practice, revisits the film, and builds one nature journaling skill. Teach them on four days, or fold them into a single afternoon.</p>
+    <div class="lesson-grid">
+      <div class="lesson-card">
+        <div class="lesson-num">1</div>
+        <div class="lesson-title">I Notice…</div>
+        <p class="lesson-body">Students learn to look closely, look from new angles, and take their time with nature.</p>
+        <p class="lesson-task">I Notice foldable: notice, draw, and label 2 different plants or trees.</p>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-num">2</div>
+        <div class="lesson-title">I Wonder…</div>
+        <p class="lesson-body">Students turn what they noticed into questions, then use a leveled reading to find answers.</p>
+        <p class="lesson-task">I Wonder foldable: write 5 questions, then answer what you can from the reading.</p>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-num">3</div>
+        <div class="lesson-title">It Reminds Me Of…</div>
+        <p class="lesson-body">Students connect what they saw on the trail to places, people, and memories in their own lives.</p>
+        <p class="lesson-task">It Reminds Me Of foldable: write or draw 3 connections to your own life.</p>
+      </div>
+      <div class="lesson-card">
+        <div class="lesson-num">4</div>
+        <div class="lesson-title">Be Outside!</div>
+        <p class="lesson-body">Students reflect in a nature journal, then head outside to make something of their own.</p>
+        <p class="lesson-task">Final project: 3 labeled details, 3 questions, and 1 connection.</p>
+      </div>
+    </div>
+    <p class="lesson-note">Every lesson plan follows the same simple structure: learning outcomes, a Breathe &amp; Arrive practice, content presentation, learner participation, assessment, and follow-up activities.</p>
+  </div>
+</section>
+
+<!-- READINGS -->
+<section class="readings" id="readings">
+  <div class="section-inner">
+    <div class="eyebrow">Field Reads · Two Reading Levels</div>
+    <h2 class="section-title">Old Neighbors and Newcomers</h2>
+    <p class="section-body">Who grows on this trail, and how did it get there? Two double-sided readings help students sort the trail's native plants from the newcomers people brought from far away, and answer the questions they raised in Lesson 2.</p>
+    <div class="read-grid">
+      <div class="read-card">
+        <span class="read-tag">Grade 3</span>
+        <div class="read-title">Old Neighbors and Newcomers</div>
+        <p class="read-body">Short, clear sentences about willows, chokecherries, a 200-year-old juniper, and a rose that smells like apples. Includes Trail Facts and Words to Know.</p>
+      </div>
+      <div class="read-card">
+        <span class="read-tag">Grades 6–8</span>
+        <div class="read-title">Old Neighbors and Newcomers</div>
+        <p class="read-body">A deeper look at native and introduced plants, Shoshone uses of willow and chokecherry, and how one escaped orchard tree spread across Utah's valleys. Ends with a Read the Land question.</p>
+      </div>
+    </div>
+    <div class="plant-list">
+      <div class="plant-col">
+        <h3>Old Neighbors (Native)</h3>
+        <p>Willow · Chokecherry · Utah juniper · Milkweed · Big sagebrush · Maple · Aspen · Narrowleaf cottonwood</p>
+      </div>
+      <div class="plant-col">
+        <h3>Newcomers (Introduced)</h3>
+        <p>Sweet-briar rose · St. Lucie cherry · Smooth brome</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMPLE -->
+<section class="example" id="example">
+  <div class="section-inner">
+    <div class="eyebrow">See an Example</div>
+    <h2 class="section-title">What a nature journal entry looks like.</h2>
+    <p class="section-body">Stu's own entry from the Birch Canyon Connection Trail, June 2026. Show it to students after they've started their own, so they can see each part in action.</p>
+    <div class="example-grid">
+      <div class="example-img">
+        <img src="../images/trail-walk-journal.jpg" alt="Stu's nature journal entry: a sketch of a 200-year-old juniper with labeled bark and leaves, and a pink sweet-briar rose, with handwritten notes and questions" loading="lazy">
+      </div>
+      <ul class="look-list">
+        <li><strong>Labeled details</strong>Silvery bark that strings easily, feathery scale-like leaves, and a tight ring structure.</li>
+        <li><strong>Questions</strong>Who else used juniper? What was the valley like when this tree was new?</li>
+        <li><strong>Connections</strong>The leaves look like snake grass, and the city below is "just a new guy" compared to this tree.</li>
+        <li><strong>Header</strong>The place, date, time, and weather.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section class="downloads" id="downloads">
+  <div class="section-inner">
+    <div class="eyebrow">Free Downloads</div>
+    <h2 class="section-title">Everything you need,<br>ready to print.</h2>
+    <p class="section-body">Download the whole guide, or just the pieces you need for today.</p>
+
+    <div class="dl-main">
+      <div>
+        <div class="dl-main-title">Trail Walk: Complete Field Experience Guide</div>
+        <p class="dl-main-desc">All four lessons, the foldables, both Field Reads, the Nature Journal page, an example entry, and a bonus poem for two voices. PDF.</p>
+      </div>
+      <a class="btn-primary" href="downloads/trail-walk-complete-guide.pdf" download>Download the Full Guide</a>
+    </div>
+
+    <div class="dl-grid">
+      <a class="dl-item" href="downloads/trail-walk-lesson-plans.pdf" download>
+        <div class="dl-item-title">Lesson Plans 1–4</div>
+        <p class="dl-item-desc">I Notice, I Wonder, It Reminds Me Of, and Be Outside!</p>
+        <span class="dl-item-cta">Download PDF →</span>
+      </a>
+      <a class="dl-item" href="downloads/trail-walk-foldables.pdf" download>
+        <div class="dl-item-title">Nature Journal Foldables</div>
+        <p class="dl-item-desc">I Notice, I Wonder, and It Reminds Me Of. One page each.</p>
+        <span class="dl-item-cta">Download PDF →</span>
+      </a>
+      <a class="dl-item" href="downloads/trail-walk-nature-journal.pdf" download>
+        <div class="dl-item-title">Nature Journal Page</div>
+        <p class="dl-item-desc">For the Lesson 4 reflection and outdoor project.</p>
+        <span class="dl-item-cta">Download PDF →</span>
+      </a>
+      <a class="dl-item" href="downloads/trail-walk-field-read-grade-3.pdf" download>
+        <div class="dl-item-title">Field Read: Grade 3</div>
+        <p class="dl-item-desc">Old Neighbors and Newcomers. Print double-sided.</p>
+        <span class="dl-item-cta">Download PDF →</span>
+      </a>
+      <a class="dl-item" href="downloads/trail-walk-field-read-grades-6-8.pdf" download>
+        <div class="dl-item-title">Field Read: Grades 6–8</div>
+        <p class="dl-item-desc">Old Neighbors and Newcomers. Print double-sided.</p>
+        <span class="dl-item-cta">Download PDF →</span>
+      </a>
+      <a class="dl-item" href="#watch">
+        <div class="dl-item-title">The Film</div>
+        <p class="dl-item-desc">Stream it above. Works on any classroom screen.</p>
+        <span class="dl-item-cta">Watch →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NOTE -->
+<section class="note" id="note">
+  <div class="section-inner">
+    <div class="note-grid">
+      <div>
+        <div class="eyebrow">A Note to Teachers and Parents</div>
+        <p class="note-quote">Teaching and parenting are hard. Be Outside wants to help, with lessons built to calm and regulate kids and give you a minute to slow down too. And don't let a lesson be your only trail. Find a hike near you and get lost in nature for an afternoon. Everything will still be waiting for you when you get back.</p>
+        <p class="note-sig">— Stu Baggaley, Be Outside</p>
+      </div>
+      <div class="breath">
+        <h3>🌬️ One Last Breath</h3>
+        <ol>
+          <li>Rest one hand on your heart and the other on your belly.</li>
+          <li>Breathe in slowly and let your belly fill. Watch your hand rise.</li>
+          <li>Keep breathing in, letting the air rise into your chest.</li>
+          <li>Sip in one last little breath, up to your collarbones.</li>
+          <li>Pause at the top.</li>
+          <li>Exhale and let it all go. Soften your jaw and drop your shoulders.</li>
+          <li>Notice how you feel.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE -->
+<section class="more">
+  <div class="more-bg">
+    <img src="../images/mt-naomi-trail.jpg" alt="View from the Mt. Naomi trail in the Bear River Range" loading="lazy">
+  </div>
+  <div class="more-overlay"></div>
+  <div class="more-content">
+    <div class="eyebrow">Keep Exploring</div>
+    <h2 class="section-title">More trails are on the way.</h2>
+    <p class="section-body">Mt. Naomi and the San Juan River are next. Want a heads-up when they're ready, or an experience built around your own place?</p>
+    <div class="hero-btns">
+      <a href="/#contact" class="btn-primary">Get Updates</a>
+      <a href="/#experiences" class="btn-ghost">See All Experiences</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="footer-brand" href="/">Be Outside</a>
+    <div class="footer-domain">beoutside.life</div>
+  </div>
+  <div class="footer-copy">© 2026 Be Outside LLC · Utah</div>
+</footer>
+
+<script>
+// ── Film: paste the YouTube video ID between the quotes when it's uploaded.
+// Example: for https://youtu.be/AbC123xyz the ID is AbC123xyz
+const YOUTUBE_ID = '';
+
+if (YOUTUBE_ID) {
+  const wrap = document.getElementById('videoWrap');
+  wrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + YOUTUBE_ID +
+    '?rel=0" title="Trail Walk film" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+}
+
+// Nav background on scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.lesson-card, .read-card, .dl-item, .flow-step').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
