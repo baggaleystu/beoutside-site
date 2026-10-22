@@ -350,6 +350,163 @@ section { position: relative; }
   max-width: 720px;
 }
 
+/* ── STANDARDS ── */
+.standards { background: white; border-top: 1px solid #ece6db; }
+.std-all { margin-top: 32px; }
+.std-toggle {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--slate);
+  color: white;
+  padding: 14px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.std-toggle::-webkit-details-marker { display: none; }
+.std-toggle:hover { background: #3a4b45; }
+.std-toggle:focus-visible { outline: 2px solid var(--sage); outline-offset: 3px; }
+.std-hide { display: none; }
+.std-all[open] .std-show { display: none; }
+.std-all[open] .std-hide { display: inline; }
+.std-chev {
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--sand);
+  border-bottom: 2px solid var(--sand);
+  transform: rotate(45deg) translateY(-3px);
+  transition: transform 0.25s;
+}
+.std-all[open] .std-chev { transform: rotate(-135deg) translate(-2px, -1px); }
+.std-intro { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 28px; max-width: 640px; }
+.std-list { margin-top: 24px; border-top: 1px solid #e3ddd2; }
+.std {
+  border-bottom: 1px solid #e3ddd2;
+}
+.std summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 4px;
+}
+.std summary::-webkit-details-marker { display: none; }
+.std summary:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+.std-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--slate);
+}
+.std-meta {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.std-icon {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--sand);
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.25s, background 0.2s;
+}
+.std-icon::before, .std-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 11px; height: 1.5px;
+  background: var(--dusk);
+  transform: translate(-50%, -50%);
+}
+.std-icon::after { transform: translate(-50%, -50%) rotate(90deg); transition: opacity 0.2s; }
+.std[open] .std-icon { background: var(--paper); }
+.std[open] .std-icon::after { opacity: 0; }
+.std-body { padding: 0 4px 28px; }
+.std-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.std-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding: 0 14px 10px 0;
+  border-bottom: 1px solid #e3ddd2;
+}
+.std-table td {
+  padding: 14px 14px 14px 0;
+  vertical-align: top;
+  color: var(--muted);
+  line-height: 1.6;
+  border-bottom: 1px solid #f0ebe2;
+}
+.std-table tr:last-child td { border-bottom: 0; }
+.std-code {
+  font-weight: 600;
+  color: var(--slate);
+  white-space: nowrap;
+}
+.std-grade {
+  display: block;
+  font-size: 11px;
+  color: var(--dusk);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.std-table td strong { color: var(--slate); font-weight: 500; }
+.std-lesson { white-space: nowrap; font-size: 12.5px; color: var(--slate); }
+.std-tag {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  border: 1px solid var(--sand);
+  padding: 2px 7px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+.std-note {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-top: 16px;
+  padding-left: 12px;
+  border-left: 2px solid var(--sand);
+}
+.std-foot {
+  margin-top: 28px;
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 760px;
+}
+.std-foot a { color: var(--slate); }
+
+@media (max-width: 640px) {
+  .std-table thead { display: none; }
+  .std-table, .std-table tbody, .std-table tr, .std-table td { display: block; width: 100%; }
+  .std-table tr { padding: 14px 0; border-bottom: 1px solid #f0ebe2; }
+  .std-table tr:last-child { border-bottom: 0; }
+  .std-table td { padding: 0; border: 0; }
+  .std-table td:first-child { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+  .std-grade { margin-top: 0; }
+  .std-lesson { margin-top: 8px; font-size: 11px; color: var(--sage); }
+  .std-lesson::before { content: 'Lesson '; font-weight: 600; letter-spacing: 0.06em; }
+}
+
 /* ── READINGS ── */
 .readings { background: white; }
 .read-grid {
@@ -658,6 +815,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
     <a href="#watch">Watch</a>
     <a href="#lessons">Lessons</a>
     <a href="#readings">Readings</a>
+    <a href="#standards">Standards</a>
     <a href="/#experiences">All Experiences</a>
     <a href="#downloads" class="nav-cta">Free Download</a>
   </div>
@@ -766,6 +924,143 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
       </div>
     </div>
     <p class="lesson-note">Every lesson plan follows the same simple structure: learning outcomes, a Breathe &amp; Arrive practice, content presentation, learner participation, assessment, and follow-up activities.</p>
+  </div>
+</section>
+
+<!-- STANDARDS -->
+<section class="standards" id="standards">
+  <div class="section-inner">
+    <div class="eyebrow">Utah Core Standards · CASEL</div>
+    <h2 class="section-title">Standards taught</h2>
+    <p class="section-body">Trail Walk is built for Utah classrooms and for the whole student. See which Utah Core Standards and CASEL social-emotional competencies each lesson addresses.</p>
+
+    <details class="std-all">
+      <summary class="std-toggle"><span class="std-show">Show standards</span><span class="std-hide">Hide standards</span><span class="std-chev" aria-hidden="true"></span></summary>
+
+    <p class="std-intro">Open a subject to see the details. Standards marked <span class="std-tag" style="margin-left:0">Supports</span> are touched on but not fully covered, so pair them with your own instruction.</p>
+    <div class="std-list">
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Science (SEEd)</span><span class="std-meta">Utah Science with Engineering Education · Grades 3–8</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Standard</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">3.2.5</span><span class="std-grade">Grade 3</span></td><td><strong>Some organisms survive well in a habitat, some less well, and some not at all.</strong> Willows and cottonwoods crowd the creek; junipers grow on dry, rocky hills.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">4.1.1</span><span class="std-grade">Grade 4</span></td><td><strong>Plant structures support survival, growth, and reproduction.</strong> Students draw and label plant parts, then read about deep sagebrush roots and the juniper's berry-like cones.</td><td class="std-lesson">1, 2</td></tr>
+              <tr><td><span class="std-code">5.3.3</span><span class="std-grade">Grade 5</span></td><td><strong>Matter moves among plants, animals, decomposers, and the environment.</strong> The old decaying tree feeds insects and fungi and slowly becomes soil.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">6.4.1</span><span class="std-grade">Grade 6</span></td><td><strong>Resource availability affects organisms.</strong> Water decides where willows and cottonwoods can grow along the creek.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">6.4.2</span><span class="std-grade">Grade 6</span></td><td><strong>Patterns of interaction among organisms.</strong> Monarchs depend on milkweed; birds feed on juniper cones in fall and winter.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">6.4.3</span><span class="std-grade">Grade 6</span></td><td><strong>Producers, consumers, and decomposers.</strong> Insects, fungi, and birds at work on the decaying tree.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">6.4.5</span><span class="std-grade">Grade 6</span></td><td><strong>Preserving biodiversity, including responses to invasive species.</strong> Native vs. introduced plants, and the "Read the Land" question about which plants are winning. <span class="std-tag">Supports</span></td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">7.4.2</span><span class="std-grade">Grade 7</span></td><td><strong>Plant structures that affect reproductive success.</strong> Cottonwood seeds float away on fluffy fibers; birds spread St. Lucie cherry seeds into Utah's valleys.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">8.3.3</span><span class="std-grade">Grade 8</span></td><td><strong>Ask questions about how ecosystem changes affect matter cycling.</strong> Students write their own questions, including about the decaying tree. <span class="std-tag">Supports</span></td><td class="std-lesson">2</td></tr>
+            </tbody>
+          </table>
+          <p class="std-note">Every lesson also builds the SEEd practice of <strong>asking questions</strong> and <strong>obtaining, evaluating, and communicating information</strong> through observation, drawing, and the Field Read.</p>
+        </div>
+      </details>
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">English Language Arts</span><span class="std-meta">Utah ELA Standards (2023) · Grades 3–8</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Standard</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">R.5</span><span class="std-grade">3.R.5 – 7–8.R.5</span></td><td><strong>Ask and answer questions, referring to the text.</strong> Students answer their own I Wonder questions with evidence from the Field Read.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">R.6</span><span class="std-grade">3.R.6 – 7–8.R.6</span></td><td><strong>Determine the main idea and how key details support it.</strong> Old neighbors vs. newcomers, and how to tell them apart.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">R.8</span><span class="std-grade">3.R.8 – 7–8.R.8</span></td><td><strong>Determine the meaning of academic and content-specific words.</strong> Words to Know: native, introduced, poplar, graft, pemmican.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">W.2</span><span class="std-grade">3.W.2 – 7–8.W.2</span></td><td><strong>Write informative pieces that convey ideas clearly.</strong> Labeled drawings and written descriptions of what students observe. <span class="std-tag">Supports</span></td><td class="std-lesson">1, 4</td></tr>
+              <tr><td><span class="std-code">W.4</span><span class="std-grade">3.W.4 – 7–8.W.4</span></td><td><strong>Conduct short research projects.</strong> Students research a question the reading didn't answer.</td><td class="std-lesson">2 (follow-up)</td></tr>
+              <tr><td><span class="std-code">SL.1</span><span class="std-grade">3.SL.1 – 7–8.SL.1</span></td><td><strong>Participate in conversations and collaborations.</strong> Partner sharing of personal connections.</td><td class="std-lesson">3</td></tr>
+              <tr><td><span class="std-code">SL.3</span><span class="std-grade">3.SL.3 – 7–8.SL.3</span></td><td><strong>Speak and present clearly.</strong> Students present their outdoor project to peers, a teacher, and a parent.</td><td class="std-lesson">4 (Share)</td></tr>
+            </tbody>
+          </table>
+          <p class="std-note">Utah's ELA standards use the same numbers at every grade (for example, 3.R.5, 4.R.5, 5.R.5, 6.R.5, 7–8.R.5), so each row applies across Grades 3–8 at grade-level rigor.</p>
+        </div>
+      </details>
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Social Studies</span><span class="std-meta">Utah Social Studies · Grade 4 and Utah Studies</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Standard</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">4.1.2</span><span class="std-grade">Grade 4</span></td><td><strong>How and why humans changed Utah's environment to meet their needs.</strong> Smooth brome planted for livestock; St. Lucie cherry escaping from orchards.</td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">4.2.3</span><span class="std-grade">Grade 4</span></td><td><strong>Ways of life of Native American tribal groups.</strong> Shoshone uses of willow and chokecherry, and the name Sihiviogoi, "Willow River." <span class="std-tag">Supports</span></td><td class="std-lesson">2</td></tr>
+              <tr><td><span class="std-code">Utah Studies 1.2</span><span class="std-grade">Grade 7</span></td><td><strong>Interactions between Utah's physical characteristics and American Indian cultures.</strong> How the Northwestern Band of the Shoshone used the plants of Cache Valley for baskets, windbreaks, and pemmican.</td><td class="std-lesson">2 + land acknowledgement</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Health</span><span class="std-meta">Mental and Emotional Health · Grade 3, Grade 6, Health I</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Standard</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">3.MEH.2</span><span class="std-grade">Grade 3</span></td><td><strong>Identify ways to relieve stress.</strong> The Trail Breath opens every lesson, and One Last Breath closes the guide.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">6.MEH.2</span><span class="std-grade">Grade 6</span></td><td><strong>Practice stress-management techniques, including mindfulness and guided imagery.</strong> Students picture an outdoor place that matters to them.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">HI.MEH.1</span><span class="std-grade">Health I</span></td><td><strong>Explore stress-management techniques such as breathing exercises and guided imagery.</strong></td><td class="std-lesson">1–4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Visual Arts</span><span class="std-meta">Utah Fine Arts Standards · Grades 3 and 6</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Standard</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">3.V.CO.1</span><span class="std-grade">Grade 3</span></td><td><strong>Develop a work of art based on observations of surroundings.</strong> Students go outside and create from what they notice.</td><td class="std-lesson">4</td></tr>
+              <tr><td><span class="std-code">3.V.CR.2</span><span class="std-grade">Grade 3</span></td><td><strong>Create a personally satisfying artwork using a variety of processes and materials.</strong> Watercolor, pencil, markers, or photography.</td><td class="std-lesson">4</td></tr>
+              <tr><td><span class="std-code">6.V.CR.2</span><span class="std-grade">Grade 6</span></td><td><strong>Investigate personally relevant content for creating art.</strong> Students build their project from their own connections to the land.</td><td class="std-lesson">3, 4</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="std">
+        <summary>
+          <span><span class="std-name">Social-Emotional Learning (CASEL)</span><span class="std-meta">CASEL 5 core competencies · Grades 3–8</span></span>
+          <span class="std-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="std-body">
+          <table class="std-table">
+            <thead><tr><th>Competency</th><th>What students do in Trail Walk</th><th>Lesson</th></tr></thead>
+            <tbody>
+              <tr><td><span class="std-code">Self-Awareness</span></td><td><strong>Understand one's own emotions, thoughts, and values.</strong> Students check in with how they feel before each lesson, journal how they feel afterward, and connect the trail to places and memories that matter to them.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">Self-Management</span></td><td><strong>Manage emotions and stress, and work toward goals.</strong> The Trail Breath calms and focuses students at the start of every lesson; the final project sets a clear goal of 3 details, 3 questions, and 1 connection.</td><td class="std-lesson">1–4</td></tr>
+              <tr><td><span class="std-code">Social Awareness</span></td><td><strong>Understand others' perspectives, including those from diverse backgrounds.</strong> The land acknowledgement and Field Read center the Northwestern Band of the Shoshone; students ask a family member about a place that matters to them.</td><td class="std-lesson">2, 3 + land acknowledgement</td></tr>
+              <tr><td><span class="std-code">Relationship Skills</span></td><td><strong>Communicate clearly, listen, and work with others.</strong> Partner sharing, presenting projects to peers and adults, and reading the poem for two voices together.</td><td class="std-lesson">3, 4</td></tr>
+              <tr><td><span class="std-code">Responsible Decision-Making</span></td><td><strong>Make caring, constructive choices and weigh consequences.</strong> "Read the Land" asks what happens if introduced plants keep spreading; students learn trail safety and to take only pictures and leave no trace.</td><td class="std-lesson">2, 4</td></tr>
+            </tbody>
+          </table>
+          <p class="std-note">CASEL's framework describes competencies rather than numbered grade-level standards. Utah's Health standards above cover the related stress-management skills.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <p class="std-foot">Aligned to the current Utah Core Standards from the <a href="https://schools.utah.gov/curr" target="_blank" rel="noopener">Utah State Board of Education</a> and the <a href="https://casel.org/fundamentals-of-sel/what-is-the-casel-framework/" target="_blank" rel="noopener">CASEL framework</a>. Check with your district for local pacing and course requirements.</p>
+    </details>
   </div>
 </section>
 
