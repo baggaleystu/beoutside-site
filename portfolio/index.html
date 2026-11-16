@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Stuart Baggaley: learning design portfolio. Teacher, CLASP Collaborative classroom teacher, and Breathe for Change certified yoga and SEL facilitator.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>Stuart Baggaley Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a quiet field journal. One reading column, a numbered process strip (it is a real sequence), project entries as ledger rows with a side meta column. */
+:root{
+  --bg:#F2F4F0; --surface:#FFFFFF; --ink:#1C2420; --muted:#56615B; --line:#D6DDD6;
+  --accent:#2C6A55; --accent-soft:#E1ECE6; --mark:#B7791F;
+  --display:"Newsreader", Georgia, "Times New Roman", serif;
+  --body:"Public Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121815; --surface:#1A221E; --ink:#E7ECE8; --muted:#A3AFA8; --line:#2E3A34;
+  --accent:#7CC2A6; --accent-soft:#1F3029; --mark:#E0A84A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121815; --surface:#1A221E; --ink:#E7ECE8; --muted:#A3AFA8; --line:#2E3A34;
+  --accent:#7CC2A6; --accent-soft:#1F3029; --mark:#E0A84A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body)}
+.wrap{max-width:860px;margin:0 auto;padding-block:56px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:64px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:-.01em}
+h2{font-size:1.75rem}
+h3{font-size:1.35rem}
+p{margin:0;max-width:66ch}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:18px}
+.thesis{font-family:var(--display);font-size:clamp(1.35rem,3.4vw,1.75rem);font-style:italic;color:var(--accent)}
+.lede{font-size:1.08rem;color:var(--ink)}
+.creds{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:4px 0 0;list-style:none}
+.creds li{font-size:.82rem;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--surface)}
+section{display:grid;gap:22px}
+.section-head{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:22px}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 16px 18px;display:grid;gap:6px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--display);font-size:1.5rem;color:var(--mark);line-height:1}
+.steps b{font-weight:600}
+.steps span{color:var(--muted);font-size:.93rem}
+.project{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding-block:26px;border-top:1px solid var(--line)}
+.project:first-of-type{border-top:0;padding-top:4px}
+.meta{display:grid;gap:10px;align-content:start;font-size:.85rem;color:var(--muted)}
+.meta dt{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.meta dd{margin:0 0 6px;color:var(--ink)}
+.meta dl{margin:0}
+.body{display:grid;gap:12px;min-width:0}
+.role{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;font-size:.95rem}
+.body ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+.links{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:500;font-size:.93rem}
+.partners{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.partners div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.partners b{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+footer{border-top:1px solid var(--line);padding-top:22px;display:grid;gap:10px}
+.contact{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.95rem}
+.contact span{user-select:all}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.stats div{background:var(--accent-soft);border-radius:8px;padding:14px 16px;display:grid;gap:4px}
+.stats b{font-family:var(--display);font-size:2.2rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.stats span{font-size:.88rem;color:var(--muted)}
+@media (max-width:640px){.pair,.stats{grid-template-columns:1fr}.project{grid-template-columns:1fr;gap:12px}.wrap{gap:48px;padding-block:36px 56px}}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:32px;align-items:center}
+.portrait{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.wide{width:100%;aspect-ratio:21/9;object-fit:cover;border-radius:10px;display:block}
+figure{margin:0;display:grid;gap:6px}
+figcaption{font-size:.8rem;color:var(--muted)}
+.shot{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px;display:block}
+.strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.hive{grid-template-columns:1fr!important}.hive img{max-width:220px}.hero{grid-template-columns:1fr}.portrait{max-width:220px}.strip{grid-template-columns:1fr}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+  <div style="display:grid;gap:18px;min-width:0">
+    <div class="eyebrow">Learning design portfolio · Smithfield, Utah</div>
+    <h1>Stuart Baggaley</h1>
+    <p class="thesis">I teach students first, then adults.</p>
+    <p class="lede">I'm a sixth grade teacher at Edith Bowen Laboratory School at Utah State University and the classroom teacher in the CLASP Collaborative. I take ideas from tribal knowledge holders and researchers, turn them into lessons and units real students take part in, and then build the materials that let other teachers do the same. I'm also a Breathe for Change certified yoga and SEL facilitator, and I lead a statewide teacher wellness program in Utah.</p>
+    <ul class="creds">
+      <li>CYT-200 Yoga Teacher &amp; SEL Facilitator, Breathe for Change</li>
+      <li>M.Ed., Learning &amp; Technology</li>
+      <li>Utah Educational Technology Endorsement</li>
+      <li>16 years in K–8 classrooms</li>
+      <li>Fluent in Spanish</li>
+    </ul>
+  </div>
+  <img class="portrait" src="img/stu-on-trail.jpg" alt="Stuart Baggaley smiling on a trail in a ball cap">
+  </header>
+
+  <figure>
+    <img class="wide" src="img/hero.jpg" alt="Rafts on the San Juan River below red rock cliffs near Mexican Hat, Utah">
+    <figcaption>The San Juan River near Mexican Hat, Utah. For ten years I have led multi-day river trips here with my sixth graders.</figcaption>
+  </figure>
+
+  <section aria-labelledby="process">
+    <div class="section-head">
+      <div class="eyebrow">How I build</div>
+      <h2 id="process">The CLASP design cycle</h2>
+      <p>CLASP practices community-driven design research. Decisions about a community's knowledge rest with that community, and the work moves at the pace of relationships. This is the cycle I follow as the collaborative's teacher.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Listen with the group</b><span>Tribal partners, knowledge holders, and university researchers bring the ideas and the knowledge.</span></li>
+      <li><b>Turn ideas into lessons</b><span>I translate them into lessons and units that fit a real classroom and real standards.</span></li>
+      <li><b>Teach students first</b><span>My own sixth graders take part, and we watch closely what works and what doesn't.</span></li>
+      <li><b>Revise with knowledge holders</b><span>We revise together until the knowledge holders are good with what is taught.</span></li>
+      <li><b>Build for kids and teachers</b><span>We create materials that students and teachers anywhere can learn from.</span></li>
+      <li><b>Share with educators</b><span>Published units, research, and conference sessions carry the work to other classrooms.</span></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="work">
+    <div class="section-head">
+      <div class="eyebrow">Selected work</div>
+      <h2 id="work">Projects</h2>
+    </div>
+
+    <article class="project">
+      <div class="meta"><dl>
+        <dt>Format</dt><dd>2-week, 6th grade unit</dd>
+        <dt>Subjects</dt><dd>Science, math, social studies, ELA</dd>
+        <dt>Funding</dt><dd>Spencer Foundation</dd>
+        <dt>Team</dt><dd>Jennifer Jenkins and Stuart Baggaley (Edith Bowen), with Dr. Breanne Litts, Dr. Melissa Tehee, Dr. Lili Yan, and Kenden Quayle (USU)</dd>
+      </dl></div>
+      <div class="body">
+        <h3>Perspectives on Bears Ears</h3>
+        <div class="pair"><img class="shot" src="img/bears-ears-ridge.jpg" alt="A red rock ridge above a green river valley in the Bears Ears region"><img class="shot" src="img/bears-ears-unit.jpg" alt="The published Perspectives on Bears Ears unit page on Centering Culture"></div>
+        <figcaption>Left: the Bears Ears landscape. Right: the published unit, free for any teacher to download.</figcaption>
+        <p>Students explore how Native American cultural heritage, ranching, mining, and conservation meet on one landscape. They analyze maps and land data, research each perspective, debate, and write evidence-based arguments.</p>
+        <ul>
+          <li>Lessons on Native American perspectives on preservation, ranching and land management, and uranium mining in the region</li>
+          <li>Two culminating paths: a pinwheel debate, or a school rally where students build booths for younger students and measure how many minds they change</li>
+          <li>Paired with our class river trip down the San Juan River past Bears Ears</li>
+        </ul>
+        <p class="role">My role: co-designed and taught the unit with my sixth graders, then helped turn it into a free, downloadable unit for other teachers.</p>
+        <div class="links">
+          <a href="https://centeringculture.org/bearsears" target="_blank" rel="noopener">Unit overview</a>
+          <a href="https://centeringculture.org/bearsears/lessonplans" target="_blank" rel="noopener">Lesson plans and downloads</a>
+          <a href="https://centeringculture.org/bearsears/resources" target="_blank" rel="noopener">Learning resources</a>
+          <a href="https://usustatesman.com/sixth-grade-students-at-edith-bowen-hold-rally-for-bears-ears/" target="_blank" rel="noopener">Utah Statesman: the student rally</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="meta"><dl>
+        <dt>Format</dt><dd>Digital interactive narrative and teacher guide</dd>
+        <dt>Focus</dt><dd>Values, language, and food sovereignty</dd>
+        <dt>Funding</dt><dd>National Science Foundation</dd>
+        <dt>Partners</dt><dd>CLASP and the Braiding Knowledge project</dd>
+      </dl></div>
+      <div class="body">
+        <h3>The Pemmican Experience</h3>
+        <figure><img class="shot" style="aspect-ratio:auto" src="img/pemmican-site.jpg" alt="The Pemmican Experience project page with illustrated scenes of making pemmican"><figcaption>The Pemmican Experience project page on Centering Culture.</figcaption></figure>
+        <p>An Indigenous-created interactive story that follows students through making pemmican, carrying lessons about kinship, reciprocity, and community. A teacher guide offers more than 17 classroom activities across science, math, social studies, and ELA, from food drying and preservation to recipe scaling.</p>
+        <p class="role">My role: as CLASP's classroom teacher, I brought the experience into my classroom, taught it to students first, and helped shape the activities teachers now use with it.</p>
+        <div class="links">
+          <a href="https://centeringculture.org/pemmicanexperience" target="_blank" rel="noopener">Project page and teacher guide</a>
+          <a href="https://claspcollaborative.itch.io" target="_blank" rel="noopener">Play the experience</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="meta"><dl>
+        <dt>Format</dt><dd>Year-long professional learning</dd>
+        <dt>Audience</dt><dd>Utah educators</dd>
+        <dt>Years</dt><dd>2025 – present</dd>
+      </dl></div>
+      <div class="body">
+        <h3>Teacher wellness and SEL program</h3>
+        <img class="shot" src="img/mountain-lake-sunset.jpg" alt="Still mountain lake at dusk">
+        <p>I co-founded and lead, for the second year, a statewide learning team that guides Utah teachers through a year of wellness and SEL practice grounded in the Breathe for Change framework. I presented "From Surviving to Thriving: Prioritizing Educator Wellness" at the Show Up for Teachers Educator Wellness Conference in 2025.</p>
+        <p class="role">My own practice: yoga since 2021, now most mornings, and breathwork through the school day. In my classroom, SEL, somatic regulation, and daily mindfulness are woven into a full ELA and social studies curriculum.</p>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="meta"><dl>
+        <dt>Audience</dt><dd>Future and practicing teachers</dd>
+        <dt>Years</dt><dd>2017 – present</dd>
+      </dl></div>
+      <div class="body">
+        <h3>Training teachers</h3>
+        <div class="stats">
+          <div><b>11</b><span>university semesters teaching future teachers</span></div>
+          <div><b>14</b><span>K–6 teachers trained on Canvas the day after COVID-19 closures</span></div>
+          <div><b>4</b><span>conference stages: NCSS, AECT, UCET, and Finland</span></div>
+        </div>
+        <ul>
+          <li>Taught 11 semesters of teacher-education courses at Utah State University, including Technology Integration &amp; Innovation in Education and Elementary Writing Methods</li>
+          <li>Had a Canvas training ready the day after COVID-19 closed our school, and supported all 14 K–6 teachers through remote learning</li>
+          <li>Mentor USU student teachers in my classroom as a cooperating teacher</li>
+          <li>Presented at NCSS, AECT, UCET, and an international laboratory school conference in Finland</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="meta"><dl>
+        <dt>Format</dt><dd>Classroom tools</dd>
+        <dt>Built with</dt><dd>AI-assisted coding</dd>
+      </dl></div>
+      <div class="body">
+        <h3>Building with AI</h3>
+        <p>I design classroom tools from scratch and use AI-assisted coding to build them. The ideas and the teaching are mine; AI lets me build fast enough to test with real students and keep improving.</p>
+
+        <h3 style="font-size:1.15rem">Write to the Summit</h3>
+        <figure><img class="shot" style="aspect-ratio:auto" src="img/summit-dashboard.jpg" alt="Write to the Summit dashboard showing a score of 16 out of 24 across six writing skills"><figcaption>Students paste their writing and get a score out of 24 across six skills, matched to their grade and type of writing.</figcaption></figure>
+        <p>A writing revision tool for grades 3–8. It scores a draft, gives the student one clear next step, and teaches short revision lessons using the student's own sentences as the practice. Students revise, check again, and climb toward 24 out of 24. Nothing is saved or sent, and no names are used.</p>
+        <p class="role">How it grew: the first version only judged grammar and syntax, so scores were too generous, then too harsh. I scored student pieces myself alongside the tool, compared them line by line, and tuned it to weigh meaning and ideas until it closely matched how trained state test scorers grade.</p>
+        <figure><img class="shot" style="aspect-ratio:auto" src="img/summit-journal.jpg" alt="Field Journal with a step-by-step climb to 24 and an I do, we do, you do revision challenge"><figcaption>The Field Journal turns each next step into an I do, we do, you do challenge built from the student's own paragraph.</figcaption></figure>
+
+        <h3 style="font-size:1.15rem">Teacher Hive</h3>
+        <div style="display:grid;grid-template-columns:180px minmax(0,1fr);gap:18px;align-items:start" class="hive">
+          <img src="img/teacher-hive.jpg" alt="Teacher Hive profile screen on a phone" style="width:100%;border-radius:10px;border:1px solid var(--line)">
+          <div style="display:grid;gap:10px;min-width:0">
+            <p>A community app where Utah teachers share what is working in their classrooms, organized around learning teams. Teachers post ideas and resources, save what helps, and join teams.</p>
+            <div class="links"><a href="https://teacherhive.vercel.app" target="_blank" rel="noopener">Open Teacher Hive</a></div>
+          </div>
+        </div>
+
+        <h3 style="font-size:1.15rem">Also</h3>
+        <ul>
+          <li>AI-supported reading passages written to students' data</li>
+          <li>AI-supported lessons and courses in Canvas</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section aria-labelledby="field">
+    <div class="section-head">
+      <div class="eyebrow">Learning on the land</div>
+      <h2 id="field">The field classroom</h2>
+      <p>Place matters in how I teach. Our Bears Ears unit pairs with a multi-day trip down the San Juan River, where students see firsthand the landscape they have been studying. Over ten years I have planned these trips for more than 450 students.</p>
+    </div>
+    <div class="strip">
+      <figure><img class="shot" src="img/river-rafts-dawn.jpg" alt="Loaded rafts on a sandy river bank at dawn"><figcaption>Rafts ready at dawn</figcaption></figure>
+      <figure><img class="shot" src="img/san-juan-canyon.jpg" alt="San Juan River canyon walls and a sandy beach"><figcaption>San Juan River canyon</figcaption></figure>
+      <figure><img class="shot" src="img/story-canyon-camp.jpg" alt="A tent among cottonwoods beneath glowing red cliffs"><figcaption>Camp beneath the cliffs</figcaption></figure>
+    </div>
+    <article class="project" style="border-top:0;padding-top:8px">
+      <div class="meta"><dl>
+        <dt>Format</dt><dd>ArcGIS StoryMap</dd>
+        <dt>Created</dt><dd>2022, by Stuart Baggaley</dd>
+      </dl></div>
+      <div class="body">
+        <h3>San Juan River Geo-Inquiry</h3>
+        <figure><img class="shot" style="aspect-ratio:auto" src="img/sanjuan-storymap.jpg" alt="San Juan River Geo-Inquiry story map title page under a wide desert sky"><figcaption>The story map students use before, during, and after the trip.</figcaption></figure>
+        <p>An interactive story map built around one inquiry question: how have the natural phenomena of the San Juan River shaped the lives of the people who have lived there? Students learn the Hero's Journey, read "The Girl Who Scattered the Stars" as a model story, then take a virtual river trip through more than 30 stops, from the Butler Wash petroglyph panel and River House to Navajo Sandstone, desert varnish, and Mexican Hat Rock, recording observations of natural phenomena along the way.</p>
+        <p class="role">What students make: after the real trip, each student writes a river story that teaches young children about a phenomenon they observed, then illustrates and publishes it as a digital children's book.</p>
+        <div class="links"><a href="https://storymaps.arcgis.com/stories/20bd555dbfb64ba6b74fb9012dd1e643" target="_blank" rel="noopener">Open the story map</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section aria-labelledby="partners">
+    <div class="section-head">
+      <div class="eyebrow">Who I build with</div>
+      <h2 id="partners">The CLASP Collaborative</h2>
+      <p>A community-driven design research collaborative supported by the National Science Foundation and the Spencer Foundation.</p>
+    </div>
+    <div class="partners">
+      <div><b>Tribal Nations</b>Confederated Tribes of the Goshute Reservation, and a Shoshone elder and storyteller</div>
+      <div><b>Title VI Programs</b>Nebo and Alpine Title VI Programs</div>
+      <div><b>Universities</b>Utah State University and the University of Utah</div>
+      <div><b>Schools</b>Edith Bowen Laboratory School</div>
+    </div>
+    <figure><img class="wide" style="aspect-ratio:auto;border:1px solid var(--line)" src="img/clasp-site.jpg" alt="CLASP Collaborative logo: Community Learning Around Sharing and Partnership"><figcaption>CLASP: Community Learning Around Sharing &amp; Partnership.</figcaption></figure>
+    <div class="links"><a href="https://www.claspcollaborative.org/" target="_blank" rel="noopener">claspcollaborative.org</a><a href="https://www.claspcollaborative.org/ourcommunity" target="_blank" rel="noopener">Our community</a></div>
+  </section>
+
+  <footer>
+    <div class="eyebrow">Contact</div>
+    <div class="contact">
+      <span>baggaleystu@gmail.com</span>
+      <span>(435) 764-5286</span>
+      <a href="https://www.linkedin.com/in/stuart-baggaley-52611170/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
