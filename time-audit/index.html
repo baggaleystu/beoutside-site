@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Audit — Be Outside</title>
+<meta name="description" content="List the tasks that eat your week and see which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --slate:  #2C3A35;
+  --sage:   #6B8C7A;
+  --sand:   #C9B89A;
+  --dusk:   #8B7355;
+  --paper:  #F7F4EF;
+  --ink:    #1E2820;
+  --muted:  #4a5a4f;
+  --sky-on-dark: #D8EDE5;
+  --card:   #FFFFFF;
+  --line:   #E4DED3;
+  --sage-soft: #E3ECE6;
+  --sand-soft: #F1EADD;
+  --human:  #DDD8CE;
+  --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+[hidden] { display: none !important; }
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--dusk); outline-offset: 2px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+/* ── HEADER ── */
+.band { background: var(--slate); color: white; }
+.band-top { display: flex; align-items: center; justify-content: space-between; padding-block: 20px; }
+.brand { font-family: var(--serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; letter-spacing: -0.01em; }
+.band-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); }
+.intro { padding-block: 36px 48px; }
+.eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--sand); margin-bottom: 14px; }
+.intro h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 7vw, 54px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 18px; }
+.intro p { color: var(--sky-on-dark); font-size: 17px; max-width: 34em; }
+.privacy {
+  margin-top: 28px; padding: 16px 18px; border-left: 3px solid var(--sand);
+  background: rgba(255,255,255,0.06); color: white; font-size: 15px; font-weight: 400;
+}
+.privacy small { display: block; margin-top: 6px; color: var(--sky-on-dark); font-weight: 300; font-size: 13px; }
+
+/* ── STEPS ── */
+main { padding-block: 8px 64px; }
+.step { padding-block: 40px 8px; }
+.step-label { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dusk); margin-bottom: 8px; }
+h2 { font-family: var(--serif); font-weight: 700; font-size: clamp(26px, 5vw, 34px); line-height: 1.15; color: var(--slate); text-wrap: balance; margin-bottom: 10px; }
+h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--slate); margin-bottom: 12px; }
+.lede { color: var(--muted); font-size: 16px; margin-bottom: 22px; max-width: 36em; }
+
+.fields { display: grid; gap: 18px; }
+.field label, .q-label { display: block; font-size: 14px; font-weight: 500; color: var(--slate); margin-bottom: 8px; }
+.field .opt { font-weight: 300; color: var(--muted); }
+.text-input {
+  width: 100%; min-height: 50px; padding: 12px 14px; font-size: 16px; font-weight: 400;
+  background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+}
+.text-input:focus { border-color: var(--sage); outline: none; box-shadow: 0 0 0 3px var(--sage-soft); }
+.text-input::placeholder { color: #9aa39c; font-weight: 300; }
+
+/* segmented choices */
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button {
+  min-height: 46px; min-width: 52px; padding: 10px 16px; font-size: 15px; font-weight: 400;
+  background: var(--card); border: 1px solid var(--line); border-radius: 999px; cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.seg button:hover { border-color: var(--sage); }
+.seg button[aria-pressed="true"] { background: var(--slate); border-color: var(--slate); color: white; font-weight: 500; }
+.seg.wide button { flex: 1 1 0; }
+.audience-seg button { flex: 1 1 200px; min-height: 54px; border-radius: 8px; font-size: 16px; }
+
+/* starter chips */
+.starter { margin: 6px 0 26px; }
+.starter-label { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 44px; padding: 9px 15px; font-size: 14px; font-weight: 400; cursor: pointer;
+  background: var(--sand-soft); border: 1px dashed var(--sand); border-radius: 999px; color: var(--slate);
+}
+.chip:hover { background: #ebe1cf; }
+.chip[disabled] { opacity: .45; cursor: default; text-decoration: line-through; }
+.chip-plus { font-weight: 600; margin-right: 4px; color: var(--dusk); }
+
+/* task cards */
+.tasks { display: grid; gap: 16px; }
+.task { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 18px; }
+.task-head { display: flex; gap: 10px; align-items: flex-start; }
+.task-head .text-input { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--slate); }
+.icon-btn {
+  flex: none; width: 46px; height: 50px; border: 1px solid transparent; background: none; border-radius: 6px;
+  color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--line); color: var(--ink); }
+.q-hint { font-weight: 300; color: var(--muted); font-size: 13px; }
+.stepper { display: inline-flex; align-items: stretch; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--card); }
+.stepper button { width: 50px; min-height: 50px; border: 0; background: var(--paper); font-size: 22px; cursor: pointer; color: var(--slate); }
+.stepper button:hover { background: var(--sage-soft); }
+.stepper input {
+  width: 84px; border: 0; border-left: 1px solid var(--line); border-right: 1px solid var(--line);
+  text-align: center; font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; -moz-appearance: textfield;
+}
+.stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper input:focus { outline: none; background: var(--sage-soft); }
+.unit { margin-left: 10px; color: var(--muted); font-size: 14px; align-self: center; }
+.hours-row { display: flex; flex-wrap: wrap; align-items: center; }
+
+.score { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; padding-top: 14px; border-top: 1px solid var(--line); font-size: 14px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap;
+}
+.badge .num { font-variant-numeric: tabular-nums; }
+.b-great { background: var(--sage); color: white; }
+.b-possible { background: var(--sand); color: var(--slate); }
+.b-human { background: var(--human); color: var(--slate); }
+.b-pending { background: transparent; border: 1px dashed var(--sand); color: var(--muted); font-weight: 500; }
+.reason { color: var(--muted); }
+
+.add-row { margin-top: 16px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 50px; padding: 12px 24px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  border-radius: 4px; border: 1px solid var(--slate); background: var(--slate); color: white; cursor: pointer; text-decoration: none;
+}
+.btn:hover { background: #3a4b45; }
+.btn-sand { background: var(--sand); border-color: var(--sand); color: var(--slate); }
+.btn-sand:hover { background: #d4c4a8; }
+.btn-line { background: transparent; color: var(--slate); }
+.btn-line:hover { background: var(--sage-soft); }
+.btn-quiet { background: transparent; border-color: transparent; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; letter-spacing: .04em; text-transform: none; font-size: 14px; font-weight: 400; padding-inline: 8px; }
+.btn-quiet:hover { background: transparent; color: var(--ink); }
+.btn-full { width: 100%; border-style: dashed; }
+
+/* ── RESULTS ── */
+.hero-num { background: var(--slate); color: white; border-radius: 12px; padding: 30px 26px; margin-bottom: 26px; }
+.hero-num .big { font-family: var(--serif); font-weight: 700; font-size: clamp(64px, 16vw, 104px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.hero-num .big small { font-family: var(--sans); font-size: 18px; font-weight: 400; letter-spacing: 0; margin-left: 6px; color: var(--sky-on-dark); }
+.hero-num .cap { font-size: 18px; margin-top: 10px; font-weight: 400; }
+.hero-num .sub { color: var(--sky-on-dark); font-size: 14px; margin-top: 8px; }
+.note { font-size: 14px; color: var(--dusk); margin: -10px 0 22px; }
+.empty { padding: 28px 22px; border: 1px dashed var(--sand); border-radius: 10px; color: var(--muted); background: var(--card); }
+
+.block { margin-top: 34px; }
+.top3 { list-style: none; display: grid; gap: 12px; counter-reset: top; }
+.top3 li { counter-increment: top; display: grid; grid-template-columns: 40px 1fr; gap: 4px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.top3 li::before { content: counter(top); grid-row: span 3; font-family: var(--serif); font-weight: 700; font-size: 30px; color: var(--sage); line-height: 1; }
+.top3 .t-name { font-weight: 500; font-size: 16px; color: var(--slate); }
+.top3 .t-idea { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--ink); }
+.top3 .t-meta { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.chart { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: minmax(0, 11em) 1fr; gap: 4px 14px; align-items: center; }
+.bar-label { font-size: 14px; color: var(--slate); overflow-wrap: anywhere; }
+.bar-track { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.bar { height: 22px; border-radius: 0 4px 4px 0; min-width: 4px; flex: none; }
+.bar.great { background: var(--sage); }
+.bar.possible { background: var(--sand); }
+.bar.human { background: var(--human); }
+.bar.pending { background: transparent; border: 1.5px dashed var(--sand); }
+.bar-val { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 16px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+.time-q { background: var(--sage-soft); border-radius: 12px; padding: 26px 22px; }
+.time-q h3 { font-size: 26px; }
+.time-q .chip { background: var(--card); border-style: solid; border-color: var(--line); font-size: 15px; min-height: 48px; }
+.time-q .chip[aria-pressed="true"] { background: var(--sage); border-color: var(--sage); color: white; font-weight: 500; }
+.time-q .text-input { margin-top: 14px; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; align-items: center; }
+.send-status { font-size: 15px; color: var(--slate); margin-top: 14px; }
+.send-status.warn { color: var(--dusk); }
+.saved-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+/* ── FACILITATOR ── */
+.drop {
+  display: block; border: 2px dashed var(--sand); border-radius: 12px; background: var(--card);
+  padding: 30px 22px; text-align: center; cursor: pointer; transition: background .15s, border-color .15s;
+}
+.drop:hover, .drop.over { background: var(--sand-soft); border-color: var(--dusk); }
+.drop strong { display: block; font-family: var(--serif); font-size: 20px; color: var(--slate); margin-bottom: 6px; }
+.drop span { color: var(--muted); font-size: 14px; }
+.drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.group-bar { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: grid; gap: 16px; margin-bottom: 22px; }
+.group-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.group-row .field { flex: 1 1 220px; min-width: 0; }
+select.text-input { cursor: pointer; }
+.file-btn { position: relative; }
+.file-btn input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.save-status { font-size: 14px; color: var(--muted); flex: 1 1 240px; }
+.save-status.warn { color: var(--dusk); font-weight: 400; }
+.print-group { display: none; }
+.import-msg { margin-top: 12px; font-size: 14px; color: var(--slate); }
+.import-msg .err { color: #9b3b22; }
+.tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+@media (min-width: 800px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.tile { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.tile.lead { background: var(--slate); border-color: var(--slate); color: white; }
+.tile .v { font-family: var(--serif); font-weight: 700; font-size: 34px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile .k { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.tile.lead .k { color: var(--sky-on-dark); }
+.tbl-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+td .idea { display: block; font-family: var(--serif); font-style: italic; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.tally { display: flex; flex-wrap: wrap; gap: 10px; }
+.tally span { background: var(--sage-soft); padding: 8px 14px; border-radius: 999px; font-size: 14px; }
+.tally b { font-weight: 600; margin-left: 6px; font-variant-numeric: tabular-nums; }
+
+/* ── FOOTER ── */
+footer { background: var(--slate); }
+.foot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-block: 30px; }
+.foot-brand { font-family: var(--serif); font-size: 20px; font-weight: 700; color: white; text-decoration: none; }
+.foot-tag { font-family: var(--serif); font-style: italic; color: var(--sand); font-size: 17px; }
+.foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.foot-links a { color: var(--sky-on-dark); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── PRINT REPORT ── */
+#print-report { display: none; }
+
+@media (max-width: 560px) {
+  .wrap { padding-left: 18px; padding-right: 18px; }
+  .task { padding: 16px; }
+  .bar-row { grid-template-columns: 1fr; }
+  .hero-num { padding: 24px 20px; }
+  .foot { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+@page { size: letter; margin: 0.5in; }
+@media print {
+  body { background: white; font-size: 11pt; }
+  .band, main, footer { display: none !important; }
+  #print-report { display: block !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  /* Facilitator view prints its group summary instead of the personal report. */
+  body.fac main { display: block !important; padding: 0; }
+  body.fac #print-report, body.fac .drop, body.fac .import-msg, body.fac .actions, body.fac [data-fac-remove], body.fac .group-bar { display: none !important; }
+  body.fac .print-group { display: block; font-family: var(--serif); font-size: 18pt; font-weight: 700; color: var(--slate); }
+  body.fac .print-group small { display: block; font-family: var(--sans); font-size: 9pt; font-weight: 400; color: var(--muted); }
+  .tbl-wrap { overflow: visible; }
+}
+.pr { font-family: var(--sans); color: var(--ink); }
+.pr-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--slate); padding-bottom: 8px; }
+.pr-brand { font-family: var(--serif); font-weight: 700; font-size: 20pt; color: var(--slate); }
+.pr-kind { font-size: 8pt; letter-spacing: .24em; text-transform: uppercase; color: var(--dusk); font-weight: 600; }
+.pr-who { margin: 8px 0 14px; font-size: 10pt; color: var(--muted); }
+.pr-who b { color: var(--ink); font-weight: 600; }
+.pr-hero { display: flex; gap: 18px; align-items: center; background: var(--slate); color: white; border-radius: 8px; padding: 14px 18px; }
+.pr-hero .big { font-family: var(--serif); font-weight: 700; font-size: 44pt; line-height: 1; }
+.pr-hero .cap { font-size: 12pt; font-weight: 500; }
+.pr-hero .sub { font-size: 9pt; color: var(--sky-on-dark); margin-top: 3px; }
+.pr h4 { font-family: var(--serif); font-size: 13pt; color: var(--slate); margin: 16px 0 6px; }
+.pr ol { margin-left: 18px; font-size: 10pt; }
+.pr ol li { margin-bottom: 4px; }
+.pr ol .idea { font-family: var(--serif); font-style: italic; }
+.pr ol .meta { color: var(--muted); }
+.pr-bars { display: grid; gap: 4px; font-size: 9pt; }
+.pr-bars .row { display: grid; grid-template-columns: 2.1in 1fr; gap: 10px; align-items: center; }
+.pr-bars .bar { height: 11pt; }
+.pr-bars .lab { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pr-legend { display: flex; gap: 14px; font-size: 8pt; color: var(--muted); margin-bottom: 6px; }
+.pr-legend i { display: inline-block; width: 9pt; height: 9pt; border-radius: 2px; margin-right: 4px; vertical-align: -1pt; }
+.pr-time { margin-top: 16px; background: var(--sage-soft); border-radius: 8px; padding: 12px 16px; }
+.pr-time .q { font-family: var(--serif); font-size: 14pt; color: var(--slate); font-weight: 700; }
+.pr-time .a { font-size: 12pt; margin-top: 4px; }
+.pr-time .lines { border-bottom: 1px solid var(--sage); height: 22pt; }
+.pr-foot { margin-top: 16px; display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 6px; }
+.pr-foot em { font-family: var(--serif); color: var(--dusk); font-size: 10pt; }
+.pr-method { font-size: 7.5pt; color: var(--muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="band">
+  <div class="wrap band-top">
+    <a class="brand" href="/">Be Outside</a>
+    <span class="band-tag" id="band-tag">Time Audit</span>
+  </div>
+  <div class="wrap intro" id="intro-audit">
+    <div class="eyebrow">Time Audit · 10–15 minutes</div>
+    <h1>Where does your week go?</h1>
+    <p>List the tasks that eat your week. We'll show which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.</p>
+    <div class="privacy" role="note">
+      <span id="privacy-line">Don't enter student, client or customer names. Describe the task, not the people.</span>
+      <small id="privacy-send">Everything stays on this device. Nothing is sent anywhere unless you export a file yourself.</small>
+    </div>
+  </div>
+  <div class="wrap intro" id="intro-fac" hidden>
+    <div class="eyebrow">Facilitator view</div>
+    <h1>Combine your group's audits</h1>
+    <p>Add the files your participants exported. You'll see the team's biggest time drains, which tools to build first, and how many hours the group could win back.</p>
+    <div class="privacy" role="note">
+      Files are read on this computer only. Nothing is uploaded.
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- PARTICIPANT AUDIT -->
+  <div id="view-audit">
+    <section class="wrap step" aria-labelledby="h-setup">
+      <div class="step-label">Step 1</div>
+      <h2 id="h-setup">Set up</h2>
+      <div class="fields">
+        <div class="field">
+          <span class="q-label" id="aud-label">Where do you work?</span>
+          <div class="seg audience-seg" role="group" aria-labelledby="aud-label" id="audience"></div>
+        </div>
+        <div class="field">
+          <label for="who">First name or role <span class="opt">(optional)</span></label>
+          <input class="text-input" id="who" type="text" autocomplete="off" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="org">Organization <span class="opt">(optional)</span></label>
+          <input class="text-input" id="org" type="text" autocomplete="off" maxlength="100">
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap step" aria-labelledby="h-tasks">
+      <div class="step-label">Step 2</div>
+      <h2 id="h-tasks">List the tasks that eat your week</h2>
+      <p class="lede">Think about a normal week. Add each task that keeps coming back, then answer four quick questions about it.</p>
+      <div class="starter">
+        <div class="starter-label">Tap to add a common one:</div>
+        <div class="chips" id="starters"></div>
+      </div>
+      <div class="tasks" id="tasks"></div>
+      <div class="add-row"><button class="btn btn-line btn-full" type="button" id="add-task">+ Add your own task</button></div>
+    </section>
+
+    <section class="wrap step" aria-labelledby="h-results">
+      <div class="step-label">Step 3</div>
+      <h2 id="h-results">Your results</h2>
+      <div id="results"></div>
+
+      <div class="block time-q">
+        <h3>What will you do with the time?</h3>
+        <div class="chips" id="time-choices"></div>
+        <label class="q-hint" for="time-other" style="display:block;margin-top:14px">Or in your own words</label>
+        <input class="text-input" id="time-other" type="text" maxlength="120" placeholder="e.g. Eat lunch outside with my kids" style="margin-top:6px">
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-sand" type="button" id="send" hidden>Send to Stu</button>
+        <button class="btn btn-sand" type="button" id="print">Print / Save as PDF</button>
+        <button class="btn btn-line" type="button" id="export-json">Export JSON</button>
+        <button class="btn btn-line" type="button" id="export-csv">Export CSV</button>
+        <button class="btn btn-quiet" type="button" id="reset">Start over</button>
+      </div>
+      <p class="send-status" id="send-status" aria-live="polite" hidden></p>
+      <p class="saved-note" id="saved-note">Your answers are saved on this device as you go.</p>
+    </section>
+  </div>
+
+  <!-- FACILITATOR -->
+  <div id="view-fac" hidden>
+    <section class="wrap step">
+      <div class="group-bar">
+        <div class="group-row">
+          <div class="field"><label for="group-pick">Group</label><select class="text-input" id="group-pick"></select></div>
+          <button class="btn btn-line" type="button" id="group-new">+ New group</button>
+          <label class="btn btn-line file-btn" for="group-open">Open group file<input type="file" id="group-open" accept=".json,application/json"></label>
+        </div>
+        <div class="field">
+          <label for="group-name">Group name</label>
+          <input class="text-input" id="group-name" type="text" maxlength="80" autocomplete="off" placeholder="e.g. Ridgeview Elementary, fall 2026">
+        </div>
+        <div class="group-row">
+          <button class="btn btn-sand" type="button" id="group-save">Save group file</button>
+          <p class="save-status" id="save-status" aria-live="polite"></p>
+          <button class="btn btn-quiet" type="button" id="group-delete">Delete group</button>
+        </div>
+      </div>
+      <label class="drop" id="drop" for="fac-files">
+        <strong>Add participant files</strong>
+        <span>Tap to choose, or drag JSON or CSV files here. You can add many at once.</span>
+        <input type="file" id="fac-files" accept=".json,.csv,application/json,text/csv" multiple>
+      </label>
+      <div class="import-msg" id="import-msg" aria-live="polite"></div>
+      <div id="fac-results"></div>
+    </section>
+  </div>
+</main>
+
+<!-- PRINTED REPORT (built from your answers when you print) -->
+<div id="print-report" aria-hidden="true"></div>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="foot-brand" href="/">Be Outside</a>
+      <div class="foot-tag">Don't wait for summer.</div>
+    </div>
+    <div class="foot-links">
+      <a href="#facilitator" id="to-fac">Facilitator view</a>
+      <a href="#" id="to-audit" hidden>Back to my audit</a>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function () {
+  "use strict";
+  var CFG = window.TIME_AUDIT_CONFIG;
+  var KEY = "be-outside-time-audit";
+  var FKEY = "be-outside-time-audit-facilitator";
+
+  // ── helpers ─────────────────────────────────────────────
+  function $(id) { return document.getElementById(id); }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
+  function num(v) { var n = parseFloat(v); return isFinite(n) && n > 0 ? n : 0; }
+  function hrs(n) {
+    if (!n) return "0";
+    var r = n >= 10 ? Math.round(n) : Math.round(n * 10) / 10;
+    return r.toLocaleString("en-US");
+  }
+  function plural(n, one, many) { return n === 1 ? one : many; }
+  function readStore(k) { try { var s = localStorage.getItem(k); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+  function writeStore(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+  function aud(key) { return CFG.audiences[key] || CFG.audiences.school; }
+  function normName(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9/ ]+/g, " ").replace(/\s+/g, " ").trim(); }
+  var YN = ["yes", "somewhat", "no"];
+  var YN_LABEL = { yes: "Yes", somewhat: "Somewhat", no: "No" };
+
+  // ── scoring (rules live in config.js) ───────────────────
+  function isScored(t) { return !!(t.repetitive && t.humanTouch && t.energy); }
+  function score(t) {
+    if (!isScored(t)) return null;
+    var s = CFG.scoring;
+    return (s.repetitive[t.repetitive] || 0) + (s.humanTouch[t.humanTouch] || 0) + (s.energy[t.energy] || 0);
+  }
+  function band(t) {
+    var sc = score(t);
+    if (sc == null) return null;
+    var bands = CFG.scoring.bands;
+    for (var i = 0; i < bands.length; i++) if (sc >= bands[i].min) return bands[i];
+    return bands[bands.length - 1];
+  }
+  function wonBack(t) { var b = band(t); return b ? num(t.hours) * b.winBack : 0; }
+  function reason(t) {
+    var s = CFG.scoring, parts = [];
+    if (t.repetitive) parts.push("Repetitive: " + YN_LABEL[t.repetitive] + " +" + s.repetitive[t.repetitive]);
+    if (t.humanTouch) parts.push("Human touch: " + YN_LABEL[t.humanTouch] + " +" + s.humanTouch[t.humanTouch]);
+    if (t.energy) parts.push("Energy " + t.energy + "/5 +" + s.energy[t.energy]);
+    return parts.join(" · ");
+  }
+  function ideaFor(name, audienceKey) {
+    var n = normName(name);
+    if (!n) return "";
+    var keys = [audienceKey, audienceKey === "school" ? "business" : "school"];
+    for (var k = 0; k < keys.length; k++) {
+      var ex = aud(keys[k]).examples;
+      for (var i = 0; i < ex.length; i++) if (normName(ex[i].task) === n) return ex[i].idea;
+    }
+    var rules = CFG.ideaRules || [];
+    for (var r = 0; r < rules.length; r++) {
+      for (var w = 0; w < rules[r].words.length; w++) {
+        if (n.indexOf(rules[r].words[w].toLowerCase()) !== -1) return rules[r].idea;
+      }
+    }
+    return "A helper that drafts “" + String(name).trim() + "” for you to check";
+  }
+  function summarize(a) {
+    var total = 0, back = 0, pending = 0;
+    a.tasks.forEach(function (t) {
+      total += num(t.hours);
+      back += wonBack(t);
+      if (num(t.hours) && !isScored(t)) pending++;
+    });
+    return { total: total, back: back, pending: pending, weeks: aud(a.audience).weeksPerYear };
+  }
+  function topTasks(a, n) {
+    return a.tasks
+      .filter(function (t) { return t.name.trim() && wonBack(t) > 0; })
+      .sort(function (x, y) { return wonBack(y) - wonBack(x) || num(y.hours) - num(x.hours); })
+      .slice(0, n);
+  }
+
+  // ── participant state ───────────────────────────────────
+  function blankAudit() {
+    return { kind: "be-outside-time-audit", version: 1, id: uid(), audience: "school", who: "", org: "",
+             tasks: [], timeChoices: [], timeOther: "", updatedAt: new Date().toISOString() };
+  }
+  function cleanTask(t) {
+    t = t || {};
+    return {
+      id: t.id || uid(),
+      name: String(t.name || ""),
+      hours: t.hours === "" || t.hours == null ? "" : (isFinite(parseFloat(t.hours)) ? parseFloat(t.hours) : ""),
+      energy: [1, 2, 3, 4, 5].indexOf(+t.energy) !== -1 ? +t.energy : null,
+      repetitive: YN.indexOf(t.repetitive) !== -1 ? t.repetitive : null,
+      humanTouch: YN.indexOf(t.humanTouch) !== -1 ? t.humanTouch : null,
+    };
+  }
+  function cleanAudit(a) {
+    var b = blankAudit();
+    if (!a || typeof a !== "object") return b;
+    b.id = a.id || b.id;
+    b.audience = CFG.audiences[a.audience] ? a.audience : "school";
+    b.who = String(a.who || "");
+    b.org = String(a.org || "");
+    b.tasks = Array.isArray(a.tasks) ? a.tasks.map(cleanTask) : [];
+    b.timeChoices = Array.isArray(a.timeChoices) ? a.timeChoices.map(String) : [];
+    b.timeOther = String(a.timeOther || "");
+    b.updatedAt = a.updatedAt || b.updatedAt;
+    if (a.sentAt) { b.sentAt = String(a.sentAt); b.sentSig = String(a.sentSig || ""); }
+    return b;
+  }
+
+  var audit = cleanAudit(readStore(KEY));
+  var storageOk = writeStore(KEY, audit);
+  if (!storageOk) $("saved-note").textContent = "This browser isn't saving your answers, so export a file before you close the page.";
+
+  // A link like /time-audit/?org=Ridgeview%20Elementary&for=school fills in
+  // the organization and audience, so a group's results line up in the Sheet.
+  (function prefillFromLink() {
+    var q;
+    try { q = new URLSearchParams(location.search); } catch (e) { return; }
+    var org = (q.get("org") || "").trim().slice(0, 80), forKey = q.get("for");
+    var changed = false;
+    if (org && !audit.org.trim()) { audit.org = org; changed = true; }
+    if (forKey && CFG.audiences[forKey] && audit.audience !== forKey && !audit.tasks.length) { audit.audience = forKey; changed = true; }
+    if (changed) { audit.updatedAt = new Date().toISOString(); writeStore(KEY, audit); }
+  })();
+
+  function save() {
+    audit.updatedAt = new Date().toISOString();
+    writeStore(KEY, audit);
+    renderSend();
+  }
+  function findTask(id) { for (var i = 0; i < audit.tasks.length; i++) if (audit.tasks[i].id === id) return audit.tasks[i]; return null; }
+
+  // ── participant rendering ───────────────────────────────
+  function renderSetup() {
+    var html = "";
+    Object.keys(CFG.audiences).forEach(function (k) {
+      html += '<button type="button" data-aud="' + k + '" aria-pressed="' + (audit.audience === k) + '">' + esc(aud(k).label) + "</button>";
+    });
+    $("audience").innerHTML = html;
+    var A = aud(audit.audience);
+    $("who").placeholder = A.rolePlaceholder;
+    $("org").placeholder = A.orgPlaceholder;
+    $("who").value = audit.who;
+    $("org").value = audit.org;
+    var who = A.privacyWho === "student" ? "student, client or customer" : "client or customer";
+    $("privacy-line").textContent = "Don't enter " + who + " names. Describe the task, not the people.";
+  }
+
+  function renderStarters() {
+    var have = {};
+    audit.tasks.forEach(function (t) { have[normName(t.name)] = true; });
+    $("starters").innerHTML = aud(audit.audience).examples.map(function (ex) {
+      var used = have[normName(ex.task)];
+      return '<button type="button" class="chip" data-starter="' + esc(ex.task) + '"' + (used ? " disabled" : "") + '>' +
+        (used ? "" : '<span class="chip-plus" aria-hidden="true">+</span>') + esc(ex.task) + "</button>";
+    }).join("");
+  }
+
+  function segButtons(field, values, labels, current, tid) {
+    return values.map(function (v) {
+      return '<button type="button" data-tid="' + tid + '" data-field="' + field + '" data-val="' + v + '" aria-pressed="' + (String(current) === String(v)) + '">' + esc(labels[v] || v) + "</button>";
+    }).join("");
+  }
+
+  function scoreHtml(t) {
+    var b = band(t);
+    if (!b) {
+      var missing = [];
+      if (!t.energy) missing.push("energy drain");
+      if (!t.repetitive) missing.push("repetitive");
+      if (!t.humanTouch) missing.push("human touch");
+      return '<span class="badge b-pending">Not scored yet</span><span class="reason">Still need: ' + esc(missing.join(", ")) + "</span>";
+    }
+    var back = wonBack(t);
+    return '<span class="badge b-' + b.key + '"><span class="num">' + score(t) + " / 6</span> " + esc(b.label) + "</span>" +
+      '<span class="reason">' + esc(reason(t)) +
+      (num(t.hours) ? " → about <b>" + hrs(back) + " " + plural(back, "hour", "hours") + "</b> a week back" : "") + "</span>";
+  }
+
+  function taskCard(t, i) {
+    var id = t.id;
+    var energyLabels = { 1: "1", 2: "2", 3: "3", 4: "4", 5: "5" };
+    return '<article class="task" data-card="' + id + '">' +
+      '<div class="task-head">' +
+        '<input class="text-input" id="name-' + id + '" data-tid="' + id + '" data-input="name" type="text" maxlength="90" ' +
+          'placeholder="What’s the task?" aria-label="Task ' + (i + 1) + ' name" value="' + esc(t.name) + '">' +
+        '<button type="button" class="icon-btn" data-remove="' + id + '" aria-label="Remove this task">×</button>' +
+      "</div>" +
+      '<div><label class="q-label" for="hours-' + id + '">Hours per week</label>' +
+        '<div class="hours-row"><div class="stepper">' +
+          '<button type="button" data-step="-0.5" data-tid="' + id + '" aria-label="Half an hour less">−</button>' +
+          '<input id="hours-' + id + '" data-tid="' + id + '" data-input="hours" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="' + esc(t.hours) + '" placeholder="0">' +
+          '<button type="button" data-step="0.5" data-tid="' + id + '" aria-label="Half an hour more">+</button>' +
+        '</div><span class="unit">hours</span></div></div>' +
+      '<div><span class="q-label" id="en-' + id + '">Energy drain <span class="q-hint">1 = barely, 5 = wears me out</span></span>' +
+        '<div class="seg wide" role="group" aria-labelledby="en-' + id + '">' + segButtons("energy", [1, 2, 3, 4, 5], energyLabels, t.energy, id) + "</div></div>" +
+      '<div><span class="q-label" id="rep-' + id + '">Repetitive? <span class="q-hint">same steps most times</span></span>' +
+        '<div class="seg wide" role="group" aria-labelledby="rep-' + id + '">' + segButtons("repetitive", YN, YN_LABEL, t.repetitive, id) + "</div></div>" +
+      '<div><span class="q-label" id="ht-' + id + '">Needs a human touch? <span class="q-hint">e.g. hard conversations or relationships</span></span>' +
+        '<div class="seg wide" role="group" aria-labelledby="ht-' + id + '">' + segButtons("humanTouch", YN, YN_LABEL, t.humanTouch, id) + "</div></div>" +
+      '<div class="score" id="score-' + id + '" aria-live="polite">' + scoreHtml(t) + "</div>" +
+    "</article>";
+  }
+
+  function renderTasks() {
+    $("tasks").innerHTML = audit.tasks.map(taskCard).join("");
+    renderStarters();
+  }
+
+  function refreshCard(t) {
+    var card = document.querySelector('[data-card="' + t.id + '"]');
+    if (!card) return;
+    card.querySelectorAll("[data-field]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(String(t[b.getAttribute("data-field")]) === b.getAttribute("data-val")));
+    });
+    $("score-" + t.id).innerHTML = scoreHtml(t);
+  }
+
+  function legendHtml() {
+    var b = CFG.scoring.bands;
+    return '<div class="legend">' + b.map(function (x) {
+      return '<span><i class="bar ' + x.key + '"></i>' + esc(x.label) + "</span>";
+    }).join("") + '<span><i class="bar pending"></i>Not scored yet</span></div>';
+  }
+
+  function renderResults() {
+    var S = summarize(audit);
+    var A = aud(audit.audience);
+    var withHours = audit.tasks.filter(function (t) { return num(t.hours) > 0; });
+    if (!withHours.length) {
+      $("results").innerHTML = '<div class="empty">Add a task and its hours per week, and your results will show up here.</div>';
+      return;
+    }
+    var html = '<div class="hero-num"><div class="big">' + hrs(S.back) + "<small>" + plural(S.back, "hour", "hours") + "</small></div>" +
+      '<div class="cap">a week you could win back</div>' +
+      '<div class="sub">Out of ' + hrs(S.total) + " hours a week on these tasks. Over a " + esc(A.yearLabel) + " (" + S.weeks + " weeks), that’s about " + hrs(S.back * S.weeks) + " hours.</div></div>";
+    if (S.pending) html += '<p class="note">' + S.pending + " " + plural(S.pending, "task isn’t", "tasks aren’t") + " scored yet, so " + plural(S.pending, "it doesn’t", "they don’t") + " count toward this number.</p>";
+
+    var top = topTasks(audit, 3);
+    html += '<div class="block"><h3>Build a tool for these first</h3>';
+    if (top.length) {
+      html += '<ol class="top3">' + top.map(function (t) {
+        var b = band(t);
+        return '<li><span class="t-name">' + esc(t.name) + '</span><span class="t-idea">' + esc(ideaFor(t.name, audit.audience)) + "</span>" +
+          '<span class="t-meta">About ' + hrs(wonBack(t)) + " of its " + hrs(num(t.hours)) + " hours a week back · " + esc(b.label) + "</span></li>";
+      }).join("") + "</ol>";
+    } else {
+      html += '<div class="empty">No task scores as an AI candidate yet. That’s a fine answer too: the work you listed may need you.</div>';
+    }
+    html += "</div>";
+
+    var sorted = withHours.slice().sort(function (x, y) { return num(y.hours) - num(x.hours); });
+    var max = num(sorted[0].hours);
+    html += '<div class="block"><h3>Hours by task</h3>' + legendHtml() + '<div class="chart">' + sorted.map(function (t) {
+      var b = band(t);
+      var cls = b ? b.key : "pending";
+      var pct = Math.max(1.5, num(t.hours) / max * 100);
+      return '<div class="bar-row"><div class="bar-label">' + esc(t.name.trim() || "Untitled task") + "</div>" +
+        '<div class="bar-track"><div class="bar ' + cls + '" style="width:calc((100% - 5.5em) * ' + (pct / 100).toFixed(4) + ')"></div>' +
+        '<span class="bar-val">' + hrs(num(t.hours)) + " h" + (b ? "" : " · not scored") + "</span></div></div>";
+    }).join("") + "</div></div>";
+    $("results").innerHTML = html;
+  }
+
+  function renderTimeChoices() {
+    $("time-choices").innerHTML = CFG.timeChoices.map(function (c) {
+      return '<button type="button" class="chip" data-time="' + esc(c) + '" aria-pressed="' + (audit.timeChoices.indexOf(c) !== -1) + '">' + esc(c) + "</button>";
+    }).join("");
+    $("time-other").value = audit.timeOther;
+  }
+
+  function renderAudit() {
+    renderSetup();
+    renderTasks();
+    renderResults();
+    renderTimeChoices();
+  }
+
+  // ── participant events ──────────────────────────────────
+  function addTask(name) {
+    var t = cleanTask({ name: name || "" });
+    audit.tasks.push(t);
+    save();
+    renderTasks();
+    renderResults();
+    var el = $(name ? "hours-" + t.id : "name-" + t.id);
+    if (el) { el.focus(); el.scrollIntoView({ block: "center", behavior: "smooth" }); }
+  }
+
+  $("view-audit").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-aud")) {
+      audit.audience = b.getAttribute("data-aud"); save(); renderSetup(); renderStarters(); renderResults(); return;
+    }
+    if (b.hasAttribute("data-starter")) { addTask(b.getAttribute("data-starter")); return; }
+    if (b.hasAttribute("data-remove")) {
+      var rid = b.getAttribute("data-remove");
+      audit.tasks = audit.tasks.filter(function (t) { return t.id !== rid; });
+      save(); renderTasks(); renderResults(); return;
+    }
+    if (b.hasAttribute("data-step")) {
+      var t = findTask(b.getAttribute("data-tid"));
+      if (!t) return;
+      var v = Math.max(0, Math.min(80, (parseFloat(t.hours) || 0) + parseFloat(b.getAttribute("data-step"))));
+      t.hours = v; $("hours-" + t.id).value = v;
+      save(); refreshCard(t); renderResults(); return;
+    }
+    if (b.hasAttribute("data-field")) {
+      var t2 = findTask(b.getAttribute("data-tid"));
+      if (!t2) return;
+      var f = b.getAttribute("data-field"), val = b.getAttribute("data-val");
+      t2[f] = f === "energy" ? +val : val;
+      save(); refreshCard(t2); renderResults(); return;
+    }
+    if (b.hasAttribute("data-time")) {
+      var c = b.getAttribute("data-time"), i = audit.timeChoices.indexOf(c);
+      if (i === -1) audit.timeChoices.push(c); else audit.timeChoices.splice(i, 1);
+      b.setAttribute("aria-pressed", String(i === -1));
+      save(); return;
+    }
+  });
+
+  $("view-audit").addEventListener("input", function (e) {
+    var el = e.target;
+    if (el.id === "who") { audit.who = el.value; save(); return; }
+    if (el.id === "org") { audit.org = el.value; save(); return; }
+    if (el.id === "time-other") { audit.timeOther = el.value; save(); return; }
+    var t = el.hasAttribute("data-tid") ? findTask(el.getAttribute("data-tid")) : null;
+    if (!t) return;
+    var f = el.getAttribute("data-input");
+    if (f === "name") { t.name = el.value; save(); refreshCard(t); renderResults(); renderStarters(); }
+    if (f === "hours") {
+      var v = el.value === "" ? "" : Math.max(0, Math.min(80, parseFloat(el.value) || 0));
+      t.hours = v; save(); refreshCard(t); renderResults();
+    }
+  });
+
+  $("add-task").addEventListener("click", function () { addTask(""); });
+
+  $("reset").addEventListener("click", function () {
+    if (!window.confirm("Start a new audit? This clears your tasks and answers on this device.")) return;
+    var keepAud = audit.audience;
+    audit = blankAudit(); audit.audience = keepAud;
+    save(); renderAudit(); window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // ── export ──────────────────────────────────────────────
+  function slug(s) { return normName(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40); }
+  function download(filename, text, type) {
+    var blob = new Blob([text], { type: type });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 1000);
+  }
+  function fileBase() {
+    var d = new Date().toISOString().slice(0, 10);
+    return "time-audit-" + (slug(audit.who) || "me") + "-" + d;
+  }
+  function csvCell(v) {
+    var s = String(v == null ? "" : v);
+    return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  var CSV_HEAD = ["audit_id", "name_or_role", "organization", "audience", "task", "hours_per_week", "energy_drain",
+    "repetitive", "human_touch", "ai_fit_score", "verdict", "hours_won_back_per_week", "tool_idea", "time_plan"];
+  function auditCsvRows(a) {
+    var plan = a.timeChoices.concat(a.timeOther.trim() ? [a.timeOther.trim()] : []).join("; ");
+    return a.tasks.filter(function (t) { return t.name.trim() || num(t.hours); }).map(function (t) {
+      var b = band(t), sc = score(t);
+      return [a.id, a.who, a.org, a.audience, t.name, num(t.hours), t.energy || "", t.repetitive || "", t.humanTouch || "",
+        sc == null ? "" : sc, b ? b.label : "Not scored", Math.round(wonBack(t) * 100) / 100,
+        t.name.trim() && wonBack(t) > 0 ? ideaFor(t.name, a.audience) : "", plan];
+    });
+  }
+  function toCsv(rows) { return [CSV_HEAD].concat(rows).map(function (r) { return r.map(csvCell).join(","); }).join("\r\n") + "\r\n"; }
+
+  $("export-json").addEventListener("click", function () {
+    save(); download(fileBase() + ".json", JSON.stringify(audit, null, 2), "application/json");
+  });
+  $("export-csv").addEventListener("click", function () {
+    save(); download(fileBase() + ".csv", toCsv(auditCsvRows(audit)), "text/csv");
+  });
+
+  // ── send to Stu's Google Sheet ──────────────────────────
+  // Only runs when the participant presses Send. The address comes from
+  // config.js; when it's empty the button stays hidden.
+  var SEND = CFG.sendTo || {};
+  var sendUrl = /^https:\/\//.test(SEND.url || "") ? SEND.url : "";
+  var sendLabel = SEND.buttonLabel || "Send";
+  var sendWho = SEND.who || "the facilitator";
+  var sending = false;
+
+  function round2(n) { return Math.round(n * 100) / 100; }
+  function sendPayload(a) {
+    var rows = auditCsvRows(a).map(function (r) {
+      var o = {};
+      CSV_HEAD.forEach(function (h, i) { o[h] = r[i]; });
+      return o;
+    });
+    var s = summarize(a);
+    return {
+      kind: "be-outside-time-audit-send", version: 1, audit_id: a.id,
+      participant: {
+        name_or_role: a.who.trim(), organization: a.org.trim(), audience: a.audience, tasks: rows.length,
+        hours_per_week: round2(s.total), hours_won_back_per_week: round2(s.back),
+        hours_won_back_per_year: Math.round(s.back * s.weeks),
+        time_plan: a.timeChoices.concat(a.timeOther.trim() ? [a.timeOther.trim()] : []).join("; "),
+      },
+      tasks: rows,
+    };
+  }
+  // A short fingerprint of what was sent, to notice later changes.
+  function sendSig(p) {
+    var str = JSON.stringify([p.participant, p.tasks]), h = 5381;
+    for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36) + "-" + str.length;
+  }
+  function sentWhen(iso) {
+    var d = new Date(iso);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " at " +
+      d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  }
+  function renderSend(msg, warn) {
+    if (!sendUrl || sending) return;
+    var el = $("send-status"), btn = $("send");
+    btn.disabled = false;
+    if (msg == null) {
+      if (!audit.sentAt) { el.hidden = true; btn.textContent = sendLabel; return; }
+      var changed = audit.sentSig !== sendSig(sendPayload(audit));
+      msg = changed
+        ? "You've changed your answers since you sent them on " + sentWhen(audit.sentAt) + ". Send again so " + sendWho + " has the latest."
+        : "Sent to " + sendWho + " on " + sentWhen(audit.sentAt) + ". Thank you!";
+      warn = changed;
+      btn.textContent = "Send again";
+    }
+    el.textContent = msg;
+    el.className = "send-status" + (warn ? " warn" : "");
+    el.hidden = false;
+  }
+
+  if (sendUrl) {
+    $("send").hidden = false;
+    $("send").textContent = sendLabel;
+    $("print").className = "btn btn-line";
+    $("privacy-send").textContent = "Everything stays on this device until you press " + sendLabel +
+      ". Then your answers go to " + sendWho + ", and nowhere else.";
+    renderSend();
+  }
+
+  $("send").addEventListener("click", function () {
+    if (sending || !sendUrl) return;
+    save();
+    var payload = sendPayload(audit);
+    if (!payload.tasks.some(function (t) { return String(t.task).trim() && t.hours_per_week > 0; })) {
+      renderSend("Add at least one task and its hours first.", true);
+      return;
+    }
+    var sig = sendSig(payload), btn = $("send"), el = $("send-status");
+    sending = true;
+    btn.disabled = true;
+    el.textContent = "Sending…"; el.className = "send-status"; el.hidden = false;
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 25000);
+    // Plain-text body keeps this a "simple" request that Apps Script accepts.
+    fetch(sendUrl, { method: "POST", body: JSON.stringify(payload), redirect: "follow", signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.ok) throw new Error((res && res.error) || "");
+        audit.sentAt = new Date().toISOString();
+        audit.sentSig = sig;
+        return null;
+      })
+      .catch(function (err) {
+        var fromSheet = err && err.message && err.name === "Error" ? err.message : "";
+        return "Your answers weren't sent. " + (fromSheet || "Check your internet and try again.") +
+          " You can also tap Export CSV and email the file to " + sendWho + ".";
+      })
+      .then(function (failMsg) {
+        clearTimeout(timer);
+        sending = false;
+        writeStore(KEY, audit);
+        renderSend(failMsg || null, !!failMsg);
+      });
+  });
+
+  // ── print report ────────────────────────────────────────
+  function buildPrint() {
+    var S = summarize(audit), A = aud(audit.audience);
+    var date = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    var who = [audit.who.trim(), audit.org.trim()].filter(Boolean).map(esc).join(" · ");
+    var top = topTasks(audit, 3);
+    var withHours = audit.tasks.filter(function (t) { return num(t.hours) > 0; })
+      .sort(function (x, y) { return num(y.hours) - num(x.hours); });
+    var shown = withHours.slice(0, 14), extra = withHours.length - shown.length;
+    var max = shown.length ? num(shown[0].hours) : 1;
+    var plan = audit.timeChoices.concat(audit.timeOther.trim() ? [audit.timeOther.trim()] : []);
+
+    var h = '<div class="pr">' +
+      '<div class="pr-head"><span class="pr-brand">Be Outside</span><span class="pr-kind">Time Audit</span></div>' +
+      '<div class="pr-who">' + (who ? "<b>" + who + "</b> · " : "") + esc(A.label) + " · " + esc(date) + "</div>" +
+      '<div class="pr-hero"><div class="big">' + hrs(S.back) + '</div><div><div class="cap">' + plural(S.back, "hour", "hours") + " a week you could win back</div>" +
+        '<div class="sub">Out of ' + hrs(S.total) + " hours a week on the tasks listed · about " + hrs(S.back * S.weeks) + " hours over a " + esc(A.yearLabel) + "</div></div></div>";
+
+    h += "<h4>Build a tool for these first</h4>";
+    h += top.length ? "<ol>" + top.map(function (t) {
+      return "<li><b>" + esc(t.name) + '</b> — <span class="idea">' + esc(ideaFor(t.name, audit.audience)) + '</span> <span class="meta">(about ' + hrs(wonBack(t)) + " h/week back)</span></li>";
+    }).join("") + "</ol>" : '<p style="font-size:10pt">No task scored as an AI candidate yet.</p>';
+
+    if (shown.length) {
+      h += "<h4>Hours by task</h4>" + '<div class="pr-legend">' + CFG.scoring.bands.map(function (b) {
+        return '<span><i class="bar ' + b.key + '"></i>' + esc(b.label) + "</span>";
+      }).join("") + "</div>";
+      h += '<div class="pr-bars">' + shown.map(function (t) {
+        var b = band(t), sc = score(t);
+        return '<div class="row"><span class="lab">' + esc(t.name.trim() || "Untitled task") + "</span>" +
+          '<span style="display:flex;align-items:center;gap:6px"><span class="bar ' + (b ? b.key : "pending") + '" style="width:' + Math.max(2, num(t.hours) / max * 70).toFixed(1) + '%"></span>' +
+          "<span>" + hrs(num(t.hours)) + " h" + (sc == null ? " · not scored" : " · score " + sc + "/6") + "</span></span></div>";
+      }).join("") + "</div>";
+      if (extra > 0) h += '<p style="font-size:8pt;color:var(--muted);margin-top:4px">+ ' + extra + " more " + plural(extra, "task", "tasks") + " in your exported file.</p>";
+    }
+
+    h += '<div class="pr-time"><div class="q">What will you do with the time?</div>' +
+      (plan.length ? '<div class="a">' + plan.map(esc).join(" · ") + "</div>" : '<div class="lines"></div>') + "</div>";
+    h += '<div class="pr-method">AI-fit score = repetitive (Yes 2, Somewhat 1, No 0) + human touch (No 2, Somewhat 1, Yes 0) + energy drain (0–2). ' +
+      CFG.scoring.bands.map(function (b) { return b.label + " (" + b.min + "+): " + Math.round(b.winBack * 100) + "% of hours back"; }).join(" · ") + ". These are estimates to start a conversation, not promises.</div>";
+    h += '<div class="pr-foot"><span>beoutside.life · Be Outside LLC</span><em>Don’t wait for summer.</em></div></div>';
+    $("print-report").innerHTML = h;
+  }
+  window.addEventListener("beforeprint", function () { if (route() === "audit") buildPrint(); });
+  $("print").addEventListener("click", function () { buildPrint(); window.print(); });
+
+  // ── facilitator ─────────────────────────────────────────
+  // Groups: one per engagement. The browser remembers them; the group
+  // file you save is the lasting copy.
+  function nowIso() { return new Date().toISOString(); }
+  function mostCommonOrg(audits) {
+    var count = {}, best = "", bestN = 0;
+    audits.forEach(function (a) {
+      var o = a.org.trim();
+      if (!o) return;
+      count[o] = (count[o] || 0) + 1;
+      if (count[o] > bestN) { best = o; bestN = count[o]; }
+    });
+    return best;
+  }
+  function cleanGroup(g) {
+    g = g || {};
+    var t = nowIso();
+    return { id: g.id || uid(), name: String(g.name || ""), createdAt: g.createdAt || t, updatedAt: g.updatedAt || t,
+             savedAt: g.savedAt || null, audits: Array.isArray(g.audits) ? g.audits.map(cleanAudit) : [] };
+  }
+  function loadFac() {
+    var raw = readStore(FKEY), groups = [];
+    if (raw && Array.isArray(raw.groups)) groups = raw.groups.map(cleanGroup);
+    else if (raw && Array.isArray(raw.audits) && raw.audits.length) {
+      // Data saved before groups existed becomes the first group.
+      var g = cleanGroup({ audits: raw.audits });
+      g.name = mostCommonOrg(g.audits) || "Group 1";
+      groups = [g];
+    }
+    if (!groups.length) groups = [cleanGroup({})];
+    var curId = raw && groups.some(function (g) { return g.id === raw.currentId; }) ? raw.currentId : groups[0].id;
+    return { groups: groups, currentId: curId };
+  }
+  var fac = loadFac();
+  function saveFac() { writeStore(FKEY, fac); }
+  function cur() {
+    for (var i = 0; i < fac.groups.length; i++) if (fac.groups[i].id === fac.currentId) return fac.groups[i];
+    fac.currentId = fac.groups[0].id;
+    return fac.groups[0];
+  }
+  function touch() { cur().updatedAt = nowIso(); saveFac(); }
+  function groupLabel(g) { return g.name.trim() || "Untitled group"; }
+
+  function parseCsv(text) {
+    var rows = [], row = [], cell = "", q = false, i = 0;
+    text = text.replace(/^﻿/, "");
+    for (; i < text.length; i++) {
+      var ch = text[i];
+      if (q) {
+        if (ch === '"') { if (text[i + 1] === '"') { cell += '"'; i++; } else q = false; }
+        else cell += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n" || ch === "\r") {
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); rows.push(row); row = []; cell = "";
+      } else cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); rows.push(row); }
+    return rows.filter(function (r) { return r.some(function (c) { return c.trim() !== ""; }); });
+  }
+  var LABEL_TO_YN = { yes: "yes", somewhat: "somewhat", no: "no" };
+  function auditsFromCsv(text, fileName) {
+    var rows = parseCsv(text);
+    if (!rows.length) throw new Error("the file is empty");
+    var head = rows[0].map(function (h) { return h.trim().toLowerCase(); });
+    var col = function (n) { return head.indexOf(n); };
+    if (col("task") === -1 || col("hours_per_week") === -1) throw new Error("it isn't a Time Audit CSV");
+    var byId = {}, order = [];
+    rows.slice(1).forEach(function (r) {
+      var get = function (n) { var i = col(n); return i === -1 ? "" : (r[i] || "").trim(); };
+      var id = get("audit_id") || fileName;
+      if (!byId[id]) {
+        var plan = get("time_plan").split(";").map(function (s) { return s.trim(); }).filter(Boolean);
+        byId[id] = cleanAudit({ id: id, who: get("name_or_role"), org: get("organization"), audience: get("audience"),
+          tasks: [], timeChoices: plan.filter(function (p) { return CFG.timeChoices.indexOf(p) !== -1; }),
+          timeOther: plan.filter(function (p) { return CFG.timeChoices.indexOf(p) === -1; }).join("; ") });
+        order.push(id);
+      }
+      byId[id].tasks.push(cleanTask({ name: get("task"), hours: get("hours_per_week"), energy: get("energy_drain"),
+        repetitive: LABEL_TO_YN[get("repetitive").toLowerCase()], humanTouch: LABEL_TO_YN[get("human_touch").toLowerCase()] }));
+    });
+    return order.map(function (id) { return byId[id]; });
+  }
+  function auditsFromJson(text) {
+    var data = JSON.parse(text);
+    var list = Array.isArray(data) ? data : (data && Array.isArray(data.audits) ? data.audits : [data]);
+    return list.map(function (a) {
+      if (!a || a.kind !== "be-outside-time-audit") throw new Error("it isn't a Time Audit file");
+      return cleanAudit(a);
+    });
+  }
+  function readFile(file) {
+    return new Promise(function (resolve) {
+      var r = new FileReader();
+      r.onload = function () { resolve({ name: file.name, text: String(r.result || "") }); };
+      r.onerror = function () { resolve({ name: file.name, text: null }); };
+      r.readAsText(file);
+    });
+  }
+  function importFiles(files) {
+    files = Array.prototype.slice.call(files || []);
+    if (!files.length) return;
+    Promise.all(files.map(readFile)).then(function (results) {
+      var added = 0, replaced = 0, errors = [];
+      results.forEach(function (f) {
+        try {
+          if (f.text == null) throw new Error("it couldn't be read");
+          var isCsv = /\.csv$/i.test(f.name) || (!/^\s*[\[{]/.test(f.text));
+          var list = isCsv ? auditsFromCsv(f.text, f.name) : auditsFromJson(f.text);
+          var g = cur();
+          list.forEach(function (a) {
+            var i = g.audits.findIndex(function (x) { return x.id === a.id; });
+            if (i === -1) { g.audits.push(a); added++; } else { g.audits[i] = a; replaced++; }
+          });
+        } catch (err) {
+          errors.push(f.name + ": " + (err && err.message && !/JSON|token|Unexpected/.test(err.message) ? err.message : "it isn't a Time Audit file"));
+        }
+      });
+      if (added || replaced) {
+        if (!cur().name.trim()) cur().name = mostCommonOrg(cur().audits);
+        touch();
+      }
+      var msg = [];
+      if (added) msg.push("Added " + added + " " + plural(added, "participant", "participants") + ".");
+      if (replaced) msg.push("Updated " + replaced + " already here.");
+      $("import-msg").innerHTML = esc(msg.join(" ")) + errors.map(function (e) { return '<div class="err">Skipped ' + esc(e) + "</div>"; }).join("");
+      renderFac();
+    });
+  }
+
+  function facSummary() {
+    var audits = cur().audits;
+    var people = audits.length, total = 0, back = 0, yearBack = 0, groups = {}, timeTally = {};
+    audits.forEach(function (a) {
+      var S = summarize(a);
+      total += S.total; back += S.back; yearBack += S.back * S.weeks;
+      var seen = {};
+      a.tasks.forEach(function (t) {
+        if (!t.name.trim() || !num(t.hours)) return;
+        var k = normName(t.name);
+        var g = groups[k] || (groups[k] = { name: t.name.trim(), audience: a.audience, people: 0, hours: 0, back: 0, energySum: 0, energyN: 0 });
+        if (!seen[k]) { g.people++; seen[k] = true; }
+        g.hours += num(t.hours); g.back += wonBack(t);
+        if (t.energy) { g.energySum += t.energy; g.energyN++; }
+      });
+      a.timeChoices.forEach(function (c) { timeTally[c] = (timeTally[c] || 0) + 1; });
+      if (a.timeOther.trim()) timeTally["Their own answer"] = (timeTally["Their own answer"] || 0) + 1;
+    });
+    var list = Object.keys(groups).map(function (k) { return groups[k]; });
+    return { people: people, total: total, back: back, yearBack: yearBack, groups: list, timeTally: timeTally };
+  }
+
+  function fmtWhen(iso) {
+    var d = new Date(iso);
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) + " at " +
+      d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  }
+  function renderSaveStatus() {
+    var g = cur(), el = $("save-status"), warn = true, text;
+    if (!g.audits.length) { text = "Add participant files below, then save a group file to keep this group."; warn = false; }
+    else if (!g.savedAt) text = "Not saved to a file yet. Save a group file and keep it with your client files, such as in Google Drive.";
+    else if (g.updatedAt > g.savedAt) text = "Changed since you saved a file on " + fmtWhen(g.savedAt) + ". Save again to keep the changes.";
+    else { text = "Saved to a file on " + fmtWhen(g.savedAt) + "."; warn = false; }
+    el.textContent = text;
+    el.classList.toggle("warn", warn);
+  }
+  function renderGroupOptions() {
+    $("group-pick").innerHTML = fac.groups.map(function (g) {
+      return '<option value="' + esc(g.id) + '"' + (g.id === fac.currentId ? " selected" : "") + ">" +
+        esc(groupLabel(g)) + " (" + g.audits.length + ")</option>";
+    }).join("");
+  }
+  function renderGroupBar() {
+    renderGroupOptions();
+    $("group-name").value = cur().name;
+    renderSaveStatus();
+  }
+
+  function renderFac() {
+    renderGroupBar();
+    var F = facSummary();
+    if (!F.people) {
+      $("fac-results").innerHTML = '<div class="empty" style="margin-top:24px">No participant files yet. Ask each person to tap <b>Export JSON</b> (or CSV) on their results, then send you the file.</div>';
+      return;
+    }
+    var drains = F.groups.slice().sort(function (a, b) { return b.hours - a.hours || b.people - a.people; });
+    var build = F.groups.filter(function (g) { return g.back > 0; }).sort(function (a, b) { return b.back - a.back; }).slice(0, 3);
+    var h = '<div class="print-group">' + esc(groupLabel(cur())) + "<small>Be Outside Time Audit · " +
+      esc(new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })) + "</small></div>" +
+      '<div class="tiles">' +
+      '<div class="tile lead"><div class="v">' + hrs(F.back) + '</div><div class="k">hours a week the team could win back</div></div>' +
+      '<div class="tile"><div class="v">' + hrs(F.yearBack) + '</div><div class="k">hours over a year</div></div>' +
+      '<div class="tile"><div class="v">' + hrs(F.total) + '</div><div class="k">hours a week on listed tasks</div></div>' +
+      '<div class="tile"><div class="v">' + F.people + '</div><div class="k">' + plural(F.people, "participant", "participants") + "</div></div></div>";
+
+    h += '<div class="block"><h3>Build these tools first</h3>';
+    h += build.length ? '<ol class="top3">' + build.map(function (g) {
+      return '<li><span class="t-name">' + esc(g.name) + '</span><span class="t-idea">' + esc(ideaFor(g.name, g.audience)) + "</span>" +
+        '<span class="t-meta">' + hrs(g.back) + " hours a week back across " + g.people + " " + plural(g.people, "person", "people") + "</span></li>";
+    }).join("") + "</ol>" : '<div class="empty">No task scores as an AI candidate across the group yet.</div>';
+    h += "</div>";
+
+    h += '<div class="block"><h3>Biggest time drains across the group</h3><div class="tbl-wrap"><table><thead><tr>' +
+      '<th>Task</th><th class="n">People</th><th class="n">Hours / week</th><th class="n">Avg energy drain</th><th class="n">Won back / week</th></tr></thead><tbody>' +
+      drains.slice(0, 20).map(function (g) {
+        return "<tr><td>" + esc(g.name) + (g.back > 0 ? '<span class="idea">' + esc(ideaFor(g.name, g.audience)) + "</span>" : "") + "</td>" +
+          '<td class="n">' + g.people + '</td><td class="n">' + hrs(g.hours) + '</td><td class="n">' + (g.energyN ? (g.energySum / g.energyN).toFixed(1) : "–") + '</td><td class="n">' + hrs(g.back) + "</td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      (drains.length > 20 ? '<p class="saved-note">Showing the top 20 of ' + drains.length + " tasks. Export the combined CSV for all of them.</p>" : "") + "</div>";
+
+    var tallyKeys = Object.keys(F.timeTally).sort(function (a, b) { return F.timeTally[b] - F.timeTally[a]; });
+    if (tallyKeys.length) {
+      h += '<div class="block"><h3>What the group will do with the time</h3><div class="tally">' +
+        tallyKeys.map(function (k) { return "<span>" + esc(k) + "<b>" + F.timeTally[k] + "</b></span>"; }).join("") + "</div></div>";
+    }
+
+    h += '<div class="block"><h3>Participants</h3><div class="tbl-wrap"><table><thead><tr><th>Name or role</th><th>Organization</th><th class="n">Tasks</th><th class="n">Hours / week</th><th class="n">Won back</th><th></th></tr></thead><tbody>' +
+      cur().audits.map(function (a, i) {
+        var S = summarize(a);
+        return "<tr><td>" + (esc(a.who.trim()) || "Participant " + (i + 1)) + "</td><td>" + (esc(a.org.trim()) || "–") + '</td><td class="n">' +
+          a.tasks.filter(function (t) { return t.name.trim(); }).length + '</td><td class="n">' + hrs(S.total) + '</td><td class="n">' + hrs(S.back) + "</td>" +
+          '<td class="n"><button type="button" class="btn btn-quiet" data-fac-remove="' + esc(a.id) + '">Remove</button></td></tr>';
+      }).join("") + "</tbody></table></div></div>";
+
+    h += '<div class="actions"><button class="btn btn-line" type="button" id="fac-csv">Export combined CSV</button>' +
+      '<button class="btn btn-quiet" type="button" id="fac-clear">Clear all participants</button></div>';
+    $("fac-results").innerHTML = h;
+  }
+
+  $("fac-files").addEventListener("change", function (e) { importFiles(e.target.files); e.target.value = ""; });
+  var drop = $("drop");
+  ["dragenter", "dragover"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add("over"); }); });
+  ["dragleave", "drop"].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove("over"); }); });
+  drop.addEventListener("drop", function (e) { importFiles(e.dataTransfer && e.dataTransfer.files); });
+  // Keep a file dropped outside the box from opening in the tab.
+  window.addEventListener("dragover", function (e) { e.preventDefault(); });
+  window.addEventListener("drop", function (e) { e.preventDefault(); });
+
+  $("fac-results").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    if (b.hasAttribute("data-fac-remove")) {
+      var id = b.getAttribute("data-fac-remove");
+      cur().audits = cur().audits.filter(function (a) { return a.id !== id; });
+      touch(); renderFac(); return;
+    }
+    if (b.id === "fac-csv") {
+      var rows = [];
+      cur().audits.forEach(function (a) { rows = rows.concat(auditCsvRows(a)); });
+      download(groupFileBase() + ".csv", toCsv(rows), "text/csv");
+      return;
+    }
+    if (b.id === "fac-clear") {
+      if (!window.confirm("Remove all participants from \u201c" + groupLabel(cur()) + "\u201d? Their own files aren't affected.")) return;
+      cur().audits = []; touch(); $("import-msg").textContent = ""; renderFac();
+    }
+  });
+
+  // ── groups ──────────────────────────────────────────────
+  function groupFileBase() {
+    return "time-audit-group-" + (slug(cur().name) || "untitled") + "-" + new Date().toISOString().slice(0, 10);
+  }
+  $("group-pick").addEventListener("change", function (e) {
+    fac.currentId = e.target.value; saveFac();
+    $("import-msg").textContent = ""; renderFac();
+  });
+  $("group-new").addEventListener("click", function () {
+    var g = cleanGroup({});
+    fac.groups.push(g); fac.currentId = g.id; saveFac();
+    $("import-msg").textContent = ""; renderFac();
+    $("group-name").focus();
+  });
+  $("group-name").addEventListener("input", function (e) {
+    cur().name = e.target.value; touch();
+    renderGroupOptions(); renderSaveStatus();
+  });
+  $("group-save").addEventListener("click", function () {
+    var g = cur();
+    g.savedAt = nowIso();
+    if (g.updatedAt > g.savedAt) g.updatedAt = g.savedAt;
+    var file = { kind: "be-outside-time-audit-group", version: 1, id: g.id, name: g.name, createdAt: g.createdAt,
+                 updatedAt: g.updatedAt, savedAt: g.savedAt, audits: g.audits };
+    download(groupFileBase() + ".json", JSON.stringify(file, null, 2), "application/json");
+    saveFac(); renderSaveStatus();
+  });
+  $("group-open").addEventListener("change", function (e) {
+    var f = e.target.files && e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    readFile(f).then(function (r) {
+      var data;
+      try { data = JSON.parse(r.text); } catch (err) { data = null; }
+      if (!data || data.kind !== "be-outside-time-audit-group") {
+        var hint = data && data.kind === "be-outside-time-audit" ? " That\u2019s a participant file, so add it with the box below." : "";
+        $("import-msg").innerHTML = '<div class="err">' + esc(f.name) + " isn\u2019t a group file." + esc(hint) + "</div>";
+        return;
+      }
+      var opened = cleanGroup(data);
+      if (!opened.savedAt) opened.savedAt = nowIso();
+      opened.updatedAt = opened.savedAt;
+      var existing = null;
+      fac.groups.forEach(function (g) { if (g.id === opened.id) existing = g; });
+      var msg;
+      if (existing) {
+        // Same group already here: the file's copy of each participant wins,
+        // and anyone added here since stays.
+        var fromFile = {}, extra = 0;
+        opened.audits.forEach(function (a) { fromFile[a.id] = true; });
+        existing.audits.forEach(function (a) { if (!fromFile[a.id]) { opened.audits.push(a); extra++; } });
+        opened.name = opened.name || existing.name;
+        if (extra) opened.updatedAt = nowIso();
+        fac.groups[fac.groups.indexOf(existing)] = opened;
+        msg = "Opened \u201c" + groupLabel(opened) + "\u201d over the copy already in this browser" +
+          (extra ? ", keeping " + extra + " " + plural(extra, "participant", "participants") + " added here since." : ".");
+      } else {
+        // Drop an empty untitled group the file replaces.
+        fac.groups = fac.groups.filter(function (g) { return g.audits.length || g.name.trim(); });
+        fac.groups.push(opened);
+        msg = "Opened \u201c" + groupLabel(opened) + "\u201d with " + opened.audits.length + " " + plural(opened.audits.length, "participant", "participants") + ".";
+      }
+      fac.currentId = opened.id; saveFac();
+      $("import-msg").textContent = msg;
+      renderFac();
+    });
+  });
+  $("group-delete").addEventListener("click", function () {
+    var g = cur();
+    var kept = g.savedAt ? " Your saved group file isn\u2019t affected." : " It hasn\u2019t been saved to a file, so it will be gone for good.";
+    if (g.audits.length && !window.confirm("Delete \u201c" + groupLabel(g) + "\u201d from this browser?" + kept)) return;
+    fac.groups = fac.groups.filter(function (x) { return x.id !== g.id; });
+    if (!fac.groups.length) fac.groups.push(cleanGroup({}));
+    fac.currentId = fac.groups[0].id; saveFac();
+    $("import-msg").textContent = ""; renderFac();
+  });
+
+  // ── routing ─────────────────────────────────────────────
+  function route() { return location.hash === "#facilitator" ? "facilitator" : "audit"; }
+  function show() {
+    var f = route() === "facilitator";
+    $("view-audit").hidden = f; $("intro-audit").hidden = f;
+    $("view-fac").hidden = !f; $("intro-fac").hidden = !f;
+    $("to-fac").hidden = f; $("to-audit").hidden = !f;
+    $("band-tag").textContent = f ? "Time Audit · Facilitator" : "Time Audit";
+    document.body.classList.toggle("fac", f);
+    if (f) renderFac(); else renderAudit();
+    window.scrollTo(0, 0);
+  }
+  $("to-audit").addEventListener("click", function (e) {
+    e.preventDefault();
+    history.pushState(null, "", location.pathname + location.search);
+    show();
+  });
+  window.addEventListener("hashchange", show);
+  window.addEventListener("popstate", show);
+  show();
+})();
+</script>
+</body>
+</html>
