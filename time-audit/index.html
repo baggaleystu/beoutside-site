@@ -190,6 +190,7 @@ h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--
 .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; align-items: center; }
 .send-status { font-size: 15px; color: var(--slate); margin-top: 14px; }
 .send-status.warn { color: var(--dusk); }
+.thanks-line { font-size: 17px; max-width: 34em; }
 .saved-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
 
 /* ── FACILITATOR ── */
@@ -324,7 +325,7 @@ footer { background: var(--slate); }
 <main>
   <!-- PARTICIPANT AUDIT -->
   <div id="view-audit">
-    <section class="wrap step" aria-labelledby="h-setup">
+    <section class="wrap step" id="step-setup" aria-labelledby="h-setup">
       <div class="step-label">Step 1</div>
       <h2 id="h-setup">Set up</h2>
       <div class="fields">
@@ -343,7 +344,7 @@ footer { background: var(--slate); }
       </div>
     </section>
 
-    <section class="wrap step" aria-labelledby="h-tasks">
+    <section class="wrap step" id="step-tasks" aria-labelledby="h-tasks">
       <div class="step-label">Step 2</div>
       <h2 id="h-tasks">List the tasks that eat your week</h2>
       <p class="lede">Think about a normal week. Add each task that keeps coming back, then answer four quick questions about it.</p>
@@ -355,7 +356,7 @@ footer { background: var(--slate); }
       <div class="add-row"><button class="btn btn-line btn-full" type="button" id="add-task">+ Add your own task</button></div>
     </section>
 
-    <section class="wrap step" aria-labelledby="h-results">
+    <section class="wrap step" id="step-results" aria-labelledby="h-results">
       <div class="step-label">Step 3</div>
       <h2 id="h-results">Your results</h2>
       <div id="results"></div>
@@ -376,6 +377,15 @@ footer { background: var(--slate); }
       </div>
       <p class="send-status" id="send-status" aria-live="polite" hidden></p>
       <p class="saved-note" id="saved-note">Your answers are saved on this device as you go.</p>
+    </section>
+
+    <section class="wrap step thanks" id="thanks" aria-labelledby="h-thanks" hidden>
+      <div class="step-label">All done</div>
+      <h2 id="h-thanks">Thank you. Stu has your answers.</h2>
+      <div class="hero-num" id="thanks-num"></div>
+      <p class="thanks-line" id="thanks-line"></p>
+      <p class="saved-note">Your answers have been cleared from this device.</p>
+      <div class="actions"><button class="btn btn-line" type="button" id="thanks-new">Start a new audit</button></div>
     </section>
   </div>
 
@@ -536,7 +546,6 @@ footer { background: var(--slate); }
     b.timeChoices = Array.isArray(a.timeChoices) ? a.timeChoices.map(String) : [];
     b.timeOther = String(a.timeOther || "");
     b.updatedAt = a.updatedAt || b.updatedAt;
-    if (a.sentAt) { b.sentAt = String(a.sentAt); b.sentSig = String(a.sentSig || ""); }
     return b;
   }
 
@@ -843,44 +852,47 @@ footer { background: var(--slate); }
       tasks: rows,
     };
   }
-  // A short fingerprint of what was sent, to notice later changes.
-  function sendSig(p) {
-    var str = JSON.stringify([p.participant, p.tasks]), h = 5381;
-    for (var i = 0; i < str.length; i++) h = ((h << 5) + h + str.charCodeAt(i)) | 0;
-    return (h >>> 0).toString(36) + "-" + str.length;
-  }
-  function sentWhen(iso) {
-    var d = new Date(iso);
-    if (isNaN(d)) return "";
-    return d.toLocaleDateString("en-US", { month: "short", day: "numeric" }) + " at " +
-      d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-  }
   function renderSend(msg, warn) {
     if (!sendUrl || sending) return;
-    var el = $("send-status"), btn = $("send");
-    btn.disabled = false;
-    if (msg == null) {
-      if (!audit.sentAt) { el.hidden = true; btn.textContent = sendLabel; return; }
-      var changed = audit.sentSig !== sendSig(sendPayload(audit));
-      msg = changed
-        ? "You've changed your answers since you sent them on " + sentWhen(audit.sentAt) + ". Send again so " + sendWho + " has the latest."
-        : "Sent to " + sendWho + " on " + sentWhen(audit.sentAt) + ". Thank you!";
-      warn = changed;
-      btn.textContent = "Send again";
-    }
+    var el = $("send-status");
+    $("send").disabled = false;
+    if (msg == null) { el.hidden = true; return; }
     el.textContent = msg;
     el.className = "send-status" + (warn ? " warn" : "");
     el.hidden = false;
   }
 
+  // Participants see their results but don't keep a copy: Send is the
+  // only way to finish, and a successful send clears this device.
+  function showSteps(on) {
+    ["step-setup", "step-tasks", "step-results"].forEach(function (id) { $(id).hidden = !on; });
+    $("thanks").hidden = on;
+  }
+  function showThanks(a) {
+    var S = summarize(a);
+    $("thanks-num").innerHTML = '<div class="big">' + hrs(S.back) + "<small>" + plural(S.back, "hour", "hours") + "</small></div>" +
+      '<div class="cap">a week you could win back</div>';
+    $("thanks-line").textContent = sendWho + " will look at what you sent and be in touch about which tools to build first.";
+    showSteps(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   if (sendUrl) {
     $("send").hidden = false;
     $("send").textContent = sendLabel;
-    $("print").className = "btn btn-line";
+    ["print", "export-json", "export-csv"].forEach(function (id) { $(id).hidden = true; });
     $("privacy-send").textContent = "Everything stays on this device until you press " + sendLabel +
-      ". Then your answers go to " + sendWho + ", and nowhere else.";
-    renderSend();
+      ". Then your answers go to " + sendWho + " and nowhere else, and this device forgets them.";
+    $("saved-note").textContent = storageOk
+      ? "Your answers are saved on this device until you send them."
+      : "This browser isn't saving your answers, so send them before you close the page.";
   }
+
+  $("thanks-new").addEventListener("click", function () {
+    showSteps(true);
+    renderAudit();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   $("send").addEventListener("click", function () {
     if (sending || !sendUrl) return;
@@ -890,7 +902,7 @@ footer { background: var(--slate); }
       renderSend("Add at least one task and its hours first.", true);
       return;
     }
-    var sig = sendSig(payload), btn = $("send"), el = $("send-status");
+    var btn = $("send"), el = $("send-status");
     sending = true;
     btn.disabled = true;
     el.textContent = "Sending…"; el.className = "send-status"; el.hidden = false;
@@ -901,20 +913,23 @@ footer { background: var(--slate); }
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (!res || !res.ok) throw new Error((res && res.error) || "");
-        audit.sentAt = new Date().toISOString();
-        audit.sentSig = sig;
         return null;
       })
       .catch(function (err) {
         var fromSheet = err && err.message && err.name === "Error" ? err.message : "";
         return "Your answers weren't sent. " + (fromSheet || "Check your internet and try again.") +
-          " You can also tap Export CSV and email the file to " + sendWho + ".";
+          " They're still saved on this device, so nothing is lost.";
       })
       .then(function (failMsg) {
         clearTimeout(timer);
         sending = false;
+        if (failMsg) { renderSend(failMsg, true); return; }
+        var sent = audit;
+        // Keep the audience and organization for the next person on a shared computer.
+        audit = blankAudit(); audit.audience = sent.audience; audit.org = sent.org;
         writeStore(KEY, audit);
-        renderSend(failMsg || null, !!failMsg);
+        renderSend();
+        showThanks(sent);
       });
   });
 
@@ -961,7 +976,7 @@ footer { background: var(--slate); }
     h += '<div class="pr-foot"><span>beoutside.life · Be Outside LLC</span><em>Don’t wait for summer.</em></div></div>';
     $("print-report").innerHTML = h;
   }
-  window.addEventListener("beforeprint", function () { if (route() === "audit") buildPrint(); });
+  window.addEventListener("beforeprint", function () { if (route() === "audit" && !sendUrl) buildPrint(); });
   $("print").addEventListener("click", function () { buildPrint(); window.print(); });
 
   // ── facilitator ─────────────────────────────────────────
