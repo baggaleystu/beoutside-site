@@ -426,6 +426,44 @@ section { position: relative; }
   line-height: 1.7;
 }
 
+.how-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.how-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dusk);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sand);
+  padding-bottom: 2px;
+}
+.how-link:hover { color: var(--slate); }
+
+/* Seven menu links: keep each on one line, and tighten the spacing
+   on mid-size screens before the mobile menu takes over at 900px. */
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1120px) { .nav-links { gap: 20px; } }
+
+/* ── TIME BACK ── */
+.time-back {
+  background: var(--slate);
+  overflow: hidden;
+}
+.time-back .section-title { color: white; }
+.time-back .section-body { color: var(--sky-on-dark); max-width: 680px; }
+.tb-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--sand);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.tb-btns { margin-top: 48px; }
+
 /* ── EXPERIENCES ── */
 .experiences {
   background: var(--paper);
@@ -832,7 +870,7 @@ footer {
   .story-grid, .founder-grid { grid-template-columns: 1fr; }
   .story-img { height: 340px; }
   .founder-img { height: 320px; }
-  .how-grid, .phil-grid { grid-template-columns: 1fr; }
+  .how-grid, .how-grid-2, .phil-grid { grid-template-columns: 1fr; }
   .exp-grid { grid-template-columns: 1fr; }
   .exp-card { height: 300px; }
   .photo-strip { grid-template-columns: 1fr; height: auto; }
@@ -916,6 +954,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
     <a href="#story">The Story</a>
     <a href="#experiences">Experiences</a>
     <a href="/trail-walk/">Trail Walk</a>
+    <a href="/time-audit/">Time Audit</a>
     <a href="#founder">About Stu</a>
     <a href="#contact" class="nav-cta">Let's Talk</a>
   </div>
@@ -976,7 +1015,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
     <div class="eyebrow">What I Do</div>
     <h2 class="section-title">Tools, lessons, and experiences<br>rooted in place.</h2>
     <p class="section-body">Every project starts with the place, the students, and the community they come from. From there, I build what fits.</p>
-    <div class="how-grid">
+    <div class="how-grid how-grid-2">
       <div class="how-card">
         <div class="how-num">01</div>
         <div class="how-title">Learning Apps &amp; Tools</div>
@@ -992,6 +1031,53 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
         <div class="how-title">Outdoor Learning Experiences</div>
         <p class="how-body">Filmed trail and river experiences with teacher guides and student materials, ready for any classroom — no field trip budget, permission slip, or nearby trailhead required.</p>
       </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-title">Time Back with AI</div>
+        <p class="how-body">A free Time Audit shows where your staff's or team's week goes and which tasks AI could carry. Then I help you put the tools you already have to work on them, and build small ones where nothing fits, so the hours go back to students, families, and fresh air.</p>
+        <a class="how-link" href="#time-back">How it works →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIME BACK -->
+<section class="time-back" id="time-back">
+  <svg class="phil-topo" viewBox="0 0 1100 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,430 Q150,398 300,414 T600,388 T900,404 T1100,380" stroke="white" stroke-width="1" fill="none"/>
+    <path d="M0,360 Q170,322 340,340 T680,310 T1000,328 T1100,304" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,280 Q190,236 380,258 T760,226 T1100,246" stroke="white" stroke-width="1.2" fill="none"/>
+    <path d="M0,196 Q230,144 460,172 T880,138 T1100,158" stroke="white" stroke-width="1" fill="none"/>
+  </svg>
+  <div class="section-inner" style="position:relative;z-index:1;">
+    <div class="eyebrow" style="color:var(--sand);">Time Back · Free Time Audit</div>
+    <h2 class="section-title">Where does your week go?</h2>
+    <p class="section-body">Grading, parent emails, reports, paperwork. Every teacher and every team has work a good tool could carry. The Time Audit takes 15 minutes on a phone or laptop and shows which tasks AI could take over and how many hours you could win back for a walk outside, time with your people, or a few quiet minutes to breathe.</p>
+    <div class="phil-grid tb-grid">
+      <div class="phil-card">
+        <div class="tb-num">1</div>
+        <div class="phil-card-title">Take the audit</div>
+        <p class="phil-card-body">List the tasks that fill your week, with the hours each one takes and how much it wears you out. On your own, or with your whole staff or team at once.</p>
+      </div>
+      <div class="phil-card">
+        <div class="tb-num">2</div>
+        <div class="phil-card-title">See your hours</div>
+        <p class="phil-card-body">Each task gets a simple, visible score. You see right away how many hours a week could come back, and the three tasks to start with.</p>
+      </div>
+      <div class="phil-card">
+        <div class="tb-num">3</div>
+        <div class="phil-card-title">Put the tools to work</div>
+        <p class="phil-card-body">I combine everyone's results to find your biggest shared time drains, then help you set up the AI tools you already use, or build small ones where nothing fits.</p>
+      </div>
+      <div class="phil-card">
+        <div class="tb-num">4</div>
+        <div class="phil-card-title">Measure again</div>
+        <p class="phil-card-body">Six to eight weeks later, the same audit shows the hours that actually came back. Real numbers, not promises.</p>
+      </div>
+    </div>
+    <div class="hero-btns tb-btns">
+      <a href="/time-audit/" class="btn-primary">Take the Time Audit</a>
+      <a href="#contact" class="btn-ghost" data-interest="time-audit">Bring it to your school or team</a>
     </div>
   </div>
 </section>
@@ -1212,6 +1298,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
         <option value="app">A learning app or tool</option>
         <option value="curriculum">Curriculum or lesson design</option>
         <option value="experience">A custom outdoor experience</option>
+        <option value="time-audit">A Time Audit for my school or team</option>
         <option value="updates">Updates on Be Outside experiences</option>
         <option value="unsure">Not sure yet</option>
       </select>
@@ -1284,6 +1371,12 @@ function handleSubmit(e) {
     btn.textContent = 'Something went wrong — try again';
   });
 }
+
+// "Bring it to your school or team" picks the Time Audit in the contact form.
+document.querySelectorAll('[data-interest]').forEach(a => a.addEventListener('click', () => {
+  const sel = document.querySelector('.waitlist-form select[name="interest"]');
+  if (sel) sel.value = a.getAttribute('data-interest');
+}));
 
 // Fade-in on scroll
 const observer = new IntersectionObserver((entries) => {

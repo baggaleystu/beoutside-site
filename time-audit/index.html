@@ -3,9 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Audit — Be Outside</title>
-<meta name="description" content="List the tasks that eat your week and see which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
-<meta name="robots" content="noindex">
+<title>Time Audit: Where Does Your Week Go? — Be Outside</title>
+<meta name="description" content="A free 15-minute Time Audit for teachers, schools and teams. List the tasks that eat your week and see which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
+<link rel="canonical" href="https://beoutside.life/time-audit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Be Outside">
+<meta property="og:title" content="Where does your week go? A free Time Audit from Be Outside">
+<meta property="og:description" content="15 minutes to see which tasks AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
+<meta property="og:url" content="https://beoutside.life/time-audit/">
+<meta property="og:image" content="https://beoutside.life/images/mt-naomi-trail.jpg">
+<meta property="og:image:alt" content="Pine-covered ridge on the Mt. Naomi trail under a blue sky">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -44,11 +52,58 @@ button, input { font: inherit; color: inherit; }
 .wrap { max-width: 760px; margin: 0 auto; padding-left: 24px; padding-right: 24px; }
 
 /* ── HEADER ── */
-.band { background: var(--slate); color: white; }
-.band-top { display: flex; align-items: center; justify-content: space-between; padding-block: 20px; }
-.brand { font-family: var(--serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; letter-spacing: -0.01em; }
-.band-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--sand); }
-.intro { padding-block: 36px 48px; }
+.band { position: relative; background: var(--slate); color: white; overflow: hidden; padding-top: 84px; }
+.band-bg { position: absolute; inset: 0; background: url('../images/mt-naomi-trail.jpg') center 45% / cover no-repeat; }
+.band-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(20,30,25,0.55) 0%, rgba(20,30,25,0.82) 45%, rgba(20,30,25,0.96) 100%);
+}
+.band > .wrap { position: relative; z-index: 2; }
+.intro { padding-block: 40px 52px; }
+
+/* ── SITE NAV (same as the home page and Trail Walk) ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px; background: transparent; transition: background 0.3s, padding 0.3s;
+}
+nav.scrolled { background: rgba(44, 58, 53, 0.96); backdrop-filter: blur(8px); padding: 14px 48px; }
+.nav-brand { font-family: var(--serif); font-size: 22px; font-weight: 700; color: white; text-decoration: none; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; font-weight: 400; letter-spacing: 0.04em; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--sand); }
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1120px) { .nav-links { gap: 20px; } }
+.nav-cta {
+  background: var(--sand) !important; color: var(--slate) !important; padding: 8px 20px !important;
+  font-weight: 600 !important; letter-spacing: 0.06em !important; font-size: 11px !important; text-transform: uppercase;
+}
+.nav-cta:hover { background: #d4c4a8 !important; }
+.nav-toggle { display: none; background: none; border: 0; width: 44px; height: 44px; margin-right: -10px; cursor: pointer; position: relative; }
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+  position: absolute; left: 11px; width: 22px; height: 2px; background: white; transition: transform 0.25s, opacity 0.2s; content: '';
+}
+.nav-toggle span { top: 21px; }
+.nav-toggle span::before { left: 0; top: -7px; }
+.nav-toggle span::after { left: 0; top: 7px; }
+nav.open .nav-toggle span { background: transparent; }
+nav.open .nav-toggle span::before { transform: translateY(7px) rotate(45deg); }
+nav.open .nav-toggle span::after { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 960px) {
+  nav { padding: 16px 24px; }
+  nav.scrolled { padding: 12px 24px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .band { padding-top: 76px; }
+  nav.open { background: rgba(44, 58, 53, 0.98); }
+  nav.open .nav-links {
+    display: flex; flex-direction: column; align-items: stretch; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(44, 58, 53, 0.98); padding: 8px 24px 24px; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  nav.open .nav-links a { font-size: 16px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  nav.open .nav-links a.nav-cta { margin-top: 16px; text-align: center; border-bottom: 0; padding: 14px 20px !important; font-size: 12px !important; }
+}
 .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: var(--sand); margin-bottom: 14px; }
 .intro h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 7vw, 54px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; margin-bottom: 18px; }
 .intro p { color: var(--sky-on-dark); font-size: 17px; max-width: 34em; }
@@ -238,6 +293,7 @@ footer { background: var(--slate); }
 .foot-tag { font-family: var(--serif); font-style: italic; color: var(--sand); font-size: 17px; }
 .foot-links { display: flex; gap: 18px; flex-wrap: wrap; }
 .foot-links a { color: var(--sky-on-dark); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.foot-copy { width: 100%; font-size: 11px; color: rgba(255,255,255,0.35); border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; }
 
 /* ── PRINT REPORT ── */
 #print-report { display: none; }
@@ -255,7 +311,7 @@ footer { background: var(--slate); }
 @page { size: letter; margin: 0.5in; }
 @media print {
   body { background: white; font-size: 11pt; }
-  .band, main, footer { display: none !important; }
+  .band, main, footer, nav { display: none !important; }
   #print-report { display: block !important; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   /* Facilitator view prints its group summary instead of the personal report. */
@@ -298,13 +354,25 @@ footer { background: var(--slate); }
 <body>
 
 <!-- HEADER -->
-<header class="band">
-  <div class="wrap band-top">
-    <a class="brand" href="/">Be Outside</a>
-    <span class="band-tag" id="band-tag">Time Audit</span>
+<nav id="nav" aria-label="Be Outside">
+  <a class="nav-brand" href="/">Be Outside</a>
+  <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="/#services">Services</a>
+    <a href="/#story">The Story</a>
+    <a href="/#experiences">Experiences</a>
+    <a href="/trail-walk/">Trail Walk</a>
+    <a href="/time-audit/" aria-current="page">Time Audit</a>
+    <a href="/#founder">About Stu</a>
+    <a href="/#contact" class="nav-cta">Let's Talk</a>
   </div>
+</nav>
+
+<header class="band">
+  <div class="band-bg" role="img" aria-label="Pine-covered ridge on the Mt. Naomi trail under a blue sky"></div>
+  <div class="band-overlay"></div>
   <div class="wrap intro" id="intro-audit">
-    <div class="eyebrow">Time Audit · 10–15 minutes</div>
+    <div class="eyebrow">Free Time Audit · 15 minutes</div>
     <h1>Where does your week go?</h1>
     <p>List the tasks that eat your week. We'll show which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.</p>
     <div class="privacy" role="note">
@@ -366,6 +434,12 @@ footer { background: var(--slate); }
         <div class="chips" id="time-choices"></div>
         <label class="q-hint" for="time-other" style="display:block;margin-top:14px">Or in your own words</label>
         <input class="text-input" id="time-other" type="text" maxlength="120" placeholder="e.g. Eat lunch outside with my kids" style="margin-top:6px">
+      </div>
+
+      <div class="block follow" id="follow" hidden>
+        <label class="q-hint" for="email" style="display:block">Want Stu to follow up? Leave your email (optional)</label>
+        <input class="text-input" id="email" type="email" inputmode="email" autocomplete="email" maxlength="120" placeholder="you@yourschool.org" style="margin-top:6px">
+        <p class="saved-note">Stu will only use it to talk with you about your results.</p>
       </div>
 
       <div class="actions">
@@ -432,6 +506,7 @@ footer { background: var(--slate); }
       <a href="#facilitator" id="to-fac">Facilitator view</a>
       <a href="#" id="to-audit" hidden>Back to my audit</a>
     </div>
+    <div class="foot-copy">© 2026 Be Outside LLC · Utah · beoutside.life</div>
   </div>
 </footer>
 
@@ -521,7 +596,7 @@ footer { background: var(--slate); }
 
   // ── participant state ───────────────────────────────────
   function blankAudit() {
-    return { kind: "be-outside-time-audit", version: 1, id: uid(), audience: "school", who: "", org: "",
+    return { kind: "be-outside-time-audit", version: 1, id: uid(), audience: "school", who: "", org: "", email: "",
              tasks: [], timeChoices: [], timeOther: "", updatedAt: new Date().toISOString() };
   }
   function cleanTask(t) {
@@ -542,6 +617,7 @@ footer { background: var(--slate); }
     b.audience = CFG.audiences[a.audience] ? a.audience : "school";
     b.who = String(a.who || "");
     b.org = String(a.org || "");
+    b.email = String(a.email || "").slice(0, 120);
     b.tasks = Array.isArray(a.tasks) ? a.tasks.map(cleanTask) : [];
     b.timeChoices = Array.isArray(a.timeChoices) ? a.timeChoices.map(String) : [];
     b.timeOther = String(a.timeOther || "");
@@ -584,6 +660,7 @@ footer { background: var(--slate); }
     $("org").placeholder = A.orgPlaceholder;
     $("who").value = audit.who;
     $("org").value = audit.org;
+    $("email").value = audit.email;
     var who = A.privacyWho === "student" ? "student, client or customer" : "client or customer";
     $("privacy-line").textContent = "Don't enter " + who + " names. Describe the task, not the people.";
   }
@@ -767,6 +844,7 @@ footer { background: var(--slate); }
     var el = e.target;
     if (el.id === "who") { audit.who = el.value; save(); return; }
     if (el.id === "org") { audit.org = el.value; save(); return; }
+    if (el.id === "email") { audit.email = el.value; save(); return; }
     if (el.id === "time-other") { audit.timeOther = el.value; save(); return; }
     var t = el.hasAttribute("data-tid") ? findTask(el.getAttribute("data-tid")) : null;
     if (!t) return;
@@ -844,7 +922,7 @@ footer { background: var(--slate); }
     return {
       kind: "be-outside-time-audit-send", version: 1, audit_id: a.id,
       participant: {
-        name_or_role: a.who.trim(), organization: a.org.trim(), audience: a.audience, tasks: rows.length,
+        name_or_role: a.who.trim(), organization: a.org.trim(), email: a.email.trim(), audience: a.audience, tasks: rows.length,
         hours_per_week: round2(s.total), hours_won_back_per_week: round2(s.back),
         hours_won_back_per_year: Math.round(s.back * s.weeks),
         time_plan: a.timeChoices.concat(a.timeOther.trim() ? [a.timeOther.trim()] : []).join("; "),
@@ -879,6 +957,7 @@ footer { background: var(--slate); }
 
   if (sendUrl) {
     $("send").hidden = false;
+    $("follow").hidden = false;
     $("send").textContent = sendLabel;
     ["print", "export-json", "export-csv"].forEach(function (id) { $(id).hidden = true; });
     $("privacy-send").textContent = "Everything stays on this device until you press " + sendLabel +
@@ -900,6 +979,11 @@ footer { background: var(--slate); }
     var payload = sendPayload(audit);
     if (!payload.tasks.some(function (t) { return String(t.task).trim() && t.hours_per_week > 0; })) {
       renderSend("Add at least one task and its hours first.", true);
+      return;
+    }
+    if (payload.participant.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.participant.email)) {
+      renderSend("That email doesn't look quite right. Fix it, or leave it empty.", true);
+      $("email").focus();
       return;
     }
     var btn = $("send"), el = $("send-status");
@@ -928,10 +1012,26 @@ footer { background: var(--slate); }
         // Keep the audience and organization for the next person on a shared computer.
         audit = blankAudit(); audit.audience = sent.audience; audit.org = sent.org;
         writeStore(KEY, audit);
+        renderAudit();
         renderSend();
         showThanks(sent);
       });
   });
+
+  // ── site nav ────────────────────────────────────────────
+  (function siteNav() {
+    var nav = $("nav"), toggle = nav.querySelector(".nav-toggle");
+    function onScroll() { nav.classList.toggle("scrolled", window.scrollY > 60); }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    function close() { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); toggle.setAttribute("aria-label", "Open menu"); }
+    toggle.addEventListener("click", function () {
+      var open = nav.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    nav.querySelectorAll(".nav-links a").forEach(function (a) { a.addEventListener("click", close); });
+  })();
 
   // ── print report ────────────────────────────────────────
   function buildPrint() {
@@ -1322,7 +1422,6 @@ footer { background: var(--slate); }
     $("view-audit").hidden = f; $("intro-audit").hidden = f;
     $("view-fac").hidden = !f; $("intro-fac").hidden = !f;
     $("to-fac").hidden = f; $("to-audit").hidden = !f;
-    $("band-tag").textContent = f ? "Time Audit · Facilitator" : "Time Audit";
     document.body.classList.toggle("fac", f);
     if (f) renderFac(); else renderAudit();
     window.scrollTo(0, 0);

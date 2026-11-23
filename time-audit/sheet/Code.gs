@@ -19,6 +19,7 @@
 var PEOPLE_COLS = [
   "audit_id", "sent_at", "name_or_role", "organization", "audience", "tasks",
   "hours_per_week", "hours_won_back_per_week", "hours_won_back_per_year", "time_plan",
+  "email",  // optional: only when the participant asks Stu to follow up
 ];
 var TASK_COLS = [
   "audit_id", "sent_at", "name_or_role", "organization", "audience", "task", "hours_per_week",
@@ -126,11 +127,18 @@ function cell(col, v) {
   return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 
+// Creates the tab with its header row. If columns were added to the
+// script later (like "email"), adds the missing headers at the end.
 function ensureSheet(ss, name, cols) {
   var sh = ss.getSheetByName(name) || ss.insertSheet(name);
   if (sh.getLastRow() === 0) {
     sh.getRange(1, 1, 1, cols.length).setValues([cols]).setFontWeight("bold");
     sh.setFrozenRows(1);
+    return sh;
+  }
+  var head = sh.getRange(1, 1, 1, cols.length).getValues()[0];
+  if (head.join("\u0001") !== cols.join("\u0001")) {
+    sh.getRange(1, 1, 1, cols.length).setValues([cols]).setFontWeight("bold");
   }
   return sh;
 }
