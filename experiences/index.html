@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outdoor Experiences — Be Outside</title>
+<meta name="description" content="Filmed outdoor learning experiences that bring real places into any classroom, plus Nature Walk breaks for educators and teams. Trail Walk is free.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --slate:#2C3A35; --sage:#6B8C7A; --sand:#C9B89A; --dusk:#8B7355;
+  --paper:#F7F4EF; --ink:#1E2820; --muted:#4a5a4f; --sky-on-dark:#D8EDE5;
+}
+html { scroll-behavior: smooth; }
+body { font-family:'Inter',sans-serif; font-weight:300; color:var(--ink); background:var(--paper); overflow-x:hidden; }
+img { display:block; max-width:100%; }
+a { color:inherit; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; transition:background .3s, padding .3s; }
+nav:not(.scrolled) .nav-links a:not(.nav-cta), nav:not(.scrolled) .nav-brand { text-shadow:0 1px 12px rgba(0,0,0,.55); }
+nav.scrolled { background:rgba(44,58,53,.96); backdrop-filter:blur(8px); padding:14px 48px; }
+.nav-brand { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#fff; text-decoration:none; }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a { color:rgba(255,255,255,.85); text-decoration:none; font-size:13px; font-weight:400; letter-spacing:.04em; transition:color .2s; }
+.nav-links a:hover { color:var(--sand); }
+.nav-cta { background:var(--sand); color:var(--slate)!important; padding:8px 20px; font-weight:600!important; letter-spacing:.06em!important; font-size:11px!important; text-transform:uppercase; }
+
+/* HERO */
+.hero { position:relative; height:100vh; min-height:640px; display:flex; align-items:flex-end; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; background:url('../images/film-white-flowers-golden.jpg') center 60%/cover; transform:scale(1.04); transition:transform 8s ease-out; }
+.hero-bg.loaded { transform:scale(1); }
+.hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(20,30,25,.3) 0%, rgba(20,30,25,.2) 30%, rgba(20,30,25,.75) 70%, rgba(20,30,25,.94) 100%); }
+.hero-content { position:relative; z-index:2; padding:0 72px 88px; max-width:960px; }
+.eyebrow-light { font-size:12px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:#EADCC2; margin-bottom:18px; text-shadow:0 1px 10px rgba(10,16,13,.85), 0 0 2px rgba(10,16,13,.6); }
+.hero-title { font-family:'Playfair Display',serif; font-size:clamp(48px,8vw,96px); font-weight:700; color:#fff; line-height:1; letter-spacing:-.02em; margin-bottom:24px; }
+.hero-title em { font-weight:400; color:var(--sand); }
+.hero-sub { font-size:clamp(16px,2vw,19px); color:var(--sky-on-dark); max-width:600px; line-height:1.6; margin-bottom:36px; }
+.btns { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-primary { background:var(--sand); color:var(--slate); padding:14px 28px; font-size:12px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; transition:background .2s; border:0; cursor:pointer; font-family:inherit; }
+.btn-primary:hover { background:#d4c4a8; }
+.btn-ghost { border:1px solid rgba(255,255,255,.45); color:#fff; padding:14px 28px; font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:border-color .2s; }
+.btn-ghost:hover { border-color:#fff; }
+.btn-dark { background:var(--slate); color:#fff; }
+.btn-dark:hover { background:#3a4c45; }
+
+/* STAT STRIP */
+.strip { background:var(--slate); padding:30px 72px; display:flex; align-items:center; justify-content:space-around; gap:32px; flex-wrap:wrap; }
+.stat { text-align:center; }
+.stat-num { font-family:'Playfair Display',serif; font-size:34px; font-weight:700; color:var(--sand); display:block; line-height:1; }
+.stat-label { font-size:10px; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--sky-on-dark); margin-top:8px; display:block; }
+.divider { width:1px; height:40px; background:rgba(255,255,255,.12); }
+
+/* SHARED */
+.inner { max-width:1120px; margin:0 auto; padding:110px 72px; }
+.eyebrow { font-size:10px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--sage); margin-bottom:14px; }
+.title { font-family:'Playfair Display',serif; font-size:clamp(30px,4vw,48px); font-weight:700; color:var(--slate); line-height:1.15; margin-bottom:22px; }
+.body { font-size:17px; color:var(--muted); line-height:1.8; max-width:620px; }
+.body + .body { margin-top:16px; }
+.quote { font-family:'Playfair Display',serif; font-size:clamp(19px,2.5vw,25px); font-style:italic; color:var(--dusk); line-height:1.5; margin:30px 0 0; padding-left:20px; border-left:3px solid var(--sage); }
+.center { text-align:center; margin-left:auto; margin-right:auto; }
+
+/* PROBLEM */
+.split { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.split-img { position:relative; height:560px; }
+.split-img img { width:100%; height:100%; object-fit:cover; }
+.split-img::after { content:''; position:absolute; bottom:-20px; right:-20px; width:120px; height:120px; border:2px solid var(--sand); z-index:-1; }
+
+/* STEPS */
+.white { background:#fff; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:56px; }
+.step { background:#fff; padding:40px 34px; }
+.step-num { font-family:'Playfair Display',serif; font-size:44px; color:var(--sand); line-height:1; margin-bottom:18px; }
+.step h3, .card h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--slate); margin-bottom:12px; line-height:1.25; }
+.step p, .card p { font-size:15px; color:var(--muted); line-height:1.75; }
+
+/* SERVICES */
+.cards { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:56px; }
+.card { background:#fff; padding:36px 32px; border-top:3px solid var(--sage); display:flex; flex-direction:column; }
+.card.feature { background:var(--slate); border-top-color:var(--sand); }
+.card.feature h3 { color:#fff; }
+.card.feature p { color:var(--sky-on-dark); }
+.card-tag { font-size:9px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--sage); margin-bottom:14px; }
+.card.feature .card-tag { color:var(--sand); }
+.card-foot { margin-top:auto; padding-top:20px; font-size:12px; font-weight:500; letter-spacing:.06em; color:var(--dusk); }
+.card.feature .card-foot { color:var(--sand); }
+
+/* CASE STUDY */
+.dark { background:var(--slate); color:#fff; }
+.dark .title { color:#fff; }
+.dark .body { color:var(--sky-on-dark); }
+.dark .eyebrow { color:var(--sand); }
+.case { display:grid; grid-template-columns:1.15fr 1fr; gap:64px; align-items:center; }
+.case-img { box-shadow:0 30px 60px rgba(0,0,0,.35); }
+.checks { list-style:none; margin-top:26px; }
+.checks li { position:relative; padding-left:28px; margin-bottom:14px; font-size:15px; line-height:1.6; color:var(--sky-on-dark); }
+.checks li::before { content:''; position:absolute; left:0; top:9px; width:14px; height:2px; background:var(--sand); }
+
+/* BAND */
+.band { position:relative; height:460px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.band img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.band::before { content:''; position:absolute; inset:0; background:rgba(20,30,25,.42); z-index:1; }
+.band p { position:relative; z-index:2; font-family:'Playfair Display',serif; font-style:italic; color:#fff; font-size:clamp(26px,4vw,46px); text-align:center; max-width:820px; padding:0 32px; line-height:1.3; }
+
+/* WHY A TEACHER */
+.pillars { display:grid; grid-template-columns:repeat(2,1fr); gap:40px 64px; margin-top:52px; }
+.pillar h4 { font-size:12px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--slate); margin-bottom:10px; }
+.pillar p { font-size:15px; color:var(--muted); line-height:1.75; }
+
+/* OUTDOOR */
+.exp-grid { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:24px; margin-top:52px; }
+.exp { background:#fff; overflow:hidden; display:flex; flex-direction:column; text-decoration:none; }
+.exp img { width:100%; height:220px; object-fit:cover; }
+.exp-body { padding:24px 26px 28px; }
+.badge { display:inline-block; font-size:9px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; padding:5px 10px; margin-bottom:12px; background:var(--paper); color:var(--dusk); }
+.badge.free { background:var(--sage); color:#fff; }
+.exp h3 { font-family:'Playfair Display',serif; font-size:21px; color:var(--slate); margin-bottom:8px; }
+.exp p { font-size:14px; color:var(--muted); line-height:1.7; }
+
+/* ABOUT */
+.about { display:grid; grid-template-columns:380px 1fr; gap:72px; align-items:start; }
+.about img { width:100%; height:500px; object-fit:cover; }
+.creds { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
+.cred { background:#fff; padding:18px 20px; border-left:3px solid var(--sand); font-size:13px; line-height:1.5; color:var(--muted); }
+.cred strong { display:block; font-weight:600; color:var(--slate); font-size:14px; margin-bottom:2px; }
+
+.about-role { font-size:12px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--dusk); margin:-8px 0 22px; line-height:1.6; }
+.about-role span { display:block; font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:17px; letter-spacing:0; text-transform:none; color:var(--muted); margin-top:2px; }
+
+/* CONTACT */
+.contact { background:var(--slate); }
+.contact .inner { max-width:760px; text-align:center; }
+.contact .title { color:#fff; }
+.contact .body { color:var(--sky-on-dark); margin:0 auto 40px; }
+.contact .eyebrow { color:var(--sand); }
+form { display:grid; gap:12px; text-align:left; }
+.row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+input, select, textarea { width:100%; padding:15px 16px; font-family:inherit; font-size:15px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#fff; }
+select option { color:var(--ink); }
+input::placeholder, textarea::placeholder { color:rgba(216,237,229,.6); }
+form .btn-primary { justify-self:start; margin-top:6px; }
+.form-note { font-size:13px; color:rgba(216,237,229,.7); margin-top:6px; }
+.thanks { display:none; color:var(--sand); font-family:'Playfair Display',serif; font-size:22px; margin-top:12px; text-align:center; }
+
+footer { background:var(--ink); color:rgba(216,237,229,.6); text-align:center; padding:32px; font-size:12px; letter-spacing:.06em; }
+footer .foot-links { position:static; display:flex; justify-content:center; gap:28px; margin-bottom:14px; background:none; padding:0; }
+footer .foot-links a { color:#fff; text-decoration:none; font-size:13px; }
+footer strong { font-family:'Playfair Display',serif; color:#fff; font-size:16px; letter-spacing:0; margin-right:10px; }
+
+/* AUDIENCES */
+.aud { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:52px; }
+.aud-panel { background:#fff; padding:40px 36px; display:flex; flex-direction:column; }
+.aud-panel h3 { font-family:'Playfair Display',serif; font-size:26px; color:var(--slate); margin-bottom:8px; }
+.aud-panel .aud-lead { font-size:15px; color:var(--muted); line-height:1.7; margin-bottom:22px; }
+.aud-panel ul { list-style:none; margin-bottom:28px; }
+.aud-panel li { position:relative; padding:12px 0 12px 26px; border-top:1px solid #ece6dc; font-size:15px; line-height:1.55; color:var(--ink); }
+.aud-panel li::before { content:''; position:absolute; left:0; top:21px; width:12px; height:2px; background:var(--sage); }
+.aud-panel .btn-primary { align-self:flex-start; margin-top:auto; }
+.row-label { font-family:'Playfair Display',serif; font-size:22px; color:var(--slate); margin:56px 0 0; padding-bottom:10px; border-bottom:1px solid #e2dbcf; }
+.row-label + .cards { margin-top:24px; }
+.both { margin-top:28px; background:#fff; padding:26px 32px; display:flex; gap:24px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.both p { font-size:15px; color:var(--muted); line-height:1.7; max-width:760px; }
+.both strong { color:var(--slate); font-weight:600; }
+
+/* STORY */
+.story-img { position:relative; height:520px; }
+.story-img img { width:100%; height:100%; object-fit:cover; }
+
+/* LEARNING DESIGN */
+.ld-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:52px; }
+.ld { background:#fff; padding:34px 30px; border-top:3px solid var(--sand); display:flex; flex-direction:column; }
+.ld h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--slate); margin-bottom:10px; }
+.ld p { font-size:15px; color:var(--muted); line-height:1.75; }
+.ld ul { list-style:none; margin-top:16px; }
+.ld li { font-size:14px; padding:9px 0; border-top:1px solid #ece6dc; }
+.ld li a { color:var(--slate); text-decoration:none; font-weight:500; }
+.ld li a:hover { color:var(--dusk); }
+.ld li span { display:block; font-size:13px; color:var(--muted); font-weight:300; }
+.sub-h { font-family:'Playfair Display',serif; font-size:26px; color:var(--slate); margin:72px 0 0; }
+.pillars-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:28px; }
+.pillars-4 h4 { font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--slate); margin-bottom:8px; }
+.pillars-4 p { font-size:14px; color:var(--muted); line-height:1.7; }
+
+.dark-ghost { color:var(--slate); border-color:var(--slate); }
+.dark-ghost:hover { border-color:var(--dusk); color:var(--dusk); }
+
+/* AUDIT CTA */
+.audit-cta { display:grid; grid-template-columns:1.5fr 1fr; gap:56px; align-items:center; padding-top:90px; padding-bottom:90px; }
+.audit-btns { display:flex; flex-direction:column; gap:14px; align-items:flex-start; }
+
+/* cards sit on the opposite ground of their section */
+.white .step, .white .card:not(.feature), .white .aud-panel, .white .both { background:var(--paper); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  nav, nav:not(.scrolled) .nav-links a:not(.nav-cta), nav:not(.scrolled) .nav-brand { text-shadow:0 1px 12px rgba(0,0,0,.55); }
+nav.scrolled { padding:14px 22px; }
+  .nav-links a:not(.nav-cta) { display:none; }
+  .hero-content { padding:0 24px 72px; }
+  .strip { padding:28px 24px; }
+  .divider { display:none; }
+  .inner { padding:80px 24px; }
+  .split, .case, .about { grid-template-columns:1fr; gap:44px; }
+  .split-img { height:380px; }
+  .steps, .cards, .exp-grid, .pillars, .creds, .row, .aud, .ld-grid, .pillars-4, .audit-cta { grid-template-columns:1fr; }
+  .story-img { height:360px; }
+  .about img { height:420px; }
+  .band { height:340px; }
+}
+
+.hero.sub { height:auto; min-height:88vh; padding-top:150px; }
+.hero.sub .hero-bg { background:url('../images/film-river-rafts.jpg') center 60%/cover; }
+.hero.sub .hero-title { font-size:clamp(42px,6.5vw,82px); }
+.walk { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+.walk-img { position:relative; height:480px; } .walk-img img { width:100%; height:100%; object-fit:cover; }
+.walk ol { margin:22px 0 0 20px; color:var(--sky-on-dark); font-size:16px; line-height:1.8; }
+.how3 .step-num { font-size:40px; }
+@media (max-width:900px){ .walk { grid-template-columns:1fr; gap:40px; } .walk-img { height:340px; } }
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a class="nav-brand" href="/">Be Outside</a>
+  <div class="nav-links">
+    <a href="/#services">Services</a>
+    <a href="/experiences/">Experiences</a>
+    <a href="/time-audit/">Time Audit</a>
+    <a href="/portfolio/">Portfolio</a>
+    <a href="/#about">About Stu</a>
+    <a class="nav-cta" href="/#contact">Let's Talk</a>
+  </div>
+</nav>
+
+<header class="hero sub" id="top">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow-light">Be Outside · Outdoor Experiences</p>
+    <h1 class="hero-title">A real place.<br>A real experience.<br><em>In any classroom.</em></h1>
+    <p class="hero-sub">Filmed trail and river experiences with teacher guides and student materials, built so students can feel the land whether or not they can get there. No field trip budget, permission slip or nearby trailhead required.</p>
+    <div class="btns">
+      <a class="btn-primary" href="/trail-walk/">Start with Trail Walk · Free</a>
+      <a class="btn-ghost" href="#nature-walk">Nature Walks for adults</a>
+    </div>
+  </div>
+</header>
+
+<!-- HOW EXPERIENCES WORK -->
+<section class="white">
+  <div class="inner">
+    <p class="eyebrow">How experiences work</p>
+    <h2 class="title">Watch the place. Then go outside.</h2>
+    <div class="steps how3">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Choose an experience</h3>
+        <p>Each one includes filmed footage, a teacher guide and student learning materials: everything you need to run it Monday morning.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Bring the place into your room</h3>
+        <p>Play the film with your class. I narrate from the trail, modeling observation and inquiry, and timer footage lets students work while the landscape rolls behind them.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Send them outside</h3>
+        <p>Students step outside wherever they are, the school yard, a sidewalk, a park, apply what they learned, then come back and share. Breathe for Change moments open and close every experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="inner">
+    <p class="eyebrow">The experiences</p>
+    <h2 class="title">Every experience is a place with a story</h2>
+    <p class="body">Each experience is built around a real location: its geology, its ecology, its Indigenous history and what's happening there right now. The trail to Birch Creek mixes plants that have grown in Cache Valley for centuries with newcomers people brought from far away. The San Juan River sits at the center of water debates across the Southwest. Mt. Naomi is a national forest balancing grazing, recreation and conservation. Students learn to read a landscape the way they'd read a headline.</p>
+    <div class="exp-grid">
+      <a class="exp" href="/trail-walk/">
+        <img src="../images/trail-walk-journal.jpg" alt="Nature journal on the Birch Creek trail">
+        <div class="exp-body">
+          <span class="badge free">Free · Available now</span>
+          <h3>Trail Walk</h3>
+          <p>Walk the trail to Birch Creek in Cache Valley from anywhere: a short film, four lessons in noticing, wondering and connecting, two leveled readings and a nature journal. Grades 3–8.</p>
+          <p class="card-foot">Open Trail Walk →</p>
+        </div>
+      </a>
+      <div class="exp">
+        <img src="../images/mt-naomi-trail.jpg" alt="Mt. Naomi trail with pine trees">
+        <div class="exp-body">
+          <span class="badge">In development</span>
+          <h3>Mt. Naomi</h3>
+          <p>From alpine meadows to the summit ridge, students identify the plants and rocks of Utah's high country while following the Haudenosaunee story of the Great White Pine.</p>
+        </div>
+      </div>
+      <div class="exp">
+        <img src="../images/film-san-juan-kayaks.jpg" alt="Inflatable kayaks on the San Juan River bank near Mexican Hat, shot on film">
+        <div class="exp-body">
+          <span class="badge">In development</span>
+          <h3>San Juan River</h3>
+          <p>Canyon walls, cottonwoods and the living history of one of the Southwest's most storied rivers. Ecology, observation and place-based storytelling on the water.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NATURE WALK -->
+<section class="dark" id="nature-walk">
+  <div class="inner walk">
+    <div class="walk-img"><img src="../images/film-hawthorn-sky.jpg" alt="White hawthorn blossoms against a deep blue sky, shot on film"></div>
+    <div>
+      <p class="eyebrow">Nature Walks · Not just for students</p>
+      <h2 class="title">Ten minutes outside, even when you can't leave the room</h2>
+      <p class="body">The same filmed walks open and close every Be Outside workshop. Teachers, school leaders and business teams slow down, breathe and spend a few minutes on the trail before they get back to work. It's the first hour you win back, practiced together.</p>
+      <ol>
+        <li>Settle in with a short breathing practice.</li>
+        <li>Walk the trail on screen, or step outside if you can.</li>
+        <li>Notice one thing, then share it with someone near you.</li>
+      </ol>
+      <div class="btns" style="margin-top:32px">
+        <a class="btn-primary" href="/trail-walk/#watch">Take a Nature Walk now</a>
+        <a class="btn-ghost" href="/#services">Bring it to a workshop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="white">
+  <div class="inner">
+    <p class="eyebrow">Philosophy</p>
+    <h2 class="title">Outdoor learning isn't just about nature.<br>It's about whose nature gets centered.</h2>
+    <div class="pillars-4">
+      <div><h4>Place-based</h4><p>Every experience is rooted in a specific place and the communities who have known it longest. Location isn't backdrop. It's curriculum.</p></div>
+      <div><h4>Culturally disruptive</h4><p>Grounded in CLASP research on Indigenous pedagogy. We ask whose stories get told about a landscape and work to expand that circle.</p></div>
+      <div><h4>Curriculum-integrated</h4><p>Every experience maps to real classroom standards, built to teach, not just inspire. Open it up and go.</p></div>
+      <div><h4>Whole-child wellness</h4><p>Breathe for Change practices run through every experience as the rhythm that holds the learning together.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MORE WORK -->
+<section>
+  <div class="inner">
+    <p class="eyebrow">More learning design</p>
+    <h2 class="title">Curriculum and tools</h2>
+    <div class="ld-grid">
+      <div class="ld">
+        <p class="card-tag">Curriculum</p>
+        <h3>The Pemmican Experience</h3>
+        <p>An NSF-funded curriculum I designed as the teacher for the CLASP collaborative, revised until knowledge holders approved.</p>
+        <ul><li><a href="https://centeringculture.org/pemmicanexperience">Project page and teacher guide →</a></li></ul>
+      </div>
+      <div class="ld">
+        <p class="card-tag">Curriculum</p>
+        <h3>Bears Ears</h3>
+        <p>Perspective taking through civic participation, presented at the NCSS conference with the CLASP team.</p>
+        <ul><li><a href="https://centeringculture.org/bearsears">Unit overview →</a></li></ul>
+      </div>
+      <div class="ld">
+        <p class="card-tag">Tools</p>
+        <h3>Classroom tools</h3>
+        <p>Field tools, writing feedback and mini-courses designed by a classroom teacher.</p>
+        <ul>
+          <li><a href="https://sites.google.com/view/writetothesummit">Write to the Summit →</a></li>
+          <li><a href="https://storymaps.arcgis.com/stories/20bd555dbfb64ba6b74fb9012dd1e643">San Juan River Geo-Inquiry →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="btns" style="margin-top:44px">
+      <a class="btn-primary btn-dark" href="/portfolio/">See the full portfolio</a>
+      <a class="btn-ghost dark-ghost" href="/#contact">Design something with me</a>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <img src="../images/film-petunias-pansies.jpg" alt="Purple petunias and yellow pansies in bloom, shot on film">
+  <p>Don't wait for summer vacation.</p>
+</div>
+
+<footer><nav class="foot-links"><a href="/">Home</a><a href="/time-audit/">Time Audit</a><a href="/trail-walk/">Trail Walk</a><a href="/portfolio/">Portfolio</a><a href="/#contact">Contact</a></nav><strong>Be Outside</strong> Stu Baggaley, Learning Design, Technology &amp; AI Consultant · beoutside.life · © 2026 Be Outside LLC · Utah</footer>
+
+<script>
+window.addEventListener('load', () => document.getElementById('heroBg').classList.add('loaded'));
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+</script>
+</body>
+</html>

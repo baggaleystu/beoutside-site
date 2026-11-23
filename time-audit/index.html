@@ -360,10 +360,10 @@ footer { background: var(--slate); }
   <div class="nav-links" id="navLinks">
     <a href="/#services">Services</a>
     <a href="/#story">The Story</a>
-    <a href="/#experiences">Experiences</a>
+    <a href="/experiences/">Experiences</a>
     <a href="/trail-walk/">Trail Walk</a>
     <a href="/time-audit/" aria-current="page">Time Audit</a>
-    <a href="/#founder">About Stu</a>
+    <a href="/#about">About Stu</a>
     <a href="/#contact" class="nav-cta">Let's Talk</a>
   </div>
 </nav>
@@ -500,7 +500,7 @@ footer { background: var(--slate); }
   <div class="wrap foot">
     <div>
       <a class="foot-brand" href="/">Be Outside</a>
-      <div class="foot-tag">Don't wait for summer.</div>
+      <div class="foot-tag">Don't wait for summer vacation.</div>
     </div>
     <div class="foot-links">
       <a href="#facilitator" id="to-fac">Facilitator view</a>
@@ -1073,7 +1073,7 @@ footer { background: var(--slate); }
       (plan.length ? '<div class="a">' + plan.map(esc).join(" · ") + "</div>" : '<div class="lines"></div>') + "</div>";
     h += '<div class="pr-method">AI-fit score = repetitive (Yes 2, Somewhat 1, No 0) + human touch (No 2, Somewhat 1, Yes 0) + energy drain (0–2). ' +
       CFG.scoring.bands.map(function (b) { return b.label + " (" + b.min + "+): " + Math.round(b.winBack * 100) + "% of hours back"; }).join(" · ") + ". These are estimates to start a conversation, not promises.</div>";
-    h += '<div class="pr-foot"><span>beoutside.life · Be Outside LLC</span><em>Don’t wait for summer.</em></div></div>';
+    h += '<div class="pr-foot"><span>beoutside.life · Be Outside LLC</span><em>Don’t wait for summer vacation.</em></div></div>';
     $("print-report").innerHTML = h;
   }
   window.addEventListener("beforeprint", function () { if (route() === "audit" && !sendUrl) buildPrint(); });
