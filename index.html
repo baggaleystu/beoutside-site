@@ -43,6 +43,10 @@ nav {
   transition: background 0.3s, padding 0.3s;
 }
 
+/* Over the photo, a soft shadow keeps the white links readable on bright sky. */
+nav:not(.scrolled):not(.open) .nav-links a:not(.nav-cta),
+nav:not(.scrolled) .nav-brand { text-shadow: 0 1px 12px rgba(0,0,0,0.55); }
+
 nav.scrolled {
   background: rgba(44, 58, 53, 0.96);
   backdrop-filter: blur(8px);
@@ -114,7 +118,8 @@ nav.scrolled {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(20,30,25,0.15) 0%,
+    rgba(20,30,25,0.58) 0%,
+    rgba(20,30,25,0.22) 15%,
     rgba(20,30,25,0.1) 40%,
     rgba(20,30,25,0.75) 80%,
     rgba(20,30,25,0.92) 100%
@@ -196,6 +201,19 @@ nav.scrolled {
 }
 
 .btn-ghost:hover { border-color: white; }
+
+.btn-audit {
+  border: 1px solid var(--sand);
+  color: var(--sand);
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-audit:hover { background: var(--sand); color: var(--slate); }
 
 /* Scroll indicator */
 .scroll-hint {
@@ -983,6 +1001,7 @@ nav.open .nav-toggle span::after  { transform: translateY(-7px) rotate(-45deg); 
     <div class="hero-btns">
       <a href="#contact" class="btn-primary">Start a Conversation</a>
       <a href="#services" class="btn-ghost">See What I Do</a>
+      <a href="/time-audit/" class="btn-audit">Free Time Audit →</a>
     </div>
   </div>
   <div class="scroll-hint">
