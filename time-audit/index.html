@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Time Audit: Where Does Your Week Go? — Be Outside</title>
-<meta name="description" content="A free 15-minute Time Audit for teachers, schools and teams. List the tasks that eat your week and see which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
+<meta name="description" content="A free 15-minute Time Audit for teachers, schools and teams. List the tasks that eat your week and see how many hours AI could win back for fresh air, your people, and yourself.">
 <link rel="canonical" href="https://beoutside.life/time-audit/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Be Outside">
 <meta property="og:title" content="Where does your week go? A free Time Audit from Be Outside">
-<meta property="og:description" content="15 minutes to see which tasks AI could take over, and how many hours you could win back for fresh air, your people, and yourself.">
+<meta property="og:description" content="15 minutes to see how many hours AI could win back for fresh air, your people, and yourself.">
 <meta property="og:url" content="https://beoutside.life/time-audit/">
 <meta property="og:image" content="https://beoutside.life/images/mt-naomi-trail.jpg">
 <meta property="og:image:alt" content="Pine-covered ridge on the Mt. Naomi trail under a blue sky">
@@ -187,6 +187,7 @@ h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--
 .b-great { background: var(--sage); color: white; }
 .b-possible { background: var(--sand); color: var(--slate); }
 .b-human { background: var(--human); color: var(--slate); }
+.b-done { background: var(--sage-soft); color: var(--slate); }
 .b-pending { background: transparent; border: 1px dashed var(--sand); color: var(--muted); font-weight: 500; }
 .reason { color: var(--muted); }
 
@@ -211,6 +212,7 @@ h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--
 .hero-num .big small { font-family: var(--sans); font-size: 18px; font-weight: 400; letter-spacing: 0; margin-left: 6px; color: var(--sky-on-dark); }
 .hero-num .cap { font-size: 18px; margin-top: 10px; font-weight: 400; }
 .hero-num .sub { color: var(--sky-on-dark); font-size: 14px; margin-top: 8px; }
+.next-note { font-size: 16px; color: var(--slate); background: var(--sage-soft); border-radius: 10px; padding: 16px 18px; margin-top: 4px; }
 .note { font-size: 14px; color: var(--dusk); margin: -10px 0 22px; }
 .empty { padding: 28px 22px; border: 1px dashed var(--sand); border-radius: 10px; color: var(--muted); background: var(--card); }
 
@@ -230,6 +232,7 @@ h3 { font-family: var(--serif); font-weight: 700; font-size: 21px; color: var(--
 .bar.great { background: var(--sage); }
 .bar.possible { background: var(--sand); }
 .bar.human { background: var(--human); }
+.bar.counted { background: var(--sage); }
 .bar.pending { background: transparent; border: 1.5px dashed var(--sand); }
 .bar-val { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 16px; font-size: 13px; color: var(--muted); }
@@ -359,10 +362,9 @@ footer { background: var(--slate); }
   <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
   <div class="nav-links" id="navLinks">
     <a href="/#services">Services</a>
-    <a href="/#story">The Story</a>
     <a href="/experiences/">Experiences</a>
-    <a href="/trail-walk/">Trail Walk</a>
     <a href="/time-audit/" aria-current="page">Time Audit</a>
+    <a href="/portfolio/">Portfolio</a>
     <a href="/#about">About Stu</a>
     <a href="/#contact" class="nav-cta">Let's Talk</a>
   </div>
@@ -374,7 +376,7 @@ footer { background: var(--slate); }
   <div class="wrap intro" id="intro-audit">
     <div class="eyebrow">Free Time Audit · 15 minutes</div>
     <h1>Where does your week go?</h1>
-    <p>List the tasks that eat your week. We'll show which ones AI could take over, and how many hours you could win back for fresh air, your people, and yourself.</p>
+    <p>List the tasks that eat your week. We'll show how many hours AI could win back for fresh air, your people, and yourself.</p>
     <div class="privacy" role="note">
       <span id="privacy-line">Don't enter student, client or customer names. Describe the task, not the people.</span>
       <small id="privacy-send">Everything stays on this device. Nothing is sent anywhere unless you export a file yourself.</small>
@@ -681,19 +683,15 @@ footer { background: var(--slate); }
     }).join("");
   }
 
+  // Participants see whether a task counts, not its score or verdict:
+  // which tasks to start with is what Stu works out with them.
   function scoreHtml(t) {
-    var b = band(t);
-    if (!b) {
-      var missing = [];
-      if (!t.energy) missing.push("energy drain");
-      if (!t.repetitive) missing.push("repetitive");
-      if (!t.humanTouch) missing.push("human touch");
-      return '<span class="badge b-pending">Not scored yet</span><span class="reason">Still need: ' + esc(missing.join(", ")) + "</span>";
-    }
-    var back = wonBack(t);
-    return '<span class="badge b-' + b.key + '"><span class="num">' + score(t) + " / 6</span> " + esc(b.label) + "</span>" +
-      '<span class="reason">' + esc(reason(t)) +
-      (num(t.hours) ? " → about <b>" + hrs(back) + " " + plural(back, "hour", "hours") + "</b> a week back" : "") + "</span>";
+    if (band(t)) return '<span class="badge b-done">✓ Counted in your results</span>';
+    var missing = [];
+    if (!t.energy) missing.push("energy drain");
+    if (!t.repetitive) missing.push("repetitive");
+    if (!t.humanTouch) missing.push("human touch");
+    return '<span class="badge b-pending">Not counted yet</span><span class="reason">Still need: ' + esc(missing.join(", ")) + "</span>";
   }
 
   function taskCard(t, i) {
@@ -735,13 +733,6 @@ footer { background: var(--slate); }
     $("score-" + t.id).innerHTML = scoreHtml(t);
   }
 
-  function legendHtml() {
-    var b = CFG.scoring.bands;
-    return '<div class="legend">' + b.map(function (x) {
-      return '<span><i class="bar ' + x.key + '"></i>' + esc(x.label) + "</span>";
-    }).join("") + '<span><i class="bar pending"></i>Not scored yet</span></div>';
-  }
-
   function renderResults() {
     var S = summarize(audit);
     var A = aud(audit.audience);
@@ -753,30 +744,19 @@ footer { background: var(--slate); }
     var html = '<div class="hero-num"><div class="big">' + hrs(S.back) + "<small>" + plural(S.back, "hour", "hours") + "</small></div>" +
       '<div class="cap">a week you could win back</div>' +
       '<div class="sub">Out of ' + hrs(S.total) + " hours a week on these tasks. Over a " + esc(A.yearLabel) + " (" + S.weeks + " weeks), that’s about " + hrs(S.back * S.weeks) + " hours.</div></div>";
-    if (S.pending) html += '<p class="note">' + S.pending + " " + plural(S.pending, "task isn’t", "tasks aren’t") + " scored yet, so " + plural(S.pending, "it doesn’t", "they don’t") + " count toward this number.</p>";
+    if (S.pending) html += '<p class="note">' + S.pending + " " + plural(S.pending, "task isn’t", "tasks aren’t") + " finished yet, so " + plural(S.pending, "it doesn’t", "they don’t") + " count toward this number.</p>";
 
-    var top = topTasks(audit, 3);
-    html += '<div class="block"><h3>Build a tool for these first</h3>';
-    if (top.length) {
-      html += '<ol class="top3">' + top.map(function (t) {
-        var b = band(t);
-        return '<li><span class="t-name">' + esc(t.name) + '</span><span class="t-idea">' + esc(ideaFor(t.name, audit.audience)) + "</span>" +
-          '<span class="t-meta">About ' + hrs(wonBack(t)) + " of its " + hrs(num(t.hours)) + " hours a week back · " + esc(b.label) + "</span></li>";
-      }).join("") + "</ol>";
-    } else {
-      html += '<div class="empty">No task scores as an AI candidate yet. That’s a fine answer too: the work you listed may need you.</div>';
-    }
-    html += "</div>";
+    if (sendUrl) html += '<p class="next-note">Which tasks to start with, and what to build for them, is what you and ' + esc(sendWho) + " work out together. Send your answers below to start that conversation.</p>";
 
     var sorted = withHours.slice().sort(function (x, y) { return num(y.hours) - num(x.hours); });
     var max = num(sorted[0].hours);
-    html += '<div class="block"><h3>Hours by task</h3>' + legendHtml() + '<div class="chart">' + sorted.map(function (t) {
+    html += '<div class="block"><h3>Hours by task</h3><div class="chart">' + sorted.map(function (t) {
       var b = band(t);
-      var cls = b ? b.key : "pending";
+      var cls = b ? "counted" : "pending";
       var pct = Math.max(1.5, num(t.hours) / max * 100);
       return '<div class="bar-row"><div class="bar-label">' + esc(t.name.trim() || "Untitled task") + "</div>" +
         '<div class="bar-track"><div class="bar ' + cls + '" style="width:calc((100% - 5.5em) * ' + (pct / 100).toFixed(4) + ')"></div>' +
-        '<span class="bar-val">' + hrs(num(t.hours)) + " h" + (b ? "" : " · not scored") + "</span></div></div>";
+        '<span class="bar-val">' + hrs(num(t.hours)) + " h" + (b ? "" : " · not counted yet") + "</span></div></div>";
     }).join("") + "</div></div>";
     $("results").innerHTML = html;
   }
@@ -1051,20 +1031,13 @@ footer { background: var(--slate); }
       '<div class="pr-hero"><div class="big">' + hrs(S.back) + '</div><div><div class="cap">' + plural(S.back, "hour", "hours") + " a week you could win back</div>" +
         '<div class="sub">Out of ' + hrs(S.total) + " hours a week on the tasks listed · about " + hrs(S.back * S.weeks) + " hours over a " + esc(A.yearLabel) + "</div></div></div>";
 
-    h += "<h4>Build a tool for these first</h4>";
-    h += top.length ? "<ol>" + top.map(function (t) {
-      return "<li><b>" + esc(t.name) + '</b> — <span class="idea">' + esc(ideaFor(t.name, audit.audience)) + '</span> <span class="meta">(about ' + hrs(wonBack(t)) + " h/week back)</span></li>";
-    }).join("") + "</ol>" : '<p style="font-size:10pt">No task scored as an AI candidate yet.</p>';
-
     if (shown.length) {
-      h += "<h4>Hours by task</h4>" + '<div class="pr-legend">' + CFG.scoring.bands.map(function (b) {
-        return '<span><i class="bar ' + b.key + '"></i>' + esc(b.label) + "</span>";
-      }).join("") + "</div>";
+      h += "<h4>Hours by task</h4>";
       h += '<div class="pr-bars">' + shown.map(function (t) {
-        var b = band(t), sc = score(t);
+        var b = band(t);
         return '<div class="row"><span class="lab">' + esc(t.name.trim() || "Untitled task") + "</span>" +
-          '<span style="display:flex;align-items:center;gap:6px"><span class="bar ' + (b ? b.key : "pending") + '" style="width:' + Math.max(2, num(t.hours) / max * 70).toFixed(1) + '%"></span>' +
-          "<span>" + hrs(num(t.hours)) + " h" + (sc == null ? " · not scored" : " · score " + sc + "/6") + "</span></span></div>";
+          '<span style="display:flex;align-items:center;gap:6px"><span class="bar ' + (b ? "counted" : "pending") + '" style="width:' + Math.max(2, num(t.hours) / max * 70).toFixed(1) + '%"></span>' +
+          "<span>" + hrs(num(t.hours)) + " h" + (b ? "" : " · not counted yet") + "</span></span></div>";
       }).join("") + "</div>";
       if (extra > 0) h += '<p style="font-size:8pt;color:var(--muted);margin-top:4px">+ ' + extra + " more " + plural(extra, "task", "tasks") + " in your exported file.</p>";
     }
