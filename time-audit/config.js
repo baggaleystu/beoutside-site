@@ -35,7 +35,6 @@ window.TIME_AUDIT_CONFIG = {
       weeksPerYear: 36,
       rolePlaceholder: "e.g. 4th grade teacher",
       orgPlaceholder: "e.g. Ridgeview Elementary",
-      privacyWho: "student",
       examples: [
         { task: "Grading writing",                              idea: "Feedback tool for student writing" },
         { task: "Building reading groups from screener data",   idea: "Reading-group builder from screener scores" },
@@ -52,7 +51,6 @@ window.TIME_AUDIT_CONFIG = {
       weeksPerYear: 48,
       rolePlaceholder: "e.g. office manager",
       orgPlaceholder: "e.g. Valley Landscaping",
-      privacyWho: "client or customer",
       examples: [
         { task: "Client follow-ups",              idea: "Follow-up email drafter from your call notes" },
         { task: "Quotes and proposals",           idea: "Proposal builder from your past quotes" },

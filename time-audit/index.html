@@ -111,6 +111,7 @@ nav.open .nav-toggle span::after { transform: translateY(-7px) rotate(-45deg); }
   margin-top: 28px; padding: 16px 18px; border-left: 3px solid var(--sand);
   background: rgba(255,255,255,0.06); color: white; font-size: 15px; font-weight: 400;
 }
+.privacy small:first-child { margin-top: 0; }
 .privacy small { display: block; margin-top: 6px; color: var(--sky-on-dark); font-weight: 300; font-size: 13px; }
 
 /* ── STEPS ── */
@@ -378,7 +379,6 @@ footer { background: var(--slate); }
     <h1>Where does your week go?</h1>
     <p>List the tasks that eat your week. We'll show how many hours AI could win back for fresh air, your people, and yourself.</p>
     <div class="privacy" role="note">
-      <span id="privacy-line">Don't enter student, client or customer names. Describe the task, not the people.</span>
       <small id="privacy-send">Everything stays on this device. Nothing is sent anywhere unless you export a file yourself.</small>
     </div>
   </div>
@@ -404,7 +404,7 @@ footer { background: var(--slate); }
           <div class="seg audience-seg" role="group" aria-labelledby="aud-label" id="audience"></div>
         </div>
         <div class="field">
-          <label for="who">First name or role <span class="opt">(optional)</span></label>
+          <label for="who"><span id="who-label">First name or role</span> <span class="opt" id="who-opt">(optional)</span></label>
           <input class="text-input" id="who" type="text" autocomplete="off" maxlength="80">
         </div>
         <div class="field">
@@ -658,13 +658,11 @@ footer { background: var(--slate); }
     });
     $("audience").innerHTML = html;
     var A = aud(audit.audience);
-    $("who").placeholder = A.rolePlaceholder;
+    $("who").placeholder = sendUrl ? "e.g. Jamie Lee, " + A.rolePlaceholder.replace(/^e\.g\. /, "") : A.rolePlaceholder;
     $("org").placeholder = A.orgPlaceholder;
     $("who").value = audit.who;
     $("org").value = audit.org;
     $("email").value = audit.email;
-    var who = A.privacyWho === "student" ? "student, client or customer" : "client or customer";
-    $("privacy-line").textContent = "Don't enter " + who + " names. Describe the task, not the people.";
   }
 
   function renderStarters() {
@@ -938,6 +936,9 @@ footer { background: var(--slate); }
   if (sendUrl) {
     $("send").hidden = false;
     $("follow").hidden = false;
+    // Stu needs to know who sent each audit, so a name is required to send.
+    $("who-label").textContent = "Your name and role";
+    $("who-opt").textContent = "(so Stu knows who sent it)";
     $("send").textContent = sendLabel;
     ["print", "export-json", "export-csv"].forEach(function (id) { $(id).hidden = true; });
     $("privacy-send").textContent = "Everything stays on this device until you press " + sendLabel +
@@ -959,6 +960,11 @@ footer { background: var(--slate); }
     var payload = sendPayload(audit);
     if (!payload.tasks.some(function (t) { return String(t.task).trim() && t.hours_per_week > 0; })) {
       renderSend("Add at least one task and its hours first.", true);
+      return;
+    }
+    if (!payload.participant.name_or_role) {
+      renderSend("Add your name at the top first, so " + sendWho + " knows who sent this.", true);
+      $("who").focus();
       return;
     }
     if (payload.participant.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.participant.email)) {
